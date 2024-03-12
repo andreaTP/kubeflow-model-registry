@@ -19,29 +19,23 @@ var _ MappedNullable = &InferenceService{}
 
 // InferenceService An `InferenceService` entity in a `ServingEnvironment` represents a deployed `ModelVersion` from a `RegisteredModel` created by Model Serving.
 type InferenceService struct {
+	// ID of the `RegisteredModel` to serve.
+	RegisteredModelId string `json:"registeredModelId"`
+	// ID of the parent `ServingEnvironment` for this `InferenceService` entity.
+	ServingEnvironmentId string `json:"servingEnvironmentId"`
+	// ID of the `ModelVersion` to serve. If it's unspecified, then the latest `ModelVersion` by creation order will be served.
+	ModelVersionId *string `json:"modelVersionId,omitempty"`
+	// Model runtime.
+	Runtime      *string                `json:"runtime,omitempty"`
+	DesiredState *InferenceServiceState `json:"desiredState,omitempty"`
+	// The client provided name of the artifact. This field is optional. If set, it must be unique among all the artifacts of the same artifact type within a database instance and cannot be changed once set.
+	Name *string `json:"name,omitempty"`
 	// User provided custom properties which are not defined by its type.
 	CustomProperties *map[string]MetadataValue `json:"customProperties,omitempty"`
 	// An optional description about the resource.
 	Description *string `json:"description,omitempty"`
 	// The external id that come from the clients’ system. This field is optional. If set, it must be unique among all resources within a database instance.
 	ExternalID *string `json:"externalID,omitempty"`
-	// The client provided name of the artifact. This field is optional. If set, it must be unique among all the artifacts of the same artifact type within a database instance and cannot be changed once set.
-	Name *string `json:"name,omitempty"`
-	// Output only. The unique server generated id of the resource.
-	Id *string `json:"id,omitempty"`
-	// Output only. Create time of the resource in millisecond since epoch.
-	CreateTimeSinceEpoch *string `json:"createTimeSinceEpoch,omitempty"`
-	// Output only. Last update time of the resource since epoch in millisecond since epoch.
-	LastUpdateTimeSinceEpoch *string `json:"lastUpdateTimeSinceEpoch,omitempty"`
-	// ID of the `ModelVersion` to serve. If it's unspecified, then the latest `ModelVersion` by creation order will be served.
-	ModelVersionId *string `json:"modelVersionId,omitempty"`
-	// Model runtime.
-	Runtime      *string                `json:"runtime,omitempty"`
-	DesiredState *InferenceServiceState `json:"desiredState,omitempty"`
-	// ID of the `RegisteredModel` to serve.
-	RegisteredModelId string `json:"registeredModelId"`
-	// ID of the parent `ServingEnvironment` for this `InferenceService` entity.
-	ServingEnvironmentId string `json:"servingEnvironmentId"`
 }
 
 // NewInferenceService instantiates a new InferenceService object
@@ -50,10 +44,6 @@ type InferenceService struct {
 // will change when the set of required properties is changed
 func NewInferenceService(registeredModelId string, servingEnvironmentId string) *InferenceService {
 	this := InferenceService{}
-	var desiredState InferenceServiceState = INFERENCESERVICESTATE_DEPLOYED
-	this.DesiredState = &desiredState
-	this.RegisteredModelId = registeredModelId
-	this.ServingEnvironmentId = servingEnvironmentId
 	return &this
 }
 
@@ -67,228 +57,52 @@ func NewInferenceServiceWithDefaults() *InferenceService {
 	return &this
 }
 
-// GetCustomProperties returns the CustomProperties field value if set, zero value otherwise.
-func (o *InferenceService) GetCustomProperties() map[string]MetadataValue {
-	if o == nil || IsNil(o.CustomProperties) {
-		var ret map[string]MetadataValue
-		return ret
-	}
-	return *o.CustomProperties
-}
-
-// GetCustomPropertiesOk returns a tuple with the CustomProperties field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *InferenceService) GetCustomPropertiesOk() (*map[string]MetadataValue, bool) {
-	if o == nil || IsNil(o.CustomProperties) {
-		return nil, false
-	}
-	return o.CustomProperties, true
-}
-
-// HasCustomProperties returns a boolean if a field has been set.
-func (o *InferenceService) HasCustomProperties() bool {
-	if o != nil && !IsNil(o.CustomProperties) {
-		return true
-	}
-
-	return false
-}
-
-// SetCustomProperties gets a reference to the given map[string]MetadataValue and assigns it to the CustomProperties field.
-func (o *InferenceService) SetCustomProperties(v map[string]MetadataValue) {
-	o.CustomProperties = &v
-}
-
-// GetDescription returns the Description field value if set, zero value otherwise.
-func (o *InferenceService) GetDescription() string {
-	if o == nil || IsNil(o.Description) {
+// GetRegisteredModelId returns the RegisteredModelId field value
+func (o *InferenceService) GetRegisteredModelId() string {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Description
+
+	return o.RegisteredModelId
 }
 
-// GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
+// GetRegisteredModelIdOk returns a tuple with the RegisteredModelId field value
 // and a boolean to check if the value has been set.
-func (o *InferenceService) GetDescriptionOk() (*string, bool) {
-	if o == nil || IsNil(o.Description) {
+func (o *InferenceService) GetRegisteredModelIdOk() (*string, bool) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Description, true
+	return &o.RegisteredModelId, true
 }
 
-// HasDescription returns a boolean if a field has been set.
-func (o *InferenceService) HasDescription() bool {
-	if o != nil && !IsNil(o.Description) {
-		return true
-	}
-
-	return false
+// SetRegisteredModelId sets field value
+func (o *InferenceService) SetRegisteredModelId(v string) {
+	o.RegisteredModelId = v
 }
 
-// SetDescription gets a reference to the given string and assigns it to the Description field.
-func (o *InferenceService) SetDescription(v string) {
-	o.Description = &v
-}
-
-// GetExternalID returns the ExternalID field value if set, zero value otherwise.
-func (o *InferenceService) GetExternalID() string {
-	if o == nil || IsNil(o.ExternalID) {
+// GetServingEnvironmentId returns the ServingEnvironmentId field value
+func (o *InferenceService) GetServingEnvironmentId() string {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.ExternalID
+
+	return o.ServingEnvironmentId
 }
 
-// GetExternalIDOk returns a tuple with the ExternalID field value if set, nil otherwise
+// GetServingEnvironmentIdOk returns a tuple with the ServingEnvironmentId field value
 // and a boolean to check if the value has been set.
-func (o *InferenceService) GetExternalIDOk() (*string, bool) {
-	if o == nil || IsNil(o.ExternalID) {
+func (o *InferenceService) GetServingEnvironmentIdOk() (*string, bool) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ExternalID, true
+	return &o.ServingEnvironmentId, true
 }
 
-// HasExternalID returns a boolean if a field has been set.
-func (o *InferenceService) HasExternalID() bool {
-	if o != nil && !IsNil(o.ExternalID) {
-		return true
-	}
-
-	return false
-}
-
-// SetExternalID gets a reference to the given string and assigns it to the ExternalID field.
-func (o *InferenceService) SetExternalID(v string) {
-	o.ExternalID = &v
-}
-
-// GetName returns the Name field value if set, zero value otherwise.
-func (o *InferenceService) GetName() string {
-	if o == nil || IsNil(o.Name) {
-		var ret string
-		return ret
-	}
-	return *o.Name
-}
-
-// GetNameOk returns a tuple with the Name field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *InferenceService) GetNameOk() (*string, bool) {
-	if o == nil || IsNil(o.Name) {
-		return nil, false
-	}
-	return o.Name, true
-}
-
-// HasName returns a boolean if a field has been set.
-func (o *InferenceService) HasName() bool {
-	if o != nil && !IsNil(o.Name) {
-		return true
-	}
-
-	return false
-}
-
-// SetName gets a reference to the given string and assigns it to the Name field.
-func (o *InferenceService) SetName(v string) {
-	o.Name = &v
-}
-
-// GetId returns the Id field value if set, zero value otherwise.
-func (o *InferenceService) GetId() string {
-	if o == nil || IsNil(o.Id) {
-		var ret string
-		return ret
-	}
-	return *o.Id
-}
-
-// GetIdOk returns a tuple with the Id field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *InferenceService) GetIdOk() (*string, bool) {
-	if o == nil || IsNil(o.Id) {
-		return nil, false
-	}
-	return o.Id, true
-}
-
-// HasId returns a boolean if a field has been set.
-func (o *InferenceService) HasId() bool {
-	if o != nil && !IsNil(o.Id) {
-		return true
-	}
-
-	return false
-}
-
-// SetId gets a reference to the given string and assigns it to the Id field.
-func (o *InferenceService) SetId(v string) {
-	o.Id = &v
-}
-
-// GetCreateTimeSinceEpoch returns the CreateTimeSinceEpoch field value if set, zero value otherwise.
-func (o *InferenceService) GetCreateTimeSinceEpoch() string {
-	if o == nil || IsNil(o.CreateTimeSinceEpoch) {
-		var ret string
-		return ret
-	}
-	return *o.CreateTimeSinceEpoch
-}
-
-// GetCreateTimeSinceEpochOk returns a tuple with the CreateTimeSinceEpoch field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *InferenceService) GetCreateTimeSinceEpochOk() (*string, bool) {
-	if o == nil || IsNil(o.CreateTimeSinceEpoch) {
-		return nil, false
-	}
-	return o.CreateTimeSinceEpoch, true
-}
-
-// HasCreateTimeSinceEpoch returns a boolean if a field has been set.
-func (o *InferenceService) HasCreateTimeSinceEpoch() bool {
-	if o != nil && !IsNil(o.CreateTimeSinceEpoch) {
-		return true
-	}
-
-	return false
-}
-
-// SetCreateTimeSinceEpoch gets a reference to the given string and assigns it to the CreateTimeSinceEpoch field.
-func (o *InferenceService) SetCreateTimeSinceEpoch(v string) {
-	o.CreateTimeSinceEpoch = &v
-}
-
-// GetLastUpdateTimeSinceEpoch returns the LastUpdateTimeSinceEpoch field value if set, zero value otherwise.
-func (o *InferenceService) GetLastUpdateTimeSinceEpoch() string {
-	if o == nil || IsNil(o.LastUpdateTimeSinceEpoch) {
-		var ret string
-		return ret
-	}
-	return *o.LastUpdateTimeSinceEpoch
-}
-
-// GetLastUpdateTimeSinceEpochOk returns a tuple with the LastUpdateTimeSinceEpoch field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *InferenceService) GetLastUpdateTimeSinceEpochOk() (*string, bool) {
-	if o == nil || IsNil(o.LastUpdateTimeSinceEpoch) {
-		return nil, false
-	}
-	return o.LastUpdateTimeSinceEpoch, true
-}
-
-// HasLastUpdateTimeSinceEpoch returns a boolean if a field has been set.
-func (o *InferenceService) HasLastUpdateTimeSinceEpoch() bool {
-	if o != nil && !IsNil(o.LastUpdateTimeSinceEpoch) {
-		return true
-	}
-
-	return false
-}
-
-// SetLastUpdateTimeSinceEpoch gets a reference to the given string and assigns it to the LastUpdateTimeSinceEpoch field.
-func (o *InferenceService) SetLastUpdateTimeSinceEpoch(v string) {
-	o.LastUpdateTimeSinceEpoch = &v
+// SetServingEnvironmentId sets field value
+func (o *InferenceService) SetServingEnvironmentId(v string) {
+	o.ServingEnvironmentId = v
 }
 
 // GetModelVersionId returns the ModelVersionId field value if set, zero value otherwise.
@@ -387,52 +201,132 @@ func (o *InferenceService) SetDesiredState(v InferenceServiceState) {
 	o.DesiredState = &v
 }
 
-// GetRegisteredModelId returns the RegisteredModelId field value
-func (o *InferenceService) GetRegisteredModelId() string {
-	if o == nil {
+// GetName returns the Name field value if set, zero value otherwise.
+func (o *InferenceService) GetName() string {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
-
-	return o.RegisteredModelId
+	return *o.Name
 }
 
-// GetRegisteredModelIdOk returns a tuple with the RegisteredModelId field value
+// GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *InferenceService) GetRegisteredModelIdOk() (*string, bool) {
-	if o == nil {
+func (o *InferenceService) GetNameOk() (*string, bool) {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
-	return &o.RegisteredModelId, true
+	return o.Name, true
 }
 
-// SetRegisteredModelId sets field value
-func (o *InferenceService) SetRegisteredModelId(v string) {
-	o.RegisteredModelId = v
+// HasName returns a boolean if a field has been set.
+func (o *InferenceService) HasName() bool {
+	if o != nil && !IsNil(o.Name) {
+		return true
+	}
+
+	return false
 }
 
-// GetServingEnvironmentId returns the ServingEnvironmentId field value
-func (o *InferenceService) GetServingEnvironmentId() string {
-	if o == nil {
+// SetName gets a reference to the given string and assigns it to the Name field.
+func (o *InferenceService) SetName(v string) {
+	o.Name = &v
+}
+
+// GetCustomProperties returns the CustomProperties field value if set, zero value otherwise.
+func (o *InferenceService) GetCustomProperties() map[string]MetadataValue {
+	if o == nil || IsNil(o.CustomProperties) {
+		var ret map[string]MetadataValue
+		return ret
+	}
+	return *o.CustomProperties
+}
+
+// GetCustomPropertiesOk returns a tuple with the CustomProperties field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *InferenceService) GetCustomPropertiesOk() (*map[string]MetadataValue, bool) {
+	if o == nil || IsNil(o.CustomProperties) {
+		return nil, false
+	}
+	return o.CustomProperties, true
+}
+
+// HasCustomProperties returns a boolean if a field has been set.
+func (o *InferenceService) HasCustomProperties() bool {
+	if o != nil && !IsNil(o.CustomProperties) {
+		return true
+	}
+
+	return false
+}
+
+// SetCustomProperties gets a reference to the given map[string]MetadataValue and assigns it to the CustomProperties field.
+func (o *InferenceService) SetCustomProperties(v map[string]MetadataValue) {
+	o.CustomProperties = &v
+}
+
+// GetDescription returns the Description field value if set, zero value otherwise.
+func (o *InferenceService) GetDescription() string {
+	if o == nil || IsNil(o.Description) {
 		var ret string
 		return ret
 	}
-
-	return o.ServingEnvironmentId
+	return *o.Description
 }
 
-// GetServingEnvironmentIdOk returns a tuple with the ServingEnvironmentId field value
+// GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *InferenceService) GetServingEnvironmentIdOk() (*string, bool) {
-	if o == nil {
+func (o *InferenceService) GetDescriptionOk() (*string, bool) {
+	if o == nil || IsNil(o.Description) {
 		return nil, false
 	}
-	return &o.ServingEnvironmentId, true
+	return o.Description, true
 }
 
-// SetServingEnvironmentId sets field value
-func (o *InferenceService) SetServingEnvironmentId(v string) {
-	o.ServingEnvironmentId = v
+// HasDescription returns a boolean if a field has been set.
+func (o *InferenceService) HasDescription() bool {
+	if o != nil && !IsNil(o.Description) {
+		return true
+	}
+
+	return false
+}
+
+// SetDescription gets a reference to the given string and assigns it to the Description field.
+func (o *InferenceService) SetDescription(v string) {
+	o.Description = &v
+}
+
+// GetExternalID returns the ExternalID field value if set, zero value otherwise.
+func (o *InferenceService) GetExternalID() string {
+	if o == nil || IsNil(o.ExternalID) {
+		var ret string
+		return ret
+	}
+	return *o.ExternalID
+}
+
+// GetExternalIDOk returns a tuple with the ExternalID field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *InferenceService) GetExternalIDOk() (*string, bool) {
+	if o == nil || IsNil(o.ExternalID) {
+		return nil, false
+	}
+	return o.ExternalID, true
+}
+
+// HasExternalID returns a boolean if a field has been set.
+func (o *InferenceService) HasExternalID() bool {
+	if o != nil && !IsNil(o.ExternalID) {
+		return true
+	}
+
+	return false
+}
+
+// SetExternalID gets a reference to the given string and assigns it to the ExternalID field.
+func (o *InferenceService) SetExternalID(v string) {
+	o.ExternalID = &v
 }
 
 func (o InferenceService) MarshalJSON() ([]byte, error) {
@@ -445,27 +339,8 @@ func (o InferenceService) MarshalJSON() ([]byte, error) {
 
 func (o InferenceService) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.CustomProperties) {
-		toSerialize["customProperties"] = o.CustomProperties
-	}
-	if !IsNil(o.Description) {
-		toSerialize["description"] = o.Description
-	}
-	if !IsNil(o.ExternalID) {
-		toSerialize["externalID"] = o.ExternalID
-	}
-	if !IsNil(o.Name) {
-		toSerialize["name"] = o.Name
-	}
-	if !IsNil(o.Id) {
-		toSerialize["id"] = o.Id
-	}
-	if !IsNil(o.CreateTimeSinceEpoch) {
-		toSerialize["createTimeSinceEpoch"] = o.CreateTimeSinceEpoch
-	}
-	if !IsNil(o.LastUpdateTimeSinceEpoch) {
-		toSerialize["lastUpdateTimeSinceEpoch"] = o.LastUpdateTimeSinceEpoch
-	}
+	toSerialize["registeredModelId"] = o.RegisteredModelId
+	toSerialize["servingEnvironmentId"] = o.ServingEnvironmentId
 	if !IsNil(o.ModelVersionId) {
 		toSerialize["modelVersionId"] = o.ModelVersionId
 	}
@@ -475,8 +350,18 @@ func (o InferenceService) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.DesiredState) {
 		toSerialize["desiredState"] = o.DesiredState
 	}
-	toSerialize["registeredModelId"] = o.RegisteredModelId
-	toSerialize["servingEnvironmentId"] = o.ServingEnvironmentId
+	if !IsNil(o.Name) {
+		toSerialize["name"] = o.Name
+	}
+	if !IsNil(o.CustomProperties) {
+		toSerialize["customProperties"] = o.CustomProperties
+	}
+	if !IsNil(o.Description) {
+		toSerialize["description"] = o.Description
+	}
+	if !IsNil(o.ExternalID) {
+		toSerialize["externalID"] = o.ExternalID
+	}
 	return toSerialize, nil
 }
 

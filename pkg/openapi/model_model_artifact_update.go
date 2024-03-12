@@ -19,15 +19,6 @@ var _ MappedNullable = &ModelArtifactUpdate{}
 
 // ModelArtifactUpdate An ML model artifact.
 type ModelArtifactUpdate struct {
-	// User provided custom properties which are not defined by its type.
-	CustomProperties *map[string]MetadataValue `json:"customProperties,omitempty"`
-	// An optional description about the resource.
-	Description *string `json:"description,omitempty"`
-	// The external id that come from the clients’ system. This field is optional. If set, it must be unique among all resources within a database instance.
-	ExternalID *string `json:"externalID,omitempty"`
-	// The uniform resource identifier of the physical artifact. May be empty if there is no physical artifact.
-	Uri   *string        `json:"uri,omitempty"`
-	State *ArtifactState `json:"state,omitempty"`
 	// Name of the model format.
 	ModelFormatName *string `json:"modelFormatName,omitempty"`
 	// Storage secret name.
@@ -38,6 +29,12 @@ type ModelArtifactUpdate struct {
 	ModelFormatVersion *string `json:"modelFormatVersion,omitempty"`
 	// Name of the service account with storage secret.
 	ServiceAccountName *string `json:"serviceAccountName,omitempty"`
+	// User provided custom properties which are not defined by its type.
+	CustomProperties *map[string]MetadataValue `json:"customProperties,omitempty"`
+	// An optional description about the resource.
+	Description *string `json:"description,omitempty"`
+	// The external id that come from the clients’ system. This field is optional. If set, it must be unique among all resources within a database instance.
+	ExternalID *string `json:"externalID,omitempty"`
 }
 
 // NewModelArtifactUpdate instantiates a new ModelArtifactUpdate object
@@ -46,8 +43,6 @@ type ModelArtifactUpdate struct {
 // will change when the set of required properties is changed
 func NewModelArtifactUpdate() *ModelArtifactUpdate {
 	this := ModelArtifactUpdate{}
-	var state ArtifactState = ARTIFACTSTATE_UNKNOWN
-	this.State = &state
 	return &this
 }
 
@@ -56,169 +51,7 @@ func NewModelArtifactUpdate() *ModelArtifactUpdate {
 // but it doesn't guarantee that properties required by API are set
 func NewModelArtifactUpdateWithDefaults() *ModelArtifactUpdate {
 	this := ModelArtifactUpdate{}
-	var state ArtifactState = ARTIFACTSTATE_UNKNOWN
-	this.State = &state
 	return &this
-}
-
-// GetCustomProperties returns the CustomProperties field value if set, zero value otherwise.
-func (o *ModelArtifactUpdate) GetCustomProperties() map[string]MetadataValue {
-	if o == nil || IsNil(o.CustomProperties) {
-		var ret map[string]MetadataValue
-		return ret
-	}
-	return *o.CustomProperties
-}
-
-// GetCustomPropertiesOk returns a tuple with the CustomProperties field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ModelArtifactUpdate) GetCustomPropertiesOk() (*map[string]MetadataValue, bool) {
-	if o == nil || IsNil(o.CustomProperties) {
-		return nil, false
-	}
-	return o.CustomProperties, true
-}
-
-// HasCustomProperties returns a boolean if a field has been set.
-func (o *ModelArtifactUpdate) HasCustomProperties() bool {
-	if o != nil && !IsNil(o.CustomProperties) {
-		return true
-	}
-
-	return false
-}
-
-// SetCustomProperties gets a reference to the given map[string]MetadataValue and assigns it to the CustomProperties field.
-func (o *ModelArtifactUpdate) SetCustomProperties(v map[string]MetadataValue) {
-	o.CustomProperties = &v
-}
-
-// GetDescription returns the Description field value if set, zero value otherwise.
-func (o *ModelArtifactUpdate) GetDescription() string {
-	if o == nil || IsNil(o.Description) {
-		var ret string
-		return ret
-	}
-	return *o.Description
-}
-
-// GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ModelArtifactUpdate) GetDescriptionOk() (*string, bool) {
-	if o == nil || IsNil(o.Description) {
-		return nil, false
-	}
-	return o.Description, true
-}
-
-// HasDescription returns a boolean if a field has been set.
-func (o *ModelArtifactUpdate) HasDescription() bool {
-	if o != nil && !IsNil(o.Description) {
-		return true
-	}
-
-	return false
-}
-
-// SetDescription gets a reference to the given string and assigns it to the Description field.
-func (o *ModelArtifactUpdate) SetDescription(v string) {
-	o.Description = &v
-}
-
-// GetExternalID returns the ExternalID field value if set, zero value otherwise.
-func (o *ModelArtifactUpdate) GetExternalID() string {
-	if o == nil || IsNil(o.ExternalID) {
-		var ret string
-		return ret
-	}
-	return *o.ExternalID
-}
-
-// GetExternalIDOk returns a tuple with the ExternalID field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ModelArtifactUpdate) GetExternalIDOk() (*string, bool) {
-	if o == nil || IsNil(o.ExternalID) {
-		return nil, false
-	}
-	return o.ExternalID, true
-}
-
-// HasExternalID returns a boolean if a field has been set.
-func (o *ModelArtifactUpdate) HasExternalID() bool {
-	if o != nil && !IsNil(o.ExternalID) {
-		return true
-	}
-
-	return false
-}
-
-// SetExternalID gets a reference to the given string and assigns it to the ExternalID field.
-func (o *ModelArtifactUpdate) SetExternalID(v string) {
-	o.ExternalID = &v
-}
-
-// GetUri returns the Uri field value if set, zero value otherwise.
-func (o *ModelArtifactUpdate) GetUri() string {
-	if o == nil || IsNil(o.Uri) {
-		var ret string
-		return ret
-	}
-	return *o.Uri
-}
-
-// GetUriOk returns a tuple with the Uri field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ModelArtifactUpdate) GetUriOk() (*string, bool) {
-	if o == nil || IsNil(o.Uri) {
-		return nil, false
-	}
-	return o.Uri, true
-}
-
-// HasUri returns a boolean if a field has been set.
-func (o *ModelArtifactUpdate) HasUri() bool {
-	if o != nil && !IsNil(o.Uri) {
-		return true
-	}
-
-	return false
-}
-
-// SetUri gets a reference to the given string and assigns it to the Uri field.
-func (o *ModelArtifactUpdate) SetUri(v string) {
-	o.Uri = &v
-}
-
-// GetState returns the State field value if set, zero value otherwise.
-func (o *ModelArtifactUpdate) GetState() ArtifactState {
-	if o == nil || IsNil(o.State) {
-		var ret ArtifactState
-		return ret
-	}
-	return *o.State
-}
-
-// GetStateOk returns a tuple with the State field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ModelArtifactUpdate) GetStateOk() (*ArtifactState, bool) {
-	if o == nil || IsNil(o.State) {
-		return nil, false
-	}
-	return o.State, true
-}
-
-// HasState returns a boolean if a field has been set.
-func (o *ModelArtifactUpdate) HasState() bool {
-	if o != nil && !IsNil(o.State) {
-		return true
-	}
-
-	return false
-}
-
-// SetState gets a reference to the given ArtifactState and assigns it to the State field.
-func (o *ModelArtifactUpdate) SetState(v ArtifactState) {
-	o.State = &v
 }
 
 // GetModelFormatName returns the ModelFormatName field value if set, zero value otherwise.
@@ -381,6 +214,102 @@ func (o *ModelArtifactUpdate) SetServiceAccountName(v string) {
 	o.ServiceAccountName = &v
 }
 
+// GetCustomProperties returns the CustomProperties field value if set, zero value otherwise.
+func (o *ModelArtifactUpdate) GetCustomProperties() map[string]MetadataValue {
+	if o == nil || IsNil(o.CustomProperties) {
+		var ret map[string]MetadataValue
+		return ret
+	}
+	return *o.CustomProperties
+}
+
+// GetCustomPropertiesOk returns a tuple with the CustomProperties field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ModelArtifactUpdate) GetCustomPropertiesOk() (*map[string]MetadataValue, bool) {
+	if o == nil || IsNil(o.CustomProperties) {
+		return nil, false
+	}
+	return o.CustomProperties, true
+}
+
+// HasCustomProperties returns a boolean if a field has been set.
+func (o *ModelArtifactUpdate) HasCustomProperties() bool {
+	if o != nil && !IsNil(o.CustomProperties) {
+		return true
+	}
+
+	return false
+}
+
+// SetCustomProperties gets a reference to the given map[string]MetadataValue and assigns it to the CustomProperties field.
+func (o *ModelArtifactUpdate) SetCustomProperties(v map[string]MetadataValue) {
+	o.CustomProperties = &v
+}
+
+// GetDescription returns the Description field value if set, zero value otherwise.
+func (o *ModelArtifactUpdate) GetDescription() string {
+	if o == nil || IsNil(o.Description) {
+		var ret string
+		return ret
+	}
+	return *o.Description
+}
+
+// GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ModelArtifactUpdate) GetDescriptionOk() (*string, bool) {
+	if o == nil || IsNil(o.Description) {
+		return nil, false
+	}
+	return o.Description, true
+}
+
+// HasDescription returns a boolean if a field has been set.
+func (o *ModelArtifactUpdate) HasDescription() bool {
+	if o != nil && !IsNil(o.Description) {
+		return true
+	}
+
+	return false
+}
+
+// SetDescription gets a reference to the given string and assigns it to the Description field.
+func (o *ModelArtifactUpdate) SetDescription(v string) {
+	o.Description = &v
+}
+
+// GetExternalID returns the ExternalID field value if set, zero value otherwise.
+func (o *ModelArtifactUpdate) GetExternalID() string {
+	if o == nil || IsNil(o.ExternalID) {
+		var ret string
+		return ret
+	}
+	return *o.ExternalID
+}
+
+// GetExternalIDOk returns a tuple with the ExternalID field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ModelArtifactUpdate) GetExternalIDOk() (*string, bool) {
+	if o == nil || IsNil(o.ExternalID) {
+		return nil, false
+	}
+	return o.ExternalID, true
+}
+
+// HasExternalID returns a boolean if a field has been set.
+func (o *ModelArtifactUpdate) HasExternalID() bool {
+	if o != nil && !IsNil(o.ExternalID) {
+		return true
+	}
+
+	return false
+}
+
+// SetExternalID gets a reference to the given string and assigns it to the ExternalID field.
+func (o *ModelArtifactUpdate) SetExternalID(v string) {
+	o.ExternalID = &v
+}
+
 func (o ModelArtifactUpdate) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -391,21 +320,6 @@ func (o ModelArtifactUpdate) MarshalJSON() ([]byte, error) {
 
 func (o ModelArtifactUpdate) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.CustomProperties) {
-		toSerialize["customProperties"] = o.CustomProperties
-	}
-	if !IsNil(o.Description) {
-		toSerialize["description"] = o.Description
-	}
-	if !IsNil(o.ExternalID) {
-		toSerialize["externalID"] = o.ExternalID
-	}
-	if !IsNil(o.Uri) {
-		toSerialize["uri"] = o.Uri
-	}
-	if !IsNil(o.State) {
-		toSerialize["state"] = o.State
-	}
 	if !IsNil(o.ModelFormatName) {
 		toSerialize["modelFormatName"] = o.ModelFormatName
 	}
@@ -420,6 +334,15 @@ func (o ModelArtifactUpdate) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.ServiceAccountName) {
 		toSerialize["serviceAccountName"] = o.ServiceAccountName
+	}
+	if !IsNil(o.CustomProperties) {
+		toSerialize["customProperties"] = o.CustomProperties
+	}
+	if !IsNil(o.Description) {
+		toSerialize["description"] = o.Description
+	}
+	if !IsNil(o.ExternalID) {
+		toSerialize["externalID"] = o.ExternalID
 	}
 	return toSerialize, nil
 }

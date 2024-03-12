@@ -19,7 +19,8 @@ var _ MappedNullable = &ServeModelCreate{}
 
 // ServeModelCreate An ML model serving action.
 type ServeModelCreate struct {
-	LastKnownState *ExecutionState `json:"lastKnownState,omitempty"`
+	// ID of the `ModelVersion` that was served in `InferenceService`.
+	ModelVersionId string `json:"modelVersionId"`
 	// User provided custom properties which are not defined by its type.
 	CustomProperties *map[string]MetadataValue `json:"customProperties,omitempty"`
 	// An optional description about the resource.
@@ -28,8 +29,6 @@ type ServeModelCreate struct {
 	ExternalID *string `json:"externalID,omitempty"`
 	// The client provided name of the artifact. This field is optional. If set, it must be unique among all the artifacts of the same artifact type within a database instance and cannot be changed once set.
 	Name *string `json:"name,omitempty"`
-	// ID of the `ModelVersion` that was served in `InferenceService`.
-	ModelVersionId string `json:"modelVersionId"`
 }
 
 // NewServeModelCreate instantiates a new ServeModelCreate object
@@ -38,9 +37,6 @@ type ServeModelCreate struct {
 // will change when the set of required properties is changed
 func NewServeModelCreate(modelVersionId string) *ServeModelCreate {
 	this := ServeModelCreate{}
-	var lastKnownState ExecutionState = EXECUTIONSTATE_UNKNOWN
-	this.LastKnownState = &lastKnownState
-	this.ModelVersionId = modelVersionId
 	return &this
 }
 
@@ -49,41 +45,31 @@ func NewServeModelCreate(modelVersionId string) *ServeModelCreate {
 // but it doesn't guarantee that properties required by API are set
 func NewServeModelCreateWithDefaults() *ServeModelCreate {
 	this := ServeModelCreate{}
-	var lastKnownState ExecutionState = EXECUTIONSTATE_UNKNOWN
-	this.LastKnownState = &lastKnownState
 	return &this
 }
 
-// GetLastKnownState returns the LastKnownState field value if set, zero value otherwise.
-func (o *ServeModelCreate) GetLastKnownState() ExecutionState {
-	if o == nil || IsNil(o.LastKnownState) {
-		var ret ExecutionState
+// GetModelVersionId returns the ModelVersionId field value
+func (o *ServeModelCreate) GetModelVersionId() string {
+	if o == nil {
+		var ret string
 		return ret
 	}
-	return *o.LastKnownState
+
+	return o.ModelVersionId
 }
 
-// GetLastKnownStateOk returns a tuple with the LastKnownState field value if set, nil otherwise
+// GetModelVersionIdOk returns a tuple with the ModelVersionId field value
 // and a boolean to check if the value has been set.
-func (o *ServeModelCreate) GetLastKnownStateOk() (*ExecutionState, bool) {
-	if o == nil || IsNil(o.LastKnownState) {
+func (o *ServeModelCreate) GetModelVersionIdOk() (*string, bool) {
+	if o == nil {
 		return nil, false
 	}
-	return o.LastKnownState, true
+	return &o.ModelVersionId, true
 }
 
-// HasLastKnownState returns a boolean if a field has been set.
-func (o *ServeModelCreate) HasLastKnownState() bool {
-	if o != nil && !IsNil(o.LastKnownState) {
-		return true
-	}
-
-	return false
-}
-
-// SetLastKnownState gets a reference to the given ExecutionState and assigns it to the LastKnownState field.
-func (o *ServeModelCreate) SetLastKnownState(v ExecutionState) {
-	o.LastKnownState = &v
+// SetModelVersionId sets field value
+func (o *ServeModelCreate) SetModelVersionId(v string) {
+	o.ModelVersionId = v
 }
 
 // GetCustomProperties returns the CustomProperties field value if set, zero value otherwise.
@@ -214,30 +200,6 @@ func (o *ServeModelCreate) SetName(v string) {
 	o.Name = &v
 }
 
-// GetModelVersionId returns the ModelVersionId field value
-func (o *ServeModelCreate) GetModelVersionId() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.ModelVersionId
-}
-
-// GetModelVersionIdOk returns a tuple with the ModelVersionId field value
-// and a boolean to check if the value has been set.
-func (o *ServeModelCreate) GetModelVersionIdOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.ModelVersionId, true
-}
-
-// SetModelVersionId sets field value
-func (o *ServeModelCreate) SetModelVersionId(v string) {
-	o.ModelVersionId = v
-}
-
 func (o ServeModelCreate) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -248,9 +210,7 @@ func (o ServeModelCreate) MarshalJSON() ([]byte, error) {
 
 func (o ServeModelCreate) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.LastKnownState) {
-		toSerialize["lastKnownState"] = o.LastKnownState
-	}
+	toSerialize["modelVersionId"] = o.ModelVersionId
 	if !IsNil(o.CustomProperties) {
 		toSerialize["customProperties"] = o.CustomProperties
 	}
@@ -263,7 +223,6 @@ func (o ServeModelCreate) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
-	toSerialize["modelVersionId"] = o.ModelVersionId
 	return toSerialize, nil
 }
 

@@ -59,7 +59,7 @@ internal/ml_metadata/proto/%.pb.go: api/grpc/ml_metadata/proto/%.proto
 gen/grpc: internal/ml_metadata/proto/metadata_store.pb.go internal/ml_metadata/proto/metadata_store_service.pb.go
 
 internal/converter/generated/converter.go: internal/converter/*.go
-	goverter gen github.com/opendatahub-io/model-registry/internal/converter/
+	bin/goverter gen github.com/opendatahub-io/model-registry/internal/converter/
 
 .PHONY: gen/converter
 gen/converter: gen/grpc internal/converter/generated/converter.go

@@ -19,15 +19,15 @@ var _ MappedNullable = &ModelVersionUpdate{}
 
 // ModelVersionUpdate Represents a ModelVersion belonging to a RegisteredModel.
 type ModelVersionUpdate struct {
+	State *ModelVersionState `json:"state,omitempty"`
+	// Name of the author.
+	Author *string `json:"author,omitempty"`
 	// User provided custom properties which are not defined by its type.
 	CustomProperties *map[string]MetadataValue `json:"customProperties,omitempty"`
 	// An optional description about the resource.
 	Description *string `json:"description,omitempty"`
 	// The external id that come from the clients’ system. This field is optional. If set, it must be unique among all resources within a database instance.
-	ExternalID *string            `json:"externalID,omitempty"`
-	State      *ModelVersionState `json:"state,omitempty"`
-	// Name of the author.
-	Author *string `json:"author,omitempty"`
+	ExternalID *string `json:"externalID,omitempty"`
 }
 
 // NewModelVersionUpdate instantiates a new ModelVersionUpdate object
@@ -36,8 +36,6 @@ type ModelVersionUpdate struct {
 // will change when the set of required properties is changed
 func NewModelVersionUpdate() *ModelVersionUpdate {
 	this := ModelVersionUpdate{}
-	var state ModelVersionState = MODELVERSIONSTATE_LIVE
-	this.State = &state
 	return &this
 }
 
@@ -49,6 +47,70 @@ func NewModelVersionUpdateWithDefaults() *ModelVersionUpdate {
 	var state ModelVersionState = MODELVERSIONSTATE_LIVE
 	this.State = &state
 	return &this
+}
+
+// GetState returns the State field value if set, zero value otherwise.
+func (o *ModelVersionUpdate) GetState() ModelVersionState {
+	if o == nil || IsNil(o.State) {
+		var ret ModelVersionState
+		return ret
+	}
+	return *o.State
+}
+
+// GetStateOk returns a tuple with the State field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ModelVersionUpdate) GetStateOk() (*ModelVersionState, bool) {
+	if o == nil || IsNil(o.State) {
+		return nil, false
+	}
+	return o.State, true
+}
+
+// HasState returns a boolean if a field has been set.
+func (o *ModelVersionUpdate) HasState() bool {
+	if o != nil && !IsNil(o.State) {
+		return true
+	}
+
+	return false
+}
+
+// SetState gets a reference to the given ModelVersionState and assigns it to the State field.
+func (o *ModelVersionUpdate) SetState(v ModelVersionState) {
+	o.State = &v
+}
+
+// GetAuthor returns the Author field value if set, zero value otherwise.
+func (o *ModelVersionUpdate) GetAuthor() string {
+	if o == nil || IsNil(o.Author) {
+		var ret string
+		return ret
+	}
+	return *o.Author
+}
+
+// GetAuthorOk returns a tuple with the Author field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ModelVersionUpdate) GetAuthorOk() (*string, bool) {
+	if o == nil || IsNil(o.Author) {
+		return nil, false
+	}
+	return o.Author, true
+}
+
+// HasAuthor returns a boolean if a field has been set.
+func (o *ModelVersionUpdate) HasAuthor() bool {
+	if o != nil && !IsNil(o.Author) {
+		return true
+	}
+
+	return false
+}
+
+// SetAuthor gets a reference to the given string and assigns it to the Author field.
+func (o *ModelVersionUpdate) SetAuthor(v string) {
+	o.Author = &v
 }
 
 // GetCustomProperties returns the CustomProperties field value if set, zero value otherwise.
@@ -147,70 +209,6 @@ func (o *ModelVersionUpdate) SetExternalID(v string) {
 	o.ExternalID = &v
 }
 
-// GetState returns the State field value if set, zero value otherwise.
-func (o *ModelVersionUpdate) GetState() ModelVersionState {
-	if o == nil || IsNil(o.State) {
-		var ret ModelVersionState
-		return ret
-	}
-	return *o.State
-}
-
-// GetStateOk returns a tuple with the State field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ModelVersionUpdate) GetStateOk() (*ModelVersionState, bool) {
-	if o == nil || IsNil(o.State) {
-		return nil, false
-	}
-	return o.State, true
-}
-
-// HasState returns a boolean if a field has been set.
-func (o *ModelVersionUpdate) HasState() bool {
-	if o != nil && !IsNil(o.State) {
-		return true
-	}
-
-	return false
-}
-
-// SetState gets a reference to the given ModelVersionState and assigns it to the State field.
-func (o *ModelVersionUpdate) SetState(v ModelVersionState) {
-	o.State = &v
-}
-
-// GetAuthor returns the Author field value if set, zero value otherwise.
-func (o *ModelVersionUpdate) GetAuthor() string {
-	if o == nil || IsNil(o.Author) {
-		var ret string
-		return ret
-	}
-	return *o.Author
-}
-
-// GetAuthorOk returns a tuple with the Author field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ModelVersionUpdate) GetAuthorOk() (*string, bool) {
-	if o == nil || IsNil(o.Author) {
-		return nil, false
-	}
-	return o.Author, true
-}
-
-// HasAuthor returns a boolean if a field has been set.
-func (o *ModelVersionUpdate) HasAuthor() bool {
-	if o != nil && !IsNil(o.Author) {
-		return true
-	}
-
-	return false
-}
-
-// SetAuthor gets a reference to the given string and assigns it to the Author field.
-func (o *ModelVersionUpdate) SetAuthor(v string) {
-	o.Author = &v
-}
-
 func (o ModelVersionUpdate) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -221,6 +219,12 @@ func (o ModelVersionUpdate) MarshalJSON() ([]byte, error) {
 
 func (o ModelVersionUpdate) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !IsNil(o.State) {
+		toSerialize["state"] = o.State
+	}
+	if !IsNil(o.Author) {
+		toSerialize["author"] = o.Author
+	}
 	if !IsNil(o.CustomProperties) {
 		toSerialize["customProperties"] = o.CustomProperties
 	}
@@ -229,12 +233,6 @@ func (o ModelVersionUpdate) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.ExternalID) {
 		toSerialize["externalID"] = o.ExternalID
-	}
-	if !IsNil(o.State) {
-		toSerialize["state"] = o.State
-	}
-	if !IsNil(o.Author) {
-		toSerialize["author"] = o.Author
 	}
 	return toSerialize, nil
 }

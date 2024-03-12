@@ -19,23 +19,23 @@ var _ MappedNullable = &InferenceServiceCreate{}
 
 // InferenceServiceCreate An `InferenceService` entity in a `ServingEnvironment` represents a deployed `ModelVersion` from a `RegisteredModel` created by Model Serving.
 type InferenceServiceCreate struct {
+	// ID of the `RegisteredModel` to serve.
+	RegisteredModelId string `json:"registeredModelId"`
+	// ID of the parent `ServingEnvironment` for this `InferenceService` entity.
+	ServingEnvironmentId string `json:"servingEnvironmentId"`
+	// ID of the `ModelVersion` to serve. If it's unspecified, then the latest `ModelVersion` by creation order will be served.
+	ModelVersionId *string `json:"modelVersionId,omitempty"`
+	// Model runtime.
+	Runtime      *string                `json:"runtime,omitempty"`
+	DesiredState *InferenceServiceState `json:"desiredState,omitempty"`
+	// The client provided name of the artifact. This field is optional. If set, it must be unique among all the artifacts of the same artifact type within a database instance and cannot be changed once set.
+	Name *string `json:"name,omitempty"`
 	// User provided custom properties which are not defined by its type.
 	CustomProperties *map[string]MetadataValue `json:"customProperties,omitempty"`
 	// An optional description about the resource.
 	Description *string `json:"description,omitempty"`
 	// The external id that come from the clients’ system. This field is optional. If set, it must be unique among all resources within a database instance.
 	ExternalID *string `json:"externalID,omitempty"`
-	// The client provided name of the artifact. This field is optional. If set, it must be unique among all the artifacts of the same artifact type within a database instance and cannot be changed once set.
-	Name *string `json:"name,omitempty"`
-	// ID of the `ModelVersion` to serve. If it's unspecified, then the latest `ModelVersion` by creation order will be served.
-	ModelVersionId *string `json:"modelVersionId,omitempty"`
-	// Model runtime.
-	Runtime      *string                `json:"runtime,omitempty"`
-	DesiredState *InferenceServiceState `json:"desiredState,omitempty"`
-	// ID of the `RegisteredModel` to serve.
-	RegisteredModelId string `json:"registeredModelId"`
-	// ID of the parent `ServingEnvironment` for this `InferenceService` entity.
-	ServingEnvironmentId string `json:"servingEnvironmentId"`
 }
 
 // NewInferenceServiceCreate instantiates a new InferenceServiceCreate object
@@ -44,10 +44,6 @@ type InferenceServiceCreate struct {
 // will change when the set of required properties is changed
 func NewInferenceServiceCreate(registeredModelId string, servingEnvironmentId string) *InferenceServiceCreate {
 	this := InferenceServiceCreate{}
-	var desiredState InferenceServiceState = INFERENCESERVICESTATE_DEPLOYED
-	this.DesiredState = &desiredState
-	this.RegisteredModelId = registeredModelId
-	this.ServingEnvironmentId = servingEnvironmentId
 	return &this
 }
 
@@ -61,132 +57,52 @@ func NewInferenceServiceCreateWithDefaults() *InferenceServiceCreate {
 	return &this
 }
 
-// GetCustomProperties returns the CustomProperties field value if set, zero value otherwise.
-func (o *InferenceServiceCreate) GetCustomProperties() map[string]MetadataValue {
-	if o == nil || IsNil(o.CustomProperties) {
-		var ret map[string]MetadataValue
-		return ret
-	}
-	return *o.CustomProperties
-}
-
-// GetCustomPropertiesOk returns a tuple with the CustomProperties field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *InferenceServiceCreate) GetCustomPropertiesOk() (*map[string]MetadataValue, bool) {
-	if o == nil || IsNil(o.CustomProperties) {
-		return nil, false
-	}
-	return o.CustomProperties, true
-}
-
-// HasCustomProperties returns a boolean if a field has been set.
-func (o *InferenceServiceCreate) HasCustomProperties() bool {
-	if o != nil && !IsNil(o.CustomProperties) {
-		return true
-	}
-
-	return false
-}
-
-// SetCustomProperties gets a reference to the given map[string]MetadataValue and assigns it to the CustomProperties field.
-func (o *InferenceServiceCreate) SetCustomProperties(v map[string]MetadataValue) {
-	o.CustomProperties = &v
-}
-
-// GetDescription returns the Description field value if set, zero value otherwise.
-func (o *InferenceServiceCreate) GetDescription() string {
-	if o == nil || IsNil(o.Description) {
+// GetRegisteredModelId returns the RegisteredModelId field value
+func (o *InferenceServiceCreate) GetRegisteredModelId() string {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Description
+
+	return o.RegisteredModelId
 }
 
-// GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
+// GetRegisteredModelIdOk returns a tuple with the RegisteredModelId field value
 // and a boolean to check if the value has been set.
-func (o *InferenceServiceCreate) GetDescriptionOk() (*string, bool) {
-	if o == nil || IsNil(o.Description) {
+func (o *InferenceServiceCreate) GetRegisteredModelIdOk() (*string, bool) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Description, true
+	return &o.RegisteredModelId, true
 }
 
-// HasDescription returns a boolean if a field has been set.
-func (o *InferenceServiceCreate) HasDescription() bool {
-	if o != nil && !IsNil(o.Description) {
-		return true
-	}
-
-	return false
+// SetRegisteredModelId sets field value
+func (o *InferenceServiceCreate) SetRegisteredModelId(v string) {
+	o.RegisteredModelId = v
 }
 
-// SetDescription gets a reference to the given string and assigns it to the Description field.
-func (o *InferenceServiceCreate) SetDescription(v string) {
-	o.Description = &v
-}
-
-// GetExternalID returns the ExternalID field value if set, zero value otherwise.
-func (o *InferenceServiceCreate) GetExternalID() string {
-	if o == nil || IsNil(o.ExternalID) {
+// GetServingEnvironmentId returns the ServingEnvironmentId field value
+func (o *InferenceServiceCreate) GetServingEnvironmentId() string {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.ExternalID
+
+	return o.ServingEnvironmentId
 }
 
-// GetExternalIDOk returns a tuple with the ExternalID field value if set, nil otherwise
+// GetServingEnvironmentIdOk returns a tuple with the ServingEnvironmentId field value
 // and a boolean to check if the value has been set.
-func (o *InferenceServiceCreate) GetExternalIDOk() (*string, bool) {
-	if o == nil || IsNil(o.ExternalID) {
+func (o *InferenceServiceCreate) GetServingEnvironmentIdOk() (*string, bool) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ExternalID, true
+	return &o.ServingEnvironmentId, true
 }
 
-// HasExternalID returns a boolean if a field has been set.
-func (o *InferenceServiceCreate) HasExternalID() bool {
-	if o != nil && !IsNil(o.ExternalID) {
-		return true
-	}
-
-	return false
-}
-
-// SetExternalID gets a reference to the given string and assigns it to the ExternalID field.
-func (o *InferenceServiceCreate) SetExternalID(v string) {
-	o.ExternalID = &v
-}
-
-// GetName returns the Name field value if set, zero value otherwise.
-func (o *InferenceServiceCreate) GetName() string {
-	if o == nil || IsNil(o.Name) {
-		var ret string
-		return ret
-	}
-	return *o.Name
-}
-
-// GetNameOk returns a tuple with the Name field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *InferenceServiceCreate) GetNameOk() (*string, bool) {
-	if o == nil || IsNil(o.Name) {
-		return nil, false
-	}
-	return o.Name, true
-}
-
-// HasName returns a boolean if a field has been set.
-func (o *InferenceServiceCreate) HasName() bool {
-	if o != nil && !IsNil(o.Name) {
-		return true
-	}
-
-	return false
-}
-
-// SetName gets a reference to the given string and assigns it to the Name field.
-func (o *InferenceServiceCreate) SetName(v string) {
-	o.Name = &v
+// SetServingEnvironmentId sets field value
+func (o *InferenceServiceCreate) SetServingEnvironmentId(v string) {
+	o.ServingEnvironmentId = v
 }
 
 // GetModelVersionId returns the ModelVersionId field value if set, zero value otherwise.
@@ -285,52 +201,132 @@ func (o *InferenceServiceCreate) SetDesiredState(v InferenceServiceState) {
 	o.DesiredState = &v
 }
 
-// GetRegisteredModelId returns the RegisteredModelId field value
-func (o *InferenceServiceCreate) GetRegisteredModelId() string {
-	if o == nil {
+// GetName returns the Name field value if set, zero value otherwise.
+func (o *InferenceServiceCreate) GetName() string {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
-
-	return o.RegisteredModelId
+	return *o.Name
 }
 
-// GetRegisteredModelIdOk returns a tuple with the RegisteredModelId field value
+// GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *InferenceServiceCreate) GetRegisteredModelIdOk() (*string, bool) {
-	if o == nil {
+func (o *InferenceServiceCreate) GetNameOk() (*string, bool) {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
-	return &o.RegisteredModelId, true
+	return o.Name, true
 }
 
-// SetRegisteredModelId sets field value
-func (o *InferenceServiceCreate) SetRegisteredModelId(v string) {
-	o.RegisteredModelId = v
+// HasName returns a boolean if a field has been set.
+func (o *InferenceServiceCreate) HasName() bool {
+	if o != nil && !IsNil(o.Name) {
+		return true
+	}
+
+	return false
 }
 
-// GetServingEnvironmentId returns the ServingEnvironmentId field value
-func (o *InferenceServiceCreate) GetServingEnvironmentId() string {
-	if o == nil {
+// SetName gets a reference to the given string and assigns it to the Name field.
+func (o *InferenceServiceCreate) SetName(v string) {
+	o.Name = &v
+}
+
+// GetCustomProperties returns the CustomProperties field value if set, zero value otherwise.
+func (o *InferenceServiceCreate) GetCustomProperties() map[string]MetadataValue {
+	if o == nil || IsNil(o.CustomProperties) {
+		var ret map[string]MetadataValue
+		return ret
+	}
+	return *o.CustomProperties
+}
+
+// GetCustomPropertiesOk returns a tuple with the CustomProperties field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *InferenceServiceCreate) GetCustomPropertiesOk() (*map[string]MetadataValue, bool) {
+	if o == nil || IsNil(o.CustomProperties) {
+		return nil, false
+	}
+	return o.CustomProperties, true
+}
+
+// HasCustomProperties returns a boolean if a field has been set.
+func (o *InferenceServiceCreate) HasCustomProperties() bool {
+	if o != nil && !IsNil(o.CustomProperties) {
+		return true
+	}
+
+	return false
+}
+
+// SetCustomProperties gets a reference to the given map[string]MetadataValue and assigns it to the CustomProperties field.
+func (o *InferenceServiceCreate) SetCustomProperties(v map[string]MetadataValue) {
+	o.CustomProperties = &v
+}
+
+// GetDescription returns the Description field value if set, zero value otherwise.
+func (o *InferenceServiceCreate) GetDescription() string {
+	if o == nil || IsNil(o.Description) {
 		var ret string
 		return ret
 	}
-
-	return o.ServingEnvironmentId
+	return *o.Description
 }
 
-// GetServingEnvironmentIdOk returns a tuple with the ServingEnvironmentId field value
+// GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *InferenceServiceCreate) GetServingEnvironmentIdOk() (*string, bool) {
-	if o == nil {
+func (o *InferenceServiceCreate) GetDescriptionOk() (*string, bool) {
+	if o == nil || IsNil(o.Description) {
 		return nil, false
 	}
-	return &o.ServingEnvironmentId, true
+	return o.Description, true
 }
 
-// SetServingEnvironmentId sets field value
-func (o *InferenceServiceCreate) SetServingEnvironmentId(v string) {
-	o.ServingEnvironmentId = v
+// HasDescription returns a boolean if a field has been set.
+func (o *InferenceServiceCreate) HasDescription() bool {
+	if o != nil && !IsNil(o.Description) {
+		return true
+	}
+
+	return false
+}
+
+// SetDescription gets a reference to the given string and assigns it to the Description field.
+func (o *InferenceServiceCreate) SetDescription(v string) {
+	o.Description = &v
+}
+
+// GetExternalID returns the ExternalID field value if set, zero value otherwise.
+func (o *InferenceServiceCreate) GetExternalID() string {
+	if o == nil || IsNil(o.ExternalID) {
+		var ret string
+		return ret
+	}
+	return *o.ExternalID
+}
+
+// GetExternalIDOk returns a tuple with the ExternalID field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *InferenceServiceCreate) GetExternalIDOk() (*string, bool) {
+	if o == nil || IsNil(o.ExternalID) {
+		return nil, false
+	}
+	return o.ExternalID, true
+}
+
+// HasExternalID returns a boolean if a field has been set.
+func (o *InferenceServiceCreate) HasExternalID() bool {
+	if o != nil && !IsNil(o.ExternalID) {
+		return true
+	}
+
+	return false
+}
+
+// SetExternalID gets a reference to the given string and assigns it to the ExternalID field.
+func (o *InferenceServiceCreate) SetExternalID(v string) {
+	o.ExternalID = &v
 }
 
 func (o InferenceServiceCreate) MarshalJSON() ([]byte, error) {
@@ -343,18 +339,8 @@ func (o InferenceServiceCreate) MarshalJSON() ([]byte, error) {
 
 func (o InferenceServiceCreate) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.CustomProperties) {
-		toSerialize["customProperties"] = o.CustomProperties
-	}
-	if !IsNil(o.Description) {
-		toSerialize["description"] = o.Description
-	}
-	if !IsNil(o.ExternalID) {
-		toSerialize["externalID"] = o.ExternalID
-	}
-	if !IsNil(o.Name) {
-		toSerialize["name"] = o.Name
-	}
+	toSerialize["registeredModelId"] = o.RegisteredModelId
+	toSerialize["servingEnvironmentId"] = o.ServingEnvironmentId
 	if !IsNil(o.ModelVersionId) {
 		toSerialize["modelVersionId"] = o.ModelVersionId
 	}
@@ -364,8 +350,18 @@ func (o InferenceServiceCreate) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.DesiredState) {
 		toSerialize["desiredState"] = o.DesiredState
 	}
-	toSerialize["registeredModelId"] = o.RegisteredModelId
-	toSerialize["servingEnvironmentId"] = o.ServingEnvironmentId
+	if !IsNil(o.Name) {
+		toSerialize["name"] = o.Name
+	}
+	if !IsNil(o.CustomProperties) {
+		toSerialize["customProperties"] = o.CustomProperties
+	}
+	if !IsNil(o.Description) {
+		toSerialize["description"] = o.Description
+	}
+	if !IsNil(o.ExternalID) {
+		toSerialize["externalID"] = o.ExternalID
+	}
 	return toSerialize, nil
 }
 

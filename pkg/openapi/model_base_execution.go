@@ -19,7 +19,6 @@ var _ MappedNullable = &BaseExecution{}
 
 // BaseExecution struct for BaseExecution
 type BaseExecution struct {
-	LastKnownState *ExecutionState `json:"lastKnownState,omitempty"`
 	// User provided custom properties which are not defined by its type.
 	CustomProperties *map[string]MetadataValue `json:"customProperties,omitempty"`
 	// An optional description about the resource.
@@ -42,8 +41,6 @@ type BaseExecution struct {
 // will change when the set of required properties is changed
 func NewBaseExecution() *BaseExecution {
 	this := BaseExecution{}
-	var lastKnownState ExecutionState = EXECUTIONSTATE_UNKNOWN
-	this.LastKnownState = &lastKnownState
 	return &this
 }
 
@@ -52,41 +49,7 @@ func NewBaseExecution() *BaseExecution {
 // but it doesn't guarantee that properties required by API are set
 func NewBaseExecutionWithDefaults() *BaseExecution {
 	this := BaseExecution{}
-	var lastKnownState ExecutionState = EXECUTIONSTATE_UNKNOWN
-	this.LastKnownState = &lastKnownState
 	return &this
-}
-
-// GetLastKnownState returns the LastKnownState field value if set, zero value otherwise.
-func (o *BaseExecution) GetLastKnownState() ExecutionState {
-	if o == nil || IsNil(o.LastKnownState) {
-		var ret ExecutionState
-		return ret
-	}
-	return *o.LastKnownState
-}
-
-// GetLastKnownStateOk returns a tuple with the LastKnownState field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *BaseExecution) GetLastKnownStateOk() (*ExecutionState, bool) {
-	if o == nil || IsNil(o.LastKnownState) {
-		return nil, false
-	}
-	return o.LastKnownState, true
-}
-
-// HasLastKnownState returns a boolean if a field has been set.
-func (o *BaseExecution) HasLastKnownState() bool {
-	if o != nil && !IsNil(o.LastKnownState) {
-		return true
-	}
-
-	return false
-}
-
-// SetLastKnownState gets a reference to the given ExecutionState and assigns it to the LastKnownState field.
-func (o *BaseExecution) SetLastKnownState(v ExecutionState) {
-	o.LastKnownState = &v
 }
 
 // GetCustomProperties returns the CustomProperties field value if set, zero value otherwise.
@@ -323,9 +286,6 @@ func (o BaseExecution) MarshalJSON() ([]byte, error) {
 
 func (o BaseExecution) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.LastKnownState) {
-		toSerialize["lastKnownState"] = o.LastKnownState
-	}
 	if !IsNil(o.CustomProperties) {
 		toSerialize["customProperties"] = o.CustomProperties
 	}

@@ -974,9 +974,23 @@ components:
         artifactType:
           type: string
           default: "model-artifact"
+        modelFormatName:
+          description: Name of the model format.
+          type: string
+        storageKey:
+          description: Storage secret name.
+          type: string
+        storagePath:
+          description: Path for model in storage provided by `storageKey`.
+          type: string
+        modelFormatVersion:
+          description: Version of the model format.
+          type: string
+        serviceAccountName:
+          description: Name of the service account with storage secret.
+          type: string
       allOf:
-        - $ref: "#/components/schemas/BaseArtifact"
-        - $ref: "#/components/schemas/ModelArtifactCreate"
+        - $ref: "#/components/schemas/BaseArtifactCreate"
     DocArtifact:
       description: A document.
       type: object
@@ -987,10 +1001,13 @@ components:
       allOf:
         - $ref: "#/components/schemas/BaseArtifact"
     RegisteredModel:
+      type: object
       description: A registered model in model registry. A registered model has ModelVersion children.
+      properties:
+        state:
+          $ref: "#/components/schemas/RegisteredModelState"
       allOf:
-        - $ref: "#/components/schemas/BaseResource"
-        - $ref: "#/components/schemas/RegisteredModelCreate"
+        - $ref: "#/components/schemas/BaseResourceCreate"
     ModelVersionList:
       description: List of ModelVersion entities.
       type: object
@@ -1014,10 +1031,13 @@ components:
       allOf:
         - $ref: "#/components/schemas/BaseResourceList"
     RegisteredModelCreate:
+      type: object
       description: A registered model in model registry. A registered model has ModelVersion children.
+      properties:
+        state:
+          $ref: "#/components/schemas/RegisteredModelState"
       allOf:
         - $ref: "#/components/schemas/BaseResourceCreate"
-        - $ref: "#/components/schemas/RegisteredModelUpdate"
     RegisteredModelUpdate:
       type: object
       properties:
@@ -1027,21 +1047,32 @@ components:
       allOf:
         - $ref: "#/components/schemas/BaseResourceUpdate"
     ModelVersion:
+      type: object
       description: Represents a ModelVersion belonging to a RegisteredModel.
+      properties:
+        state:
+          $ref: "#/components/schemas/ModelVersionState"
+        author:
+          description: Name of the author.
+          type: string
       allOf:
-        - $ref: "#/components/schemas/ModelVersionCreate"
-        - $ref: "#/components/schemas/BaseResource"
+        - $ref: "#/components/schemas/BaseResourceCreate"
     ModelVersionCreate:
+      type: object
       description: Represents a ModelVersion belonging to a RegisteredModel.
       required:
         - registeredModelID
-      allOf:
-        - $ref: "#/components/schemas/BaseResourceCreate"
-        - $ref: "#/components/schemas/ModelVersionUpdate"
       properties:
+        state:
+          $ref: "#/components/schemas/ModelVersionState"
+        author:
+          description: Name of the author.
+          type: string
         registeredModelID:
           description: ID of the `RegisteredModel` to which this version belongs.
           type: string
+      allOf:
+        - $ref: "#/components/schemas/BaseResourceCreate"
     ModelVersionUpdate:
       type: object
       properties:
@@ -1054,8 +1085,16 @@ components:
       allOf:
         - $ref: "#/components/schemas/BaseResourceUpdate"
     BaseArtifactCreate:
+      type: object
+      properties:
+        uri:
+          description: |-
+            The uniform resource identifier of the physical artifact.
+            May be empty if there is no physical artifact.
+          type: string
+        state:
+          $ref: "#/components/schemas/ArtifactState"
       allOf:
-        - $ref: "#/components/schemas/BaseArtifactUpdate"
         - $ref: "#/components/schemas/BaseResourceCreate"
     BaseArtifactUpdate:
       type: object
@@ -1271,9 +1310,24 @@ components:
     ModelArtifactCreate:
       description: An ML model artifact.
       type: object
+      properties:
+        modelFormatName:
+          description: Name of the model format.
+          type: string
+        storageKey:
+          description: Storage secret name.
+          type: string
+        storagePath:
+          description: Path for model in storage provided by `storageKey`.
+          type: string
+        modelFormatVersion:
+          description: Version of the model format.
+          type: string
+        serviceAccountName:
+          description: Name of the service account with storage secret.
+          type: string
       allOf:
         - $ref: "#/components/schemas/BaseArtifactCreate"
-        - $ref: "#/components/schemas/ModelArtifactUpdate"
     Error:
       description: Error code and message.
       required:
@@ -1313,13 +1367,12 @@ components:
     BaseArtifact:
       type: object
       required:
-        - artifactType    
+        - artifactType
       properties:
         artifactType:
           type: string
       allOf:
         - $ref: "#/components/schemas/BaseArtifactCreate"
-        - $ref: "#/components/schemas/BaseResource"
     ServingEnvironmentList:
       description: List of ServingEnvironments.
       type: object
@@ -1359,11 +1412,30 @@ components:
         - $ref: "#/components/schemas/BaseResourceCreate"
         - $ref: "#/components/schemas/ServingEnvironmentUpdate"
     InferenceService:
+      type: object
+      required:
+        - registeredModelId
+        - servingEnvironmentId
+      properties:
+        registeredModelId:
+          description: ID of the `RegisteredModel` to serve.
+          type: string
+        servingEnvironmentId:
+          description: ID of the parent `ServingEnvironment` for this `InferenceService` entity.
+          type: string
+        modelVersionId:
+          description: >-
+            ID of the `ModelVersion` to serve. If it's unspecified, then the latest `ModelVersion` by creation order will be served.
+          type: string
+        runtime:
+          description: Model runtime.
+          type: string
+        desiredState:
+          $ref: "#/components/schemas/InferenceServiceState"
       description: >-
         An `InferenceService` entity in a `ServingEnvironment` represents a deployed `ModelVersion` from a `RegisteredModel` created by Model Serving.
       allOf:
-        - $ref: "#/components/schemas/BaseResource"
-        - $ref: "#/components/schemas/InferenceServiceCreate"
+        - $ref: "#/components/schemas/BaseResourceCreate"
     InferenceServiceList:
       description: List of InferenceServices.
       type: object
@@ -1390,9 +1462,14 @@ components:
     ServeModel:
       description: An ML model serving action.
       type: object
+      required:
+        - modelVersionId    
+      properties:
+        modelVersionId:
+          description: ID of the `ModelVersion` that was served in `InferenceService`.
+          type: string
       allOf:
-        - $ref: "#/components/schemas/BaseExecution"
-        - $ref: "#/components/schemas/ServeModelCreate"
+        - $ref: "#/components/schemas/BaseExecutionCreate"
     ServeModelUpdate:
       description: An ML model serving action.
       allOf:
@@ -1408,7 +1485,6 @@ components:
       description: An ML model serving action.
       allOf:
         - $ref: "#/components/schemas/BaseExecutionCreate"
-        - $ref: "#/components/schemas/ServeModelUpdate"
     InferenceServiceUpdate:
       type: object
       properties:
@@ -1437,11 +1513,19 @@ components:
         servingEnvironmentId:
           description: ID of the parent `ServingEnvironment` for this `InferenceService` entity.
           type: string
+        modelVersionId:
+          description: >-
+            ID of the `ModelVersion` to serve. If it's unspecified, then the latest `ModelVersion` by creation order will be served.
+          type: string
+        runtime:
+          description: Model runtime.
+          type: string
+        desiredState:
+          $ref: "#/components/schemas/InferenceServiceState"
       description: >-
         An `InferenceService` entity in a `ServingEnvironment` represents a deployed `ModelVersion` from a `RegisteredModel` created by Model Serving.
       allOf:
         - $ref: "#/components/schemas/BaseResourceCreate"
-        - $ref: "#/components/schemas/InferenceServiceUpdate"
   responses:
     NotFound:
       content:

@@ -19,19 +19,19 @@ var _ MappedNullable = &ModelVersionCreate{}
 
 // ModelVersionCreate Represents a ModelVersion belonging to a RegisteredModel.
 type ModelVersionCreate struct {
+	State *ModelVersionState `json:"state,omitempty"`
+	// Name of the author.
+	Author *string `json:"author,omitempty"`
 	// ID of the `RegisteredModel` to which this version belongs.
 	RegisteredModelID string `json:"registeredModelID"`
+	// The client provided name of the artifact. This field is optional. If set, it must be unique among all the artifacts of the same artifact type within a database instance and cannot be changed once set.
+	Name *string `json:"name,omitempty"`
 	// User provided custom properties which are not defined by its type.
 	CustomProperties *map[string]MetadataValue `json:"customProperties,omitempty"`
 	// An optional description about the resource.
 	Description *string `json:"description,omitempty"`
 	// The external id that come from the clients’ system. This field is optional. If set, it must be unique among all resources within a database instance.
 	ExternalID *string `json:"externalID,omitempty"`
-	// The client provided name of the artifact. This field is optional. If set, it must be unique among all the artifacts of the same artifact type within a database instance and cannot be changed once set.
-	Name  *string            `json:"name,omitempty"`
-	State *ModelVersionState `json:"state,omitempty"`
-	// Name of the author.
-	Author *string `json:"author,omitempty"`
 }
 
 // NewModelVersionCreate instantiates a new ModelVersionCreate object
@@ -40,8 +40,6 @@ type ModelVersionCreate struct {
 // will change when the set of required properties is changed
 func NewModelVersionCreate(registeredModelID string) *ModelVersionCreate {
 	this := ModelVersionCreate{}
-	var state ModelVersionState = MODELVERSIONSTATE_LIVE
-	this.State = &state
 	return &this
 }
 
@@ -53,6 +51,70 @@ func NewModelVersionCreateWithDefaults() *ModelVersionCreate {
 	var state ModelVersionState = MODELVERSIONSTATE_LIVE
 	this.State = &state
 	return &this
+}
+
+// GetState returns the State field value if set, zero value otherwise.
+func (o *ModelVersionCreate) GetState() ModelVersionState {
+	if o == nil || IsNil(o.State) {
+		var ret ModelVersionState
+		return ret
+	}
+	return *o.State
+}
+
+// GetStateOk returns a tuple with the State field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ModelVersionCreate) GetStateOk() (*ModelVersionState, bool) {
+	if o == nil || IsNil(o.State) {
+		return nil, false
+	}
+	return o.State, true
+}
+
+// HasState returns a boolean if a field has been set.
+func (o *ModelVersionCreate) HasState() bool {
+	if o != nil && !IsNil(o.State) {
+		return true
+	}
+
+	return false
+}
+
+// SetState gets a reference to the given ModelVersionState and assigns it to the State field.
+func (o *ModelVersionCreate) SetState(v ModelVersionState) {
+	o.State = &v
+}
+
+// GetAuthor returns the Author field value if set, zero value otherwise.
+func (o *ModelVersionCreate) GetAuthor() string {
+	if o == nil || IsNil(o.Author) {
+		var ret string
+		return ret
+	}
+	return *o.Author
+}
+
+// GetAuthorOk returns a tuple with the Author field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ModelVersionCreate) GetAuthorOk() (*string, bool) {
+	if o == nil || IsNil(o.Author) {
+		return nil, false
+	}
+	return o.Author, true
+}
+
+// HasAuthor returns a boolean if a field has been set.
+func (o *ModelVersionCreate) HasAuthor() bool {
+	if o != nil && !IsNil(o.Author) {
+		return true
+	}
+
+	return false
+}
+
+// SetAuthor gets a reference to the given string and assigns it to the Author field.
+func (o *ModelVersionCreate) SetAuthor(v string) {
+	o.Author = &v
 }
 
 // GetRegisteredModelID returns the RegisteredModelID field value
@@ -77,6 +139,38 @@ func (o *ModelVersionCreate) GetRegisteredModelIDOk() (*string, bool) {
 // SetRegisteredModelID sets field value
 func (o *ModelVersionCreate) SetRegisteredModelID(v string) {
 	o.RegisteredModelID = v
+}
+
+// GetName returns the Name field value if set, zero value otherwise.
+func (o *ModelVersionCreate) GetName() string {
+	if o == nil || IsNil(o.Name) {
+		var ret string
+		return ret
+	}
+	return *o.Name
+}
+
+// GetNameOk returns a tuple with the Name field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ModelVersionCreate) GetNameOk() (*string, bool) {
+	if o == nil || IsNil(o.Name) {
+		return nil, false
+	}
+	return o.Name, true
+}
+
+// HasName returns a boolean if a field has been set.
+func (o *ModelVersionCreate) HasName() bool {
+	if o != nil && !IsNil(o.Name) {
+		return true
+	}
+
+	return false
+}
+
+// SetName gets a reference to the given string and assigns it to the Name field.
+func (o *ModelVersionCreate) SetName(v string) {
+	o.Name = &v
 }
 
 // GetCustomProperties returns the CustomProperties field value if set, zero value otherwise.
@@ -175,102 +269,6 @@ func (o *ModelVersionCreate) SetExternalID(v string) {
 	o.ExternalID = &v
 }
 
-// GetName returns the Name field value if set, zero value otherwise.
-func (o *ModelVersionCreate) GetName() string {
-	if o == nil || IsNil(o.Name) {
-		var ret string
-		return ret
-	}
-	return *o.Name
-}
-
-// GetNameOk returns a tuple with the Name field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ModelVersionCreate) GetNameOk() (*string, bool) {
-	if o == nil || IsNil(o.Name) {
-		return nil, false
-	}
-	return o.Name, true
-}
-
-// HasName returns a boolean if a field has been set.
-func (o *ModelVersionCreate) HasName() bool {
-	if o != nil && !IsNil(o.Name) {
-		return true
-	}
-
-	return false
-}
-
-// SetName gets a reference to the given string and assigns it to the Name field.
-func (o *ModelVersionCreate) SetName(v string) {
-	o.Name = &v
-}
-
-// GetState returns the State field value if set, zero value otherwise.
-func (o *ModelVersionCreate) GetState() ModelVersionState {
-	if o == nil || IsNil(o.State) {
-		var ret ModelVersionState
-		return ret
-	}
-	return *o.State
-}
-
-// GetStateOk returns a tuple with the State field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ModelVersionCreate) GetStateOk() (*ModelVersionState, bool) {
-	if o == nil || IsNil(o.State) {
-		return nil, false
-	}
-	return o.State, true
-}
-
-// HasState returns a boolean if a field has been set.
-func (o *ModelVersionCreate) HasState() bool {
-	if o != nil && !IsNil(o.State) {
-		return true
-	}
-
-	return false
-}
-
-// SetState gets a reference to the given ModelVersionState and assigns it to the State field.
-func (o *ModelVersionCreate) SetState(v ModelVersionState) {
-	o.State = &v
-}
-
-// GetAuthor returns the Author field value if set, zero value otherwise.
-func (o *ModelVersionCreate) GetAuthor() string {
-	if o == nil || IsNil(o.Author) {
-		var ret string
-		return ret
-	}
-	return *o.Author
-}
-
-// GetAuthorOk returns a tuple with the Author field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ModelVersionCreate) GetAuthorOk() (*string, bool) {
-	if o == nil || IsNil(o.Author) {
-		return nil, false
-	}
-	return o.Author, true
-}
-
-// HasAuthor returns a boolean if a field has been set.
-func (o *ModelVersionCreate) HasAuthor() bool {
-	if o != nil && !IsNil(o.Author) {
-		return true
-	}
-
-	return false
-}
-
-// SetAuthor gets a reference to the given string and assigns it to the Author field.
-func (o *ModelVersionCreate) SetAuthor(v string) {
-	o.Author = &v
-}
-
 func (o ModelVersionCreate) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -281,7 +279,16 @@ func (o ModelVersionCreate) MarshalJSON() ([]byte, error) {
 
 func (o ModelVersionCreate) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !IsNil(o.State) {
+		toSerialize["state"] = o.State
+	}
+	if !IsNil(o.Author) {
+		toSerialize["author"] = o.Author
+	}
 	toSerialize["registeredModelID"] = o.RegisteredModelID
+	if !IsNil(o.Name) {
+		toSerialize["name"] = o.Name
+	}
 	if !IsNil(o.CustomProperties) {
 		toSerialize["customProperties"] = o.CustomProperties
 	}
@@ -290,15 +297,6 @@ func (o ModelVersionCreate) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.ExternalID) {
 		toSerialize["externalID"] = o.ExternalID
-	}
-	if !IsNil(o.Name) {
-		toSerialize["name"] = o.Name
-	}
-	if !IsNil(o.State) {
-		toSerialize["state"] = o.State
-	}
-	if !IsNil(o.Author) {
-		toSerialize["author"] = o.Author
 	}
 	return toSerialize, nil
 }
