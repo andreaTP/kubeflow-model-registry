@@ -1016,7 +1016,6 @@ components:
     RegisteredModelCreate:
       description: A registered model in model registry. A registered model has ModelVersion children.
       allOf:
-        - type: object
         - $ref: "#/components/schemas/BaseResourceCreate"
         - $ref: "#/components/schemas/RegisteredModelUpdate"
     RegisteredModelUpdate:
@@ -1157,8 +1156,28 @@ components:
             since epoch.
           type: string
           readOnly: true
-      allOf:
-        - $ref: "#/components/schemas/BaseResourceCreate"
+        # BaseResourceCreate
+        name:
+          description: |-
+            The client provided name of the artifact. This field is optional. If set,
+            it must be unique among all the artifacts of the same artifact type within
+            a database instance and cannot be changed once set.
+          type: string
+        # BaseResourceUpdate
+        customProperties:
+          description: User provided custom properties which are not defined by its type.
+          type: object
+          additionalProperties:
+            $ref: "#/components/schemas/MetadataValue"
+        description:
+          description: |-
+            An optional description about the resource.
+          type: string
+        externalID:
+          description: |-
+            The external id that come from the clients’ system. This field is optional.
+            If set, it must be unique among all resources within a database instance.
+          type: string
     BaseResourceCreate:
       type: object
       properties:
@@ -1168,8 +1187,20 @@ components:
             it must be unique among all the artifacts of the same artifact type within
             a database instance and cannot be changed once set.
           type: string
-      allOf:
-        - $ref: "#/components/schemas/BaseResourceUpdate"
+        customProperties:
+          description: User provided custom properties which are not defined by its type.
+          type: object
+          additionalProperties:
+            $ref: "#/components/schemas/MetadataValue"
+        description:
+          description: |-
+            An optional description about the resource.
+          type: string
+        externalID:
+          description: |-
+            The external id that come from the clients’ system. This field is optional.
+            If set, it must be unique among all resources within a database instance.
+          type: string
     BaseResourceUpdate:
       type: object
       properties:
@@ -1208,14 +1239,13 @@ components:
     ArtifactList:
       description: A list of Artifact entities.
       type: object
+      properties:
+        items:
+          description: Array of `Artifact` entities.
+          type: array
+          items:
+            $ref: "#/components/schemas/Artifact"
       allOf:
-        - type: object
-          properties:
-            items:
-              description: Array of `Artifact` entities.
-              type: array
-              items:
-                $ref: "#/components/schemas/Artifact"
         - $ref: "#/components/schemas/BaseResourceList"
     ModelArtifactUpdate:
       description: An ML model artifact.
