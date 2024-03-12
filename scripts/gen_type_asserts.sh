@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# set -e
+set -e
 
 ASSERT_FILE_PATH="internal/server/openapi/type_asserts.go"
 PATCH="./patches/type_asserts.patch"
