@@ -67,13 +67,13 @@ gen/converter: gen/grpc internal/converter/generated/converter.go
 # validate the openapi schema
 .PHONY: openapi/validate
 openapi/validate: bin/openapi-generator-cli
-	openapi-generator-cli validate -i api/openapi/model-registry.yaml
+	bin/openapi-generator-cli validate -i api/openapi/model-registry.yaml
 
 # generate the openapi server implementation
 # note: run manually only when model-registry.yaml api changes, for model changes gen/openapi is run automatically
 .PHONY: gen/openapi-server
 gen/openapi-server: bin/openapi-generator-cli openapi/validate
-	openapi-generator-cli generate \
+	bin/openapi-generator-cli generate \
 		-i api/openapi/model-registry.yaml -g go-server -o internal/server/openapi --package-name openapi --global-property models \
 		--ignore-file-override ./.openapi-generator-ignore --additional-properties=outputAsLibrary=true,enumClassPrefix=true,router=chi,sourceFolder=,onlyInterfaces=true,isGoSubmodule=true,enumClassPrefix=true,useOneOfDiscriminatorLookup=true \
 		--template-dir ./templates/go-server
@@ -86,7 +86,7 @@ gen/openapi: bin/openapi-generator-cli openapi/validate pkg/openapi/client.go
 
 pkg/openapi/client.go: bin/openapi-generator-cli api/openapi/model-registry.yaml
 	rm -rf pkg/openapi
-	openapi-generator-cli generate \
+	bin/openapi-generator-cli generate \
 		-i api/openapi/model-registry.yaml -g go -o pkg/openapi --package-name openapi \
 		--ignore-file-override ./.openapi-generator-ignore --additional-properties=isGoSubmodule=true,enumClassPrefix=true,useOneOfDiscriminatorLookup=true
 	gofmt -w pkg/openapi
@@ -118,23 +118,8 @@ bin/golangci-lint:
 bin/goverter:
 	GOBIN=$(PROJECT_PATH)/bin go install github.com/jmattheis/goverter/cmd/goverter@v1.1.1
 
-OPENAPI_GENERATOR ?= ${PROJECT_BIN}/openapi-generator-cli
-NPM ?= "$(shell which npm)"
 bin/openapi-generator-cli:
-ifeq (, $(shell which ${NPM} 2> /dev/null))
-	@echo "npm is not available please install it to be able to install openapi-generator"
-	exit 1
-endif
-ifeq (, $(shell which ${PROJECT_BIN}/openapi-generator-cli 2> /dev/null))
-	@{ \
-	set -e ;\
-	mkdir -p ${PROJECT_BIN} ;\
-	mkdir -p ${PROJECT_BIN}/openapi-generator-installation ;\
-	cd ${PROJECT_BIN} ;\
-	${NPM} install -g --prefix ${PROJECT_BIN}/openapi-generator-installation @openapitools/openapi-generator-cli ;\
-	ln -s openapi-generator-installation/bin/openapi-generator-cli openapi-generator-cli ;\
-	}
-endif
+	scripts/install-openapi-generator.sh ${PROJECT_BIN}
 
 .PHONY: clean/deps
 clean/deps:

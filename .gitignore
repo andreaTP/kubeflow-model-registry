@@ -4,6 +4,7 @@ model-registry
 metadata.sqlite.db
 vendor
 coverage.*
+bin
 
 # Robot Framework files
 log.html
