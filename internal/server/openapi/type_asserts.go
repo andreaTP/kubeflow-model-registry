@@ -64,14 +64,15 @@ func AssertArtifactStateConstraints(obj model.ArtifactState) error {
 
 // AssertBaseArtifactRequired checks if the required fields are not zero-ed
 func AssertBaseArtifactRequired(obj model.BaseArtifact) error {
-	elements := map[string]interface{}{
-		"artifactType": obj.ArtifactType,
-	}
-	for name, el := range elements {
-		if isZero := IsZeroValue(el); isZero {
-			return &RequiredError{Field: name}
-		}
-	}
+	// FIXME(manual): Artifact.ArtifactType is not present on client models
+	// elements := map[string]interface{}{
+	// 	"artifactType": obj.ArtifactType,
+	// }
+	// for name, el := range elements {
+	// 	if isZero := IsZeroValue(el); isZero {
+	// 		return &RequiredError{Field: name}
+	// 	}
+	// }
 
 	return nil
 }

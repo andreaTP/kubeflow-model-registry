@@ -50,4 +50,4 @@ for file in internal/server/openapi/model_*; do
     fi
 done
 
-# git apply "$PATCH"
+git apply "$PATCH"
