@@ -4,7 +4,6 @@ configuration.go
 model_artifact.go
 model_artifact_list.go
 model_artifact_state.go
-model_base_artifact.go
 model_base_execution.go
 model_base_execution_create.go
 model_base_execution_update.go
@@ -55,7 +54,9 @@ model_with_base_resource_create.go
 model_with_base_resource_update.go
 model_with_inference_service_create.go
 model_with_inference_service_update.go
+model_with_model_artifact_update.go
 model_with_model_version_update.go
+model_with_registered_model_update.go
 model_with_serve_model_create.go
 response.go
 utils.go

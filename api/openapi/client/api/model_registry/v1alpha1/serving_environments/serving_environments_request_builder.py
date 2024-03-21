@@ -11,11 +11,11 @@ from kiota_abstractions.serialization import Parsable, ParsableFactory
 from typing import Any, Callable, Dict, List, Optional, TYPE_CHECKING, Union
 
 if TYPE_CHECKING:
-    from .....models.base_resource_list import BaseResourceList
     from .....models.error import Error
     from .....models.order_by_field import OrderByField
     from .....models.serving_environment import ServingEnvironment
     from .....models.serving_environment_create import ServingEnvironmentCreate
+    from .....models.serving_environment_list import ServingEnvironmentList
     from .....models.sort_order import SortOrder
     from .item.with_servingenvironment_item_request_builder import WithServingenvironmentItemRequestBuilder
 
@@ -46,11 +46,11 @@ class Serving_environmentsRequestBuilder(BaseRequestBuilder):
         url_tpl_params["servingenvironmentId"] = servingenvironment_id
         return WithServingenvironmentItemRequestBuilder(self.request_adapter, url_tpl_params)
     
-    async def get(self,request_configuration: Optional[RequestConfiguration] = None) -> Optional[BaseResourceList]:
+    async def get(self,request_configuration: Optional[RequestConfiguration] = None) -> Optional[ServingEnvironmentList]:
         """
         Gets a list of all `ServingEnvironment` entities.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
-        Returns: Optional[BaseResourceList]
+        Returns: Optional[ServingEnvironmentList]
         """
         request_info = self.to_get_request_information(
             request_configuration
@@ -63,9 +63,9 @@ class Serving_environmentsRequestBuilder(BaseRequestBuilder):
         }
         if not self.request_adapter:
             raise Exception("Http core is null") 
-        from .....models.base_resource_list import BaseResourceList
+        from .....models.serving_environment_list import ServingEnvironmentList
 
-        return await self.request_adapter.send_async(request_info, BaseResourceList, error_mapping)
+        return await self.request_adapter.send_async(request_info, ServingEnvironmentList, error_mapping)
     
     async def post(self,body: Optional[ServingEnvironmentCreate] = None, request_configuration: Optional[RequestConfiguration] = None) -> Optional[ServingEnvironment]:
         """

@@ -12,7 +12,7 @@ from typing import Any, Callable, Dict, List, Optional, TYPE_CHECKING, Union
 
 if TYPE_CHECKING:
     from .......models.artifact import Artifact
-    from .......models.base_resource_list import BaseResourceList
+    from .......models.artifact_list import ArtifactList
     from .......models.error import Error
     from .......models.order_by_field import OrderByField
     from .......models.sort_order import SortOrder
@@ -30,11 +30,11 @@ class ArtifactsRequestBuilder(BaseRequestBuilder):
         """
         super().__init__(request_adapter, "{+baseurl}/api/model_registry/v1alpha1/model_versions/{modelversionId}/artifacts{?externalID*,name*,nextPageToken*,orderBy*,pageSize*,sortOrder*}", path_parameters)
     
-    async def get(self,request_configuration: Optional[RequestConfiguration] = None) -> Optional[BaseResourceList]:
+    async def get(self,request_configuration: Optional[RequestConfiguration] = None) -> Optional[ArtifactList]:
         """
         List all artifacts associated with the `ModelVersion`
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
-        Returns: Optional[BaseResourceList]
+        Returns: Optional[ArtifactList]
         """
         request_info = self.to_get_request_information(
             request_configuration
@@ -48,9 +48,9 @@ class ArtifactsRequestBuilder(BaseRequestBuilder):
         }
         if not self.request_adapter:
             raise Exception("Http core is null") 
-        from .......models.base_resource_list import BaseResourceList
+        from .......models.artifact_list import ArtifactList
 
-        return await self.request_adapter.send_async(request_info, BaseResourceList, error_mapping)
+        return await self.request_adapter.send_async(request_info, ArtifactList, error_mapping)
     
     async def post(self,body: Optional[Artifact] = None, request_configuration: Optional[RequestConfiguration] = None) -> Optional[Artifact]:
         """

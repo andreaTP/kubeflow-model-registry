@@ -19,6 +19,12 @@ var _ MappedNullable = &ModelVersion{}
 
 // ModelVersion Represents a ModelVersion belonging to a RegisteredModel.
 type ModelVersion struct {
+	// Output only. The unique server generated id of the resource.
+	Id *string `json:"id,omitempty"`
+	// Output only. Create time of the resource in millisecond since epoch.
+	CreateTimeSinceEpoch *string `json:"createTimeSinceEpoch,omitempty"`
+	// Output only. Last update time of the resource since epoch in millisecond since epoch.
+	LastUpdateTimeSinceEpoch *string `json:"lastUpdateTimeSinceEpoch,omitempty"`
 	// The client provided name of the artifact. This field is optional. If set, it must be unique among all the artifacts of the same artifact type within a database instance and cannot be changed once set.
 	Name *string `json:"name,omitempty"`
 	// User provided custom properties which are not defined by its type.
@@ -30,12 +36,6 @@ type ModelVersion struct {
 	State      *ModelVersionState `json:"state,omitempty"`
 	// Name of the author.
 	Author *string `json:"author,omitempty"`
-	// Output only. The unique server generated id of the resource.
-	Id *string `json:"id,omitempty"`
-	// Output only. Create time of the resource in millisecond since epoch.
-	CreateTimeSinceEpoch *string `json:"createTimeSinceEpoch,omitempty"`
-	// Output only. Last update time of the resource since epoch in millisecond since epoch.
-	LastUpdateTimeSinceEpoch *string `json:"lastUpdateTimeSinceEpoch,omitempty"`
 }
 
 // NewModelVersion instantiates a new ModelVersion object
@@ -57,6 +57,102 @@ func NewModelVersionWithDefaults() *ModelVersion {
 	var state ModelVersionState = MODELVERSIONSTATE_LIVE
 	this.State = &state
 	return &this
+}
+
+// GetId returns the Id field value if set, zero value otherwise.
+func (o *ModelVersion) GetId() string {
+	if o == nil || IsNil(o.Id) {
+		var ret string
+		return ret
+	}
+	return *o.Id
+}
+
+// GetIdOk returns a tuple with the Id field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ModelVersion) GetIdOk() (*string, bool) {
+	if o == nil || IsNil(o.Id) {
+		return nil, false
+	}
+	return o.Id, true
+}
+
+// HasId returns a boolean if a field has been set.
+func (o *ModelVersion) HasId() bool {
+	if o != nil && !IsNil(o.Id) {
+		return true
+	}
+
+	return false
+}
+
+// SetId gets a reference to the given string and assigns it to the Id field.
+func (o *ModelVersion) SetId(v string) {
+	o.Id = &v
+}
+
+// GetCreateTimeSinceEpoch returns the CreateTimeSinceEpoch field value if set, zero value otherwise.
+func (o *ModelVersion) GetCreateTimeSinceEpoch() string {
+	if o == nil || IsNil(o.CreateTimeSinceEpoch) {
+		var ret string
+		return ret
+	}
+	return *o.CreateTimeSinceEpoch
+}
+
+// GetCreateTimeSinceEpochOk returns a tuple with the CreateTimeSinceEpoch field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ModelVersion) GetCreateTimeSinceEpochOk() (*string, bool) {
+	if o == nil || IsNil(o.CreateTimeSinceEpoch) {
+		return nil, false
+	}
+	return o.CreateTimeSinceEpoch, true
+}
+
+// HasCreateTimeSinceEpoch returns a boolean if a field has been set.
+func (o *ModelVersion) HasCreateTimeSinceEpoch() bool {
+	if o != nil && !IsNil(o.CreateTimeSinceEpoch) {
+		return true
+	}
+
+	return false
+}
+
+// SetCreateTimeSinceEpoch gets a reference to the given string and assigns it to the CreateTimeSinceEpoch field.
+func (o *ModelVersion) SetCreateTimeSinceEpoch(v string) {
+	o.CreateTimeSinceEpoch = &v
+}
+
+// GetLastUpdateTimeSinceEpoch returns the LastUpdateTimeSinceEpoch field value if set, zero value otherwise.
+func (o *ModelVersion) GetLastUpdateTimeSinceEpoch() string {
+	if o == nil || IsNil(o.LastUpdateTimeSinceEpoch) {
+		var ret string
+		return ret
+	}
+	return *o.LastUpdateTimeSinceEpoch
+}
+
+// GetLastUpdateTimeSinceEpochOk returns a tuple with the LastUpdateTimeSinceEpoch field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ModelVersion) GetLastUpdateTimeSinceEpochOk() (*string, bool) {
+	if o == nil || IsNil(o.LastUpdateTimeSinceEpoch) {
+		return nil, false
+	}
+	return o.LastUpdateTimeSinceEpoch, true
+}
+
+// HasLastUpdateTimeSinceEpoch returns a boolean if a field has been set.
+func (o *ModelVersion) HasLastUpdateTimeSinceEpoch() bool {
+	if o != nil && !IsNil(o.LastUpdateTimeSinceEpoch) {
+		return true
+	}
+
+	return false
+}
+
+// SetLastUpdateTimeSinceEpoch gets a reference to the given string and assigns it to the LastUpdateTimeSinceEpoch field.
+func (o *ModelVersion) SetLastUpdateTimeSinceEpoch(v string) {
+	o.LastUpdateTimeSinceEpoch = &v
 }
 
 // GetName returns the Name field value if set, zero value otherwise.
@@ -251,102 +347,6 @@ func (o *ModelVersion) SetAuthor(v string) {
 	o.Author = &v
 }
 
-// GetId returns the Id field value if set, zero value otherwise.
-func (o *ModelVersion) GetId() string {
-	if o == nil || IsNil(o.Id) {
-		var ret string
-		return ret
-	}
-	return *o.Id
-}
-
-// GetIdOk returns a tuple with the Id field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ModelVersion) GetIdOk() (*string, bool) {
-	if o == nil || IsNil(o.Id) {
-		return nil, false
-	}
-	return o.Id, true
-}
-
-// HasId returns a boolean if a field has been set.
-func (o *ModelVersion) HasId() bool {
-	if o != nil && !IsNil(o.Id) {
-		return true
-	}
-
-	return false
-}
-
-// SetId gets a reference to the given string and assigns it to the Id field.
-func (o *ModelVersion) SetId(v string) {
-	o.Id = &v
-}
-
-// GetCreateTimeSinceEpoch returns the CreateTimeSinceEpoch field value if set, zero value otherwise.
-func (o *ModelVersion) GetCreateTimeSinceEpoch() string {
-	if o == nil || IsNil(o.CreateTimeSinceEpoch) {
-		var ret string
-		return ret
-	}
-	return *o.CreateTimeSinceEpoch
-}
-
-// GetCreateTimeSinceEpochOk returns a tuple with the CreateTimeSinceEpoch field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ModelVersion) GetCreateTimeSinceEpochOk() (*string, bool) {
-	if o == nil || IsNil(o.CreateTimeSinceEpoch) {
-		return nil, false
-	}
-	return o.CreateTimeSinceEpoch, true
-}
-
-// HasCreateTimeSinceEpoch returns a boolean if a field has been set.
-func (o *ModelVersion) HasCreateTimeSinceEpoch() bool {
-	if o != nil && !IsNil(o.CreateTimeSinceEpoch) {
-		return true
-	}
-
-	return false
-}
-
-// SetCreateTimeSinceEpoch gets a reference to the given string and assigns it to the CreateTimeSinceEpoch field.
-func (o *ModelVersion) SetCreateTimeSinceEpoch(v string) {
-	o.CreateTimeSinceEpoch = &v
-}
-
-// GetLastUpdateTimeSinceEpoch returns the LastUpdateTimeSinceEpoch field value if set, zero value otherwise.
-func (o *ModelVersion) GetLastUpdateTimeSinceEpoch() string {
-	if o == nil || IsNil(o.LastUpdateTimeSinceEpoch) {
-		var ret string
-		return ret
-	}
-	return *o.LastUpdateTimeSinceEpoch
-}
-
-// GetLastUpdateTimeSinceEpochOk returns a tuple with the LastUpdateTimeSinceEpoch field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ModelVersion) GetLastUpdateTimeSinceEpochOk() (*string, bool) {
-	if o == nil || IsNil(o.LastUpdateTimeSinceEpoch) {
-		return nil, false
-	}
-	return o.LastUpdateTimeSinceEpoch, true
-}
-
-// HasLastUpdateTimeSinceEpoch returns a boolean if a field has been set.
-func (o *ModelVersion) HasLastUpdateTimeSinceEpoch() bool {
-	if o != nil && !IsNil(o.LastUpdateTimeSinceEpoch) {
-		return true
-	}
-
-	return false
-}
-
-// SetLastUpdateTimeSinceEpoch gets a reference to the given string and assigns it to the LastUpdateTimeSinceEpoch field.
-func (o *ModelVersion) SetLastUpdateTimeSinceEpoch(v string) {
-	o.LastUpdateTimeSinceEpoch = &v
-}
-
 func (o ModelVersion) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -357,6 +357,15 @@ func (o ModelVersion) MarshalJSON() ([]byte, error) {
 
 func (o ModelVersion) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Id) {
+		toSerialize["id"] = o.Id
+	}
+	if !IsNil(o.CreateTimeSinceEpoch) {
+		toSerialize["createTimeSinceEpoch"] = o.CreateTimeSinceEpoch
+	}
+	if !IsNil(o.LastUpdateTimeSinceEpoch) {
+		toSerialize["lastUpdateTimeSinceEpoch"] = o.LastUpdateTimeSinceEpoch
+	}
 	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
@@ -374,15 +383,6 @@ func (o ModelVersion) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Author) {
 		toSerialize["author"] = o.Author
-	}
-	if !IsNil(o.Id) {
-		toSerialize["id"] = o.Id
-	}
-	if !IsNil(o.CreateTimeSinceEpoch) {
-		toSerialize["createTimeSinceEpoch"] = o.CreateTimeSinceEpoch
-	}
-	if !IsNil(o.LastUpdateTimeSinceEpoch) {
-		toSerialize["lastUpdateTimeSinceEpoch"] = o.LastUpdateTimeSinceEpoch
 	}
 	return toSerialize, nil
 }

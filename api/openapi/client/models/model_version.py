@@ -35,8 +35,6 @@ class ModelVersion(AdditionalDataHolder, Parsable):
     last_update_time_since_epoch: Optional[str] = None
     # The client provided name of the artifact. This field is optional. If set,it must be unique among all the artifacts of the same artifact type withina database instance and cannot be changed once set.
     name: Optional[str] = None
-    # ID of the `RegisteredModel` to which this version belongs.
-    registered_model_i_d: Optional[str] = None
     
     @staticmethod
     def create_from_discriminator_value(parse_node: Optional[ParseNode] = None) -> ModelVersion:
@@ -69,7 +67,6 @@ class ModelVersion(AdditionalDataHolder, Parsable):
             "id": lambda n : setattr(self, 'id', n.get_str_value()),
             "lastUpdateTimeSinceEpoch": lambda n : setattr(self, 'last_update_time_since_epoch', n.get_str_value()),
             "name": lambda n : setattr(self, 'name', n.get_str_value()),
-            "registeredModelID": lambda n : setattr(self, 'registered_model_i_d', n.get_str_value()),
             "state": lambda n : setattr(self, 'state', n.get_enum_value(ModelVersionState)),
         }
         return fields
@@ -87,7 +84,6 @@ class ModelVersion(AdditionalDataHolder, Parsable):
         writer.write_str_value("description", self.description)
         writer.write_str_value("externalID", self.external_i_d)
         writer.write_str_value("name", self.name)
-        writer.write_str_value("registeredModelID", self.registered_model_i_d)
         writer.write_enum_value("state", self.state)
         writer.write_additional_data_value(self.additional_data)
     

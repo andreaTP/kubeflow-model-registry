@@ -1306,43 +1306,29 @@ components:
           model-artifact: "#/components/schemas/ModelArtifact"
           doc-artifact: "#/components/schemas/DocArtifact"
       description: A metadata Artifact Entity.
-    BaseArtifact:
-      allOf:
-        - $ref: "#/components/schemas/WithBaseArtifactUpdate"
-        - $ref: "#/components/schemas/WithBaseResource"
-        - $ref: "#/components/schemas/WithBaseResourceCreate"
-        - $ref: "#/components/schemas/WithBaseResourceUpdate"
-        - required:
-            - artifactType
-          type: object
-          properties:
-            artifactType:
-              type: string
     ServingEnvironmentList:
       description: List of ServingEnvironments.
       type: object
+      properties:
+        items:
+          description: ""
+          type: array
+          items:
+            $ref: "#/components/schemas/ServingEnvironment"
+          readOnly: false
       allOf:
-        - type: object
-          properties:
-            items:
-              description: ""
-              type: array
-              items:
-                $ref: "#/components/schemas/ServingEnvironment"
-              readOnly: false
         - $ref: "#/components/schemas/BaseResourceList"
     RegisteredModelList:
       description: List of RegisteredModels.
       type: object
+      properties:
+        items:
+          description: ""
+          type: array
+          items:
+            $ref: "#/components/schemas/RegisteredModel"
+          readOnly: false
       allOf:
-        - type: object
-          properties:
-            items:
-              description: ""
-              type: array
-              items:
-                $ref: "#/components/schemas/RegisteredModel"
-              readOnly: false
         - $ref: "#/components/schemas/BaseResourceList"
     ServingEnvironment:
       description: A Model Serving environment for serving `RegisteredModels`.
@@ -1350,7 +1336,6 @@ components:
         - $ref: "#/components/schemas/WithBaseResource"
         - $ref: "#/components/schemas/WithBaseResourceCreate"
         - $ref: "#/components/schemas/WithBaseResourceUpdate"
-        - $ref: "#/components/schemas/ServingEnvironmentCreate"
     ServingEnvironmentUpdate:
       description: A Model Serving environment for serving `RegisteredModels`.
       allOf:
@@ -1360,7 +1345,6 @@ components:
       allOf:
         - $ref: "#/components/schemas/WithBaseResourceCreate"
         - $ref: "#/components/schemas/WithBaseResourceUpdate"
-        - $ref: "#/components/schemas/ServingEnvironmentUpdate"
     InferenceService:
       description: >-
         An `InferenceService` entity in a `ServingEnvironment` represents a deployed `ModelVersion` from a `RegisteredModel` created by Model Serving.
@@ -1368,7 +1352,8 @@ components:
         - $ref: "#/components/schemas/WithBaseResource"
         - $ref: "#/components/schemas/WithBaseResourceCreate"
         - $ref: "#/components/schemas/WithBaseResourceUpdate"
-        - $ref: "#/components/schemas/InferenceServiceCreate"
+        - $ref: "#/components/schemas/WithInferenceServiceUpdate"
+        - $ref: "#/components/schemas/WithInferenceServiceCreate"
     InferenceServiceList:
       description: List of InferenceServices.
       type: object

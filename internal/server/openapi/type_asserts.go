@@ -75,26 +75,6 @@ func AssertArtifactStateConstraints(obj model.ArtifactState) error {
 }
 
 
-// AssertBaseArtifactRequired checks if the required fields are not zero-ed
-func AssertBaseArtifactRequired(obj model.BaseArtifact) error {
-	elements := map[string]interface{}{
-		"artifactType": obj.ArtifactType,
-	}
-	for name, el := range elements {
-		if isZero := IsZeroValue(el); isZero {
-			return &RequiredError{Field: name}
-		}
-	}
-
-	return nil
-}
-
-// AssertBaseArtifactConstraints checks if the values respects the defined constraints
-func AssertBaseArtifactConstraints(obj model.BaseArtifact) error {
-	return nil
-}
-
-
 // AssertBaseExecutionRequired checks if the required fields are not zero-ed
 func AssertBaseExecutionRequired(obj model.BaseExecution) error {
 	return nil
@@ -837,6 +817,17 @@ func AssertWithInferenceServiceUpdateConstraints(obj model.WithInferenceServiceU
 }
 
 
+// AssertWithModelArtifactUpdateRequired checks if the required fields are not zero-ed
+func AssertWithModelArtifactUpdateRequired(obj model.WithModelArtifactUpdate) error {
+	return nil
+}
+
+// AssertWithModelArtifactUpdateConstraints checks if the values respects the defined constraints
+func AssertWithModelArtifactUpdateConstraints(obj model.WithModelArtifactUpdate) error {
+	return nil
+}
+
+
 // AssertWithModelVersionUpdateRequired checks if the required fields are not zero-ed
 func AssertWithModelVersionUpdateRequired(obj model.WithModelVersionUpdate) error {
 	return nil
@@ -844,6 +835,17 @@ func AssertWithModelVersionUpdateRequired(obj model.WithModelVersionUpdate) erro
 
 // AssertWithModelVersionUpdateConstraints checks if the values respects the defined constraints
 func AssertWithModelVersionUpdateConstraints(obj model.WithModelVersionUpdate) error {
+	return nil
+}
+
+
+// AssertWithRegisteredModelUpdateRequired checks if the required fields are not zero-ed
+func AssertWithRegisteredModelUpdateRequired(obj model.WithRegisteredModelUpdate) error {
+	return nil
+}
+
+// AssertWithRegisteredModelUpdateConstraints checks if the values respects the defined constraints
+func AssertWithRegisteredModelUpdateConstraints(obj model.WithRegisteredModelUpdate) error {
 	return nil
 }
 

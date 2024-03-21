@@ -5,9 +5,6 @@ from typing import Any, Callable, Dict, List, Optional, TYPE_CHECKING, Union
 
 @dataclass
 class BaseResourceList(AdditionalDataHolder, Parsable):
-    """
-    List of ServingEnvironments.
-    """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: Dict[str, Any] = field(default_factory=dict)
 
