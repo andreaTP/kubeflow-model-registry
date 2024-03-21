@@ -1,18 +1,27 @@
 from __future__ import annotations
 from dataclasses import dataclass, field
-from kiota_abstractions.serialization import Parsable, ParseNode, SerializationWriter
+from kiota_abstractions.serialization import AdditionalDataHolder, Parsable, ParseNode, SerializationWriter
 from typing import Any, Callable, Dict, List, Optional, TYPE_CHECKING, Union
 
 if TYPE_CHECKING:
-    from .with_base_resource_update import WithBaseResourceUpdate
-
-from .with_base_resource_update import WithBaseResourceUpdate
+    from .registered_model_create_custom_properties import RegisteredModelCreate_customProperties
 
 @dataclass
-class RegisteredModelCreate(WithBaseResourceUpdate):
+class RegisteredModelCreate(AdditionalDataHolder, Parsable):
     """
     A registered model in model registry. A registered model has ModelVersion children.
     """
+    # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
+    additional_data: Dict[str, Any] = field(default_factory=dict)
+
+    # User provided custom properties which are not defined by its type.
+    custom_properties: Optional[RegisteredModelCreate_customProperties] = None
+    # An optional description about the resource.
+    description: Optional[str] = None
+    # The external id that come from the clients’ system. This field is optional.If set, it must be unique among all resources within a database instance.
+    external_i_d: Optional[str] = None
+    # The client provided name of the artifact. This field is optional. If set,it must be unique among all the artifacts of the same artifact type withina database instance and cannot be changed once set.
+    name: Optional[str] = None
     
     @staticmethod
     def create_from_discriminator_value(parse_node: Optional[ParseNode] = None) -> RegisteredModelCreate:
@@ -30,14 +39,16 @@ class RegisteredModelCreate(WithBaseResourceUpdate):
         The deserialization information for the current model
         Returns: Dict[str, Callable[[ParseNode], None]]
         """
-        from .with_base_resource_update import WithBaseResourceUpdate
+        from .registered_model_create_custom_properties import RegisteredModelCreate_customProperties
 
-        from .with_base_resource_update import WithBaseResourceUpdate
+        from .registered_model_create_custom_properties import RegisteredModelCreate_customProperties
 
         fields: Dict[str, Callable[[Any], None]] = {
+            "customProperties": lambda n : setattr(self, 'custom_properties', n.get_object_value(RegisteredModelCreate_customProperties)),
+            "description": lambda n : setattr(self, 'description', n.get_str_value()),
+            "externalID": lambda n : setattr(self, 'external_i_d', n.get_str_value()),
+            "name": lambda n : setattr(self, 'name', n.get_str_value()),
         }
-        super_fields = super().get_field_deserializers()
-        fields.update(super_fields)
         return fields
     
     def serialize(self,writer: SerializationWriter) -> None:
@@ -48,6 +59,10 @@ class RegisteredModelCreate(WithBaseResourceUpdate):
         """
         if not writer:
             raise TypeError("writer cannot be null.")
-        super().serialize(writer)
+        writer.write_object_value("customProperties", self.custom_properties)
+        writer.write_str_value("description", self.description)
+        writer.write_str_value("externalID", self.external_i_d)
+        writer.write_str_value("name", self.name)
+        writer.write_additional_data_value(self.additional_data)
     
 

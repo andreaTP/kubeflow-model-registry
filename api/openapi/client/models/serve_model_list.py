@@ -5,6 +5,7 @@ from typing import Any, Callable, Dict, List, Optional, TYPE_CHECKING, Union
 
 if TYPE_CHECKING:
     from .base_resource_list import BaseResourceList
+    from .serve_model import ServeModel
 
 from .base_resource_list import BaseResourceList
 
@@ -33,10 +34,13 @@ class ServeModelList(BaseResourceList):
         Returns: Dict[str, Callable[[ParseNode], None]]
         """
         from .base_resource_list import BaseResourceList
+        from .serve_model import ServeModel
 
         from .base_resource_list import BaseResourceList
+        from .serve_model import ServeModel
 
         fields: Dict[str, Callable[[Any], None]] = {
+            "items": lambda n : setattr(self, 'items', n.get_collection_of_object_values(ServeModel)),
         }
         super_fields = super().get_field_deserializers()
         fields.update(super_fields)
@@ -51,5 +55,6 @@ class ServeModelList(BaseResourceList):
         if not writer:
             raise TypeError("writer cannot be null.")
         super().serialize(writer)
+        writer.write_collection_of_object_values("items", self.items)
     
 

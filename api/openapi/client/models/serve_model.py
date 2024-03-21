@@ -4,6 +4,7 @@ from kiota_abstractions.serialization import AdditionalDataHolder, Parsable, Par
 from typing import Any, Callable, Dict, List, Optional, TYPE_CHECKING, Union
 
 if TYPE_CHECKING:
+    from .execution_state import ExecutionState
     from .serve_model_custom_properties import ServeModel_customProperties
 
 @dataclass
@@ -14,6 +15,10 @@ class ServeModel(AdditionalDataHolder, Parsable):
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: Dict[str, Any] = field(default_factory=dict)
 
+    from .execution_state import ExecutionState
+
+    # The state of the Execution. The state transitions are  NEW -> RUNNING -> COMPLETE | CACHED | FAILED | CANCELEDCACHED means the execution is skipped due to cached results.CANCELED means the execution is skipped due to precondition not met. It isdifferent from CACHED in that a CANCELED execution will not have any eventassociated with it. It is different from FAILED in that there is nounexpected error happened and it is regarded as a normal state.See also: ml-metadata Execution.State
+    last_known_state: Optional[ExecutionState] = ExecutionState("UNKNOWN")
     # Output only. Create time of the resource in millisecond since epoch.
     create_time_since_epoch: Optional[str] = None
     # User provided custom properties which are not defined by its type.
@@ -47,8 +52,10 @@ class ServeModel(AdditionalDataHolder, Parsable):
         The deserialization information for the current model
         Returns: Dict[str, Callable[[ParseNode], None]]
         """
+        from .execution_state import ExecutionState
         from .serve_model_custom_properties import ServeModel_customProperties
 
+        from .execution_state import ExecutionState
         from .serve_model_custom_properties import ServeModel_customProperties
 
         fields: Dict[str, Callable[[Any], None]] = {
@@ -57,6 +64,7 @@ class ServeModel(AdditionalDataHolder, Parsable):
             "description": lambda n : setattr(self, 'description', n.get_str_value()),
             "externalID": lambda n : setattr(self, 'external_i_d', n.get_str_value()),
             "id": lambda n : setattr(self, 'id', n.get_str_value()),
+            "lastKnownState": lambda n : setattr(self, 'last_known_state', n.get_enum_value(ExecutionState)),
             "lastUpdateTimeSinceEpoch": lambda n : setattr(self, 'last_update_time_since_epoch', n.get_str_value()),
             "modelVersionId": lambda n : setattr(self, 'model_version_id', n.get_str_value()),
             "name": lambda n : setattr(self, 'name', n.get_str_value()),
@@ -74,6 +82,7 @@ class ServeModel(AdditionalDataHolder, Parsable):
         writer.write_object_value("customProperties", self.custom_properties)
         writer.write_str_value("description", self.description)
         writer.write_str_value("externalID", self.external_i_d)
+        writer.write_enum_value("lastKnownState", self.last_known_state)
         writer.write_str_value("modelVersionId", self.model_version_id)
         writer.write_str_value("name", self.name)
         writer.write_additional_data_value(self.additional_data)

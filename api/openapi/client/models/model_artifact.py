@@ -4,6 +4,7 @@ from kiota_abstractions.serialization import AdditionalDataHolder, Parsable, Par
 from typing import Any, Callable, Dict, List, Optional, TYPE_CHECKING, Union
 
 if TYPE_CHECKING:
+    from .artifact_state import ArtifactState
     from .model_artifact_custom_properties import ModelArtifact_customProperties
 
 @dataclass
@@ -15,7 +16,11 @@ class ModelArtifact(AdditionalDataHolder, Parsable):
     additional_data: Dict[str, Any] = field(default_factory=dict)
 
     # The artifactType property
-    artifact_type: Optional[str] = None
+    artifact_type: Optional[str] = "model-artifact"
+    from .artifact_state import ArtifactState
+
+    #  - PENDING: A state indicating that the artifact may exist. - LIVE: A state indicating that the artifact should exist, unless somethingexternal to the system deletes it. - MARKED_FOR_DELETION: A state indicating that the artifact should be deleted. - DELETED: A state indicating that the artifact has been deleted. - ABANDONED: A state indicating that the artifact has been abandoned, which may bedue to a failed or cancelled execution. - REFERENCE: A state indicating that the artifact is a reference artifact. Atexecution start time, the orchestrator produces an output artifact foreach output key with state PENDING. However, for an intermediateartifact, this first artifact's state will be REFERENCE. Intermediateartifacts emitted during a component's execution will copy the REFERENCEartifact's attributes. At the end of an execution, the artifact stateshould remain REFERENCE instead of being changed to LIVE.See also: ml-metadata Artifact.State
+    state: Optional[ArtifactState] = ArtifactState("UNKNOWN")
     # Output only. Create time of the resource in millisecond since epoch.
     create_time_since_epoch: Optional[str] = None
     # User provided custom properties which are not defined by its type.
@@ -28,8 +33,20 @@ class ModelArtifact(AdditionalDataHolder, Parsable):
     id: Optional[str] = None
     # Output only. Last update time of the resource since epoch in millisecondsince epoch.
     last_update_time_since_epoch: Optional[str] = None
+    # Name of the model format.
+    model_format_name: Optional[str] = None
+    # Version of the model format.
+    model_format_version: Optional[str] = None
     # The client provided name of the artifact. This field is optional. If set,it must be unique among all the artifacts of the same artifact type withina database instance and cannot be changed once set.
     name: Optional[str] = None
+    # Name of the service account with storage secret.
+    service_account_name: Optional[str] = None
+    # Storage secret name.
+    storage_key: Optional[str] = None
+    # Path for model in storage provided by `storageKey`.
+    storage_path: Optional[str] = None
+    # The uniform resource identifier of the physical artifact.May be empty if there is no physical artifact.
+    uri: Optional[str] = None
     
     @staticmethod
     def create_from_discriminator_value(parse_node: Optional[ParseNode] = None) -> ModelArtifact:
@@ -47,8 +64,10 @@ class ModelArtifact(AdditionalDataHolder, Parsable):
         The deserialization information for the current model
         Returns: Dict[str, Callable[[ParseNode], None]]
         """
+        from .artifact_state import ArtifactState
         from .model_artifact_custom_properties import ModelArtifact_customProperties
 
+        from .artifact_state import ArtifactState
         from .model_artifact_custom_properties import ModelArtifact_customProperties
 
         fields: Dict[str, Callable[[Any], None]] = {
@@ -59,7 +78,14 @@ class ModelArtifact(AdditionalDataHolder, Parsable):
             "externalID": lambda n : setattr(self, 'external_i_d', n.get_str_value()),
             "id": lambda n : setattr(self, 'id', n.get_str_value()),
             "lastUpdateTimeSinceEpoch": lambda n : setattr(self, 'last_update_time_since_epoch', n.get_str_value()),
+            "modelFormatName": lambda n : setattr(self, 'model_format_name', n.get_str_value()),
+            "modelFormatVersion": lambda n : setattr(self, 'model_format_version', n.get_str_value()),
             "name": lambda n : setattr(self, 'name', n.get_str_value()),
+            "serviceAccountName": lambda n : setattr(self, 'service_account_name', n.get_str_value()),
+            "state": lambda n : setattr(self, 'state', n.get_enum_value(ArtifactState)),
+            "storageKey": lambda n : setattr(self, 'storage_key', n.get_str_value()),
+            "storagePath": lambda n : setattr(self, 'storage_path', n.get_str_value()),
+            "uri": lambda n : setattr(self, 'uri', n.get_str_value()),
         }
         return fields
     
@@ -75,7 +101,14 @@ class ModelArtifact(AdditionalDataHolder, Parsable):
         writer.write_object_value("customProperties", self.custom_properties)
         writer.write_str_value("description", self.description)
         writer.write_str_value("externalID", self.external_i_d)
+        writer.write_str_value("modelFormatName", self.model_format_name)
+        writer.write_str_value("modelFormatVersion", self.model_format_version)
         writer.write_str_value("name", self.name)
+        writer.write_str_value("serviceAccountName", self.service_account_name)
+        writer.write_enum_value("state", self.state)
+        writer.write_str_value("storageKey", self.storage_key)
+        writer.write_str_value("storagePath", self.storage_path)
+        writer.write_str_value("uri", self.uri)
         writer.write_additional_data_value(self.additional_data)
     
 

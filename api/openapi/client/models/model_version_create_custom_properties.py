@@ -1,43 +1,35 @@
 from __future__ import annotations
 from dataclasses import dataclass, field
-from kiota_abstractions.serialization import Parsable, ParseNode, SerializationWriter
+from kiota_abstractions.serialization import AdditionalDataHolder, Parsable, ParseNode, SerializationWriter
 from typing import Any, Callable, Dict, List, Optional, TYPE_CHECKING, Union
 
-if TYPE_CHECKING:
-    from .base_artifact_create import BaseArtifactCreate
-
-from .base_artifact_create import BaseArtifactCreate
-
 @dataclass
-class BaseArtifact(BaseArtifactCreate):
-    # The artifactType property
-    artifact_type: Optional[str] = None
+class ModelVersionCreate_customProperties(AdditionalDataHolder, Parsable):
+    """
+    User provided custom properties which are not defined by its type.
+    """
+    # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
+    additional_data: Dict[str, Any] = field(default_factory=dict)
+
     
     @staticmethod
-    def create_from_discriminator_value(parse_node: Optional[ParseNode] = None) -> BaseArtifact:
+    def create_from_discriminator_value(parse_node: Optional[ParseNode] = None) -> ModelVersionCreate_customProperties:
         """
         Creates a new instance of the appropriate class based on discriminator value
         param parse_node: The parse node to use to read the discriminator value and create the object
-        Returns: BaseArtifact
+        Returns: ModelVersionCreate_customProperties
         """
         if not parse_node:
             raise TypeError("parse_node cannot be null.")
-        return BaseArtifact()
+        return ModelVersionCreate_customProperties()
     
     def get_field_deserializers(self,) -> Dict[str, Callable[[ParseNode], None]]:
         """
         The deserialization information for the current model
         Returns: Dict[str, Callable[[ParseNode], None]]
         """
-        from .base_artifact_create import BaseArtifactCreate
-
-        from .base_artifact_create import BaseArtifactCreate
-
         fields: Dict[str, Callable[[Any], None]] = {
-            "artifactType": lambda n : setattr(self, 'artifact_type', n.get_str_value()),
         }
-        super_fields = super().get_field_deserializers()
-        fields.update(super_fields)
         return fields
     
     def serialize(self,writer: SerializationWriter) -> None:
@@ -48,7 +40,6 @@ class BaseArtifact(BaseArtifactCreate):
         """
         if not writer:
             raise TypeError("writer cannot be null.")
-        super().serialize(writer)
-        writer.write_str_value("artifactType", self.artifact_type)
+        writer.write_additional_data_value(self.additional_data)
     
 

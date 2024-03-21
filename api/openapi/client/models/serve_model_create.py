@@ -4,17 +4,15 @@ from kiota_abstractions.serialization import Parsable, ParseNode, SerializationW
 from typing import Any, Callable, Dict, List, Optional, TYPE_CHECKING, Union
 
 if TYPE_CHECKING:
-    from .serve_model_update import ServeModelUpdate
+    from .with_base_resource_update import WithBaseResourceUpdate
 
-from .serve_model_update import ServeModelUpdate
+from .with_base_resource_update import WithBaseResourceUpdate
 
 @dataclass
-class ServeModelCreate(ServeModelUpdate):
+class ServeModelCreate(WithBaseResourceUpdate):
     """
     An ML model serving action.
     """
-    # ID of the `ModelVersion` that was served in `InferenceService`.
-    model_version_id: Optional[str] = None
     
     @staticmethod
     def create_from_discriminator_value(parse_node: Optional[ParseNode] = None) -> ServeModelCreate:
@@ -32,12 +30,11 @@ class ServeModelCreate(ServeModelUpdate):
         The deserialization information for the current model
         Returns: Dict[str, Callable[[ParseNode], None]]
         """
-        from .serve_model_update import ServeModelUpdate
+        from .with_base_resource_update import WithBaseResourceUpdate
 
-        from .serve_model_update import ServeModelUpdate
+        from .with_base_resource_update import WithBaseResourceUpdate
 
         fields: Dict[str, Callable[[Any], None]] = {
-            "modelVersionId": lambda n : setattr(self, 'model_version_id', n.get_str_value()),
         }
         super_fields = super().get_field_deserializers()
         fields.update(super_fields)
@@ -52,6 +49,5 @@ class ServeModelCreate(ServeModelUpdate):
         if not writer:
             raise TypeError("writer cannot be null.")
         super().serialize(writer)
-        writer.write_str_value("modelVersionId", self.model_version_id)
     
 

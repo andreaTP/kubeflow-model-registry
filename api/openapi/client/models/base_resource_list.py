@@ -1,18 +1,16 @@
 from __future__ import annotations
 from dataclasses import dataclass, field
-from kiota_abstractions.serialization import Parsable, ParseNode, SerializationWriter
+from kiota_abstractions.serialization import AdditionalDataHolder, Parsable, ParseNode, SerializationWriter
 from typing import Any, Callable, Dict, List, Optional, TYPE_CHECKING, Union
 
-if TYPE_CHECKING:
-    from .serving_environment_list import ServingEnvironmentList
-
-from .serving_environment_list import ServingEnvironmentList
-
 @dataclass
-class BaseResourceList(ServingEnvironmentList):
+class BaseResourceList(AdditionalDataHolder, Parsable):
     """
-    List of RegisteredModels.
+    List of ModelArtifact entities.
     """
+    # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
+    additional_data: Dict[str, Any] = field(default_factory=dict)
+
     # Token to use to retrieve next page of results.
     next_page_token: Optional[str] = None
     # Maximum number of resources to return in the result.
@@ -36,17 +34,11 @@ class BaseResourceList(ServingEnvironmentList):
         The deserialization information for the current model
         Returns: Dict[str, Callable[[ParseNode], None]]
         """
-        from .serving_environment_list import ServingEnvironmentList
-
-        from .serving_environment_list import ServingEnvironmentList
-
         fields: Dict[str, Callable[[Any], None]] = {
             "nextPageToken": lambda n : setattr(self, 'next_page_token', n.get_str_value()),
             "pageSize": lambda n : setattr(self, 'page_size', n.get_int_value()),
             "size": lambda n : setattr(self, 'size', n.get_int_value()),
         }
-        super_fields = super().get_field_deserializers()
-        fields.update(super_fields)
         return fields
     
     def serialize(self,writer: SerializationWriter) -> None:
@@ -57,9 +49,9 @@ class BaseResourceList(ServingEnvironmentList):
         """
         if not writer:
             raise TypeError("writer cannot be null.")
-        super().serialize(writer)
         writer.write_str_value("nextPageToken", self.next_page_token)
         writer.write_int_value("pageSize", self.page_size)
         writer.write_int_value("size", self.size)
+        writer.write_additional_data_value(self.additional_data)
     
 

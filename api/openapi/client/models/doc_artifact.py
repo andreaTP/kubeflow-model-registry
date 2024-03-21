@@ -4,12 +4,12 @@ from kiota_abstractions.serialization import Parsable, ParseNode, SerializationW
 from typing import Any, Callable, Dict, List, Optional, TYPE_CHECKING, Union
 
 if TYPE_CHECKING:
-    from .base_artifact import BaseArtifact
+    from .with_base_artifact_update import WithBaseArtifactUpdate
 
-from .base_artifact import BaseArtifact
+from .with_base_artifact_update import WithBaseArtifactUpdate
 
 @dataclass
-class DocArtifact(BaseArtifact):
+class DocArtifact(WithBaseArtifactUpdate):
     """
     A document.
     """
@@ -32,11 +32,12 @@ class DocArtifact(BaseArtifact):
         The deserialization information for the current model
         Returns: Dict[str, Callable[[ParseNode], None]]
         """
-        from .base_artifact import BaseArtifact
+        from .with_base_artifact_update import WithBaseArtifactUpdate
 
-        from .base_artifact import BaseArtifact
+        from .with_base_artifact_update import WithBaseArtifactUpdate
 
         fields: Dict[str, Callable[[Any], None]] = {
+            "artifactType": lambda n : setattr(self, 'artifact_type', n.get_str_value()),
         }
         super_fields = super().get_field_deserializers()
         fields.update(super_fields)
@@ -51,5 +52,6 @@ class DocArtifact(BaseArtifact):
         if not writer:
             raise TypeError("writer cannot be null.")
         super().serialize(writer)
+        writer.write_str_value("artifactType", self.artifact_type)
     
 

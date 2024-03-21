@@ -1,20 +1,38 @@
 from __future__ import annotations
 from dataclasses import dataclass, field
-from kiota_abstractions.serialization import Parsable, ParseNode, SerializationWriter
+from kiota_abstractions.serialization import AdditionalDataHolder, Parsable, ParseNode, SerializationWriter
 from typing import Any, Callable, Dict, List, Optional, TYPE_CHECKING, Union
 
 if TYPE_CHECKING:
-    from .inference_service_update import InferenceServiceUpdate
-
-from .inference_service_update import InferenceServiceUpdate
+    from .inference_service_create_custom_properties import InferenceServiceCreate_customProperties
+    from .inference_service_state import InferenceServiceState
 
 @dataclass
-class InferenceServiceCreate(InferenceServiceUpdate):
+class InferenceServiceCreate(AdditionalDataHolder, Parsable):
     """
     An `InferenceService` entity in a `ServingEnvironment` represents a deployed `ModelVersion` from a `RegisteredModel` created by Model Serving.
     """
+    # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
+    additional_data: Dict[str, Any] = field(default_factory=dict)
+
+    from .inference_service_state import InferenceServiceState
+
+    # - DEPLOYED: A state indicating that the `InferenceService` should be deployed.- UNDEPLOYED: A state indicating that the `InferenceService` should be un-deployed.The state indicates the desired state of inference service.See the associated `ServeModel` for the actual status of service deployment action.
+    desired_state: Optional[InferenceServiceState] = InferenceServiceState("DEPLOYED")
+    # User provided custom properties which are not defined by its type.
+    custom_properties: Optional[InferenceServiceCreate_customProperties] = None
+    # An optional description about the resource.
+    description: Optional[str] = None
+    # The external id that come from the clients’ system. This field is optional.If set, it must be unique among all resources within a database instance.
+    external_i_d: Optional[str] = None
+    # ID of the `ModelVersion` to serve. If it's unspecified, then the latest `ModelVersion` by creation order will be served.
+    model_version_id: Optional[str] = None
+    # The client provided name of the artifact. This field is optional. If set,it must be unique among all the artifacts of the same artifact type withina database instance and cannot be changed once set.
+    name: Optional[str] = None
     # ID of the `RegisteredModel` to serve.
     registered_model_id: Optional[str] = None
+    # Model runtime.
+    runtime: Optional[str] = None
     # ID of the parent `ServingEnvironment` for this `InferenceService` entity.
     serving_environment_id: Optional[str] = None
     
@@ -34,16 +52,23 @@ class InferenceServiceCreate(InferenceServiceUpdate):
         The deserialization information for the current model
         Returns: Dict[str, Callable[[ParseNode], None]]
         """
-        from .inference_service_update import InferenceServiceUpdate
+        from .inference_service_create_custom_properties import InferenceServiceCreate_customProperties
+        from .inference_service_state import InferenceServiceState
 
-        from .inference_service_update import InferenceServiceUpdate
+        from .inference_service_create_custom_properties import InferenceServiceCreate_customProperties
+        from .inference_service_state import InferenceServiceState
 
         fields: Dict[str, Callable[[Any], None]] = {
+            "customProperties": lambda n : setattr(self, 'custom_properties', n.get_object_value(InferenceServiceCreate_customProperties)),
+            "description": lambda n : setattr(self, 'description', n.get_str_value()),
+            "desiredState": lambda n : setattr(self, 'desired_state', n.get_enum_value(InferenceServiceState)),
+            "externalID": lambda n : setattr(self, 'external_i_d', n.get_str_value()),
+            "modelVersionId": lambda n : setattr(self, 'model_version_id', n.get_str_value()),
+            "name": lambda n : setattr(self, 'name', n.get_str_value()),
             "registeredModelId": lambda n : setattr(self, 'registered_model_id', n.get_str_value()),
+            "runtime": lambda n : setattr(self, 'runtime', n.get_str_value()),
             "servingEnvironmentId": lambda n : setattr(self, 'serving_environment_id', n.get_str_value()),
         }
-        super_fields = super().get_field_deserializers()
-        fields.update(super_fields)
         return fields
     
     def serialize(self,writer: SerializationWriter) -> None:
@@ -54,8 +79,15 @@ class InferenceServiceCreate(InferenceServiceUpdate):
         """
         if not writer:
             raise TypeError("writer cannot be null.")
-        super().serialize(writer)
+        writer.write_object_value("customProperties", self.custom_properties)
+        writer.write_str_value("description", self.description)
+        writer.write_enum_value("desiredState", self.desired_state)
+        writer.write_str_value("externalID", self.external_i_d)
+        writer.write_str_value("modelVersionId", self.model_version_id)
+        writer.write_str_value("name", self.name)
         writer.write_str_value("registeredModelId", self.registered_model_id)
+        writer.write_str_value("runtime", self.runtime)
         writer.write_str_value("servingEnvironmentId", self.serving_environment_id)
+        writer.write_additional_data_value(self.additional_data)
     
 

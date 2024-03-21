@@ -115,6 +115,24 @@ func (c *OpenAPIConverterImpl) ConvertModelArtifactCreate(source *openapi.ModelA
 	var pOpenapiModelArtifact *openapi.ModelArtifact
 	if source != nil {
 		var openapiModelArtifact openapi.ModelArtifact
+		var pString *string
+		if (*source).Uri != nil {
+			xstring := *(*source).Uri
+			pString = &xstring
+		}
+		openapiModelArtifact.Uri = pString
+		var pOpenapiArtifactState *openapi.ArtifactState
+		if (*source).State != nil {
+			openapiArtifactState := openapi.ArtifactState(*(*source).State)
+			pOpenapiArtifactState = &openapiArtifactState
+		}
+		openapiModelArtifact.State = pOpenapiArtifactState
+		var pString2 *string
+		if (*source).Name != nil {
+			xstring2 := *(*source).Name
+			pString2 = &xstring2
+		}
+		openapiModelArtifact.Name = pString2
 		var pMapStringOpenapiMetadataValue *map[string]openapi.MetadataValue
 		if (*source).CustomProperties != nil {
 			mapStringOpenapiMetadataValue := make(map[string]openapi.MetadataValue, len((*(*source).CustomProperties)))
@@ -124,36 +142,18 @@ func (c *OpenAPIConverterImpl) ConvertModelArtifactCreate(source *openapi.ModelA
 			pMapStringOpenapiMetadataValue = &mapStringOpenapiMetadataValue
 		}
 		openapiModelArtifact.CustomProperties = pMapStringOpenapiMetadataValue
-		var pString *string
-		if (*source).Description != nil {
-			xstring := *(*source).Description
-			pString = &xstring
-		}
-		openapiModelArtifact.Description = pString
-		var pString2 *string
-		if (*source).ExternalID != nil {
-			xstring2 := *(*source).ExternalID
-			pString2 = &xstring2
-		}
-		openapiModelArtifact.ExternalID = pString2
 		var pString3 *string
-		if (*source).Uri != nil {
-			xstring3 := *(*source).Uri
+		if (*source).Description != nil {
+			xstring3 := *(*source).Description
 			pString3 = &xstring3
 		}
-		openapiModelArtifact.Uri = pString3
-		var pOpenapiArtifactState *openapi.ArtifactState
-		if (*source).State != nil {
-			openapiArtifactState := openapi.ArtifactState(*(*source).State)
-			pOpenapiArtifactState = &openapiArtifactState
-		}
-		openapiModelArtifact.State = pOpenapiArtifactState
+		openapiModelArtifact.Description = pString3
 		var pString4 *string
-		if (*source).Name != nil {
-			xstring4 := *(*source).Name
+		if (*source).ExternalID != nil {
+			xstring4 := *(*source).ExternalID
 			pString4 = &xstring4
 		}
-		openapiModelArtifact.Name = pString4
+		openapiModelArtifact.ExternalID = pString4
 		var pString5 *string
 		if (*source).ModelFormatName != nil {
 			xstring5 := *(*source).ModelFormatName
@@ -192,6 +192,18 @@ func (c *OpenAPIConverterImpl) ConvertModelArtifactUpdate(source *openapi.ModelA
 	var pOpenapiModelArtifact *openapi.ModelArtifact
 	if source != nil {
 		var openapiModelArtifact openapi.ModelArtifact
+		var pString *string
+		if (*source).Uri != nil {
+			xstring := *(*source).Uri
+			pString = &xstring
+		}
+		openapiModelArtifact.Uri = pString
+		var pOpenapiArtifactState *openapi.ArtifactState
+		if (*source).State != nil {
+			openapiArtifactState := openapi.ArtifactState(*(*source).State)
+			pOpenapiArtifactState = &openapiArtifactState
+		}
+		openapiModelArtifact.State = pOpenapiArtifactState
 		var pMapStringOpenapiMetadataValue *map[string]openapi.MetadataValue
 		if (*source).CustomProperties != nil {
 			mapStringOpenapiMetadataValue := make(map[string]openapi.MetadataValue, len((*(*source).CustomProperties)))
@@ -201,30 +213,18 @@ func (c *OpenAPIConverterImpl) ConvertModelArtifactUpdate(source *openapi.ModelA
 			pMapStringOpenapiMetadataValue = &mapStringOpenapiMetadataValue
 		}
 		openapiModelArtifact.CustomProperties = pMapStringOpenapiMetadataValue
-		var pString *string
-		if (*source).Description != nil {
-			xstring := *(*source).Description
-			pString = &xstring
-		}
-		openapiModelArtifact.Description = pString
 		var pString2 *string
-		if (*source).ExternalID != nil {
-			xstring2 := *(*source).ExternalID
+		if (*source).Description != nil {
+			xstring2 := *(*source).Description
 			pString2 = &xstring2
 		}
-		openapiModelArtifact.ExternalID = pString2
+		openapiModelArtifact.Description = pString2
 		var pString3 *string
-		if (*source).Uri != nil {
-			xstring3 := *(*source).Uri
+		if (*source).ExternalID != nil {
+			xstring3 := *(*source).ExternalID
 			pString3 = &xstring3
 		}
-		openapiModelArtifact.Uri = pString3
-		var pOpenapiArtifactState *openapi.ArtifactState
-		if (*source).State != nil {
-			openapiArtifactState := openapi.ArtifactState(*(*source).State)
-			pOpenapiArtifactState = &openapiArtifactState
-		}
-		openapiModelArtifact.State = pOpenapiArtifactState
+		openapiModelArtifact.ExternalID = pString3
 		var pString4 *string
 		if (*source).ModelFormatName != nil {
 			xstring4 := *(*source).ModelFormatName
@@ -433,6 +433,12 @@ func (c *OpenAPIConverterImpl) ConvertServeModelCreate(source *openapi.ServeMode
 			pOpenapiExecutionState = &openapiExecutionState
 		}
 		openapiServeModel.LastKnownState = pOpenapiExecutionState
+		var pString *string
+		if (*source).Name != nil {
+			xstring := *(*source).Name
+			pString = &xstring
+		}
+		openapiServeModel.Name = pString
 		var pMapStringOpenapiMetadataValue *map[string]openapi.MetadataValue
 		if (*source).CustomProperties != nil {
 			mapStringOpenapiMetadataValue := make(map[string]openapi.MetadataValue, len((*(*source).CustomProperties)))
@@ -442,24 +448,18 @@ func (c *OpenAPIConverterImpl) ConvertServeModelCreate(source *openapi.ServeMode
 			pMapStringOpenapiMetadataValue = &mapStringOpenapiMetadataValue
 		}
 		openapiServeModel.CustomProperties = pMapStringOpenapiMetadataValue
-		var pString *string
-		if (*source).Description != nil {
-			xstring := *(*source).Description
-			pString = &xstring
-		}
-		openapiServeModel.Description = pString
 		var pString2 *string
-		if (*source).ExternalID != nil {
-			xstring2 := *(*source).ExternalID
+		if (*source).Description != nil {
+			xstring2 := *(*source).Description
 			pString2 = &xstring2
 		}
-		openapiServeModel.ExternalID = pString2
+		openapiServeModel.Description = pString2
 		var pString3 *string
-		if (*source).Name != nil {
-			xstring3 := *(*source).Name
+		if (*source).ExternalID != nil {
+			xstring3 := *(*source).ExternalID
 			pString3 = &xstring3
 		}
-		openapiServeModel.Name = pString3
+		openapiServeModel.ExternalID = pString3
 		openapiServeModel.ModelVersionId = (*source).ModelVersionId
 		pOpenapiServeModel = &openapiServeModel
 	}

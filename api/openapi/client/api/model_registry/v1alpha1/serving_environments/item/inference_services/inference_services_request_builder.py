@@ -11,10 +11,10 @@ from kiota_abstractions.serialization import Parsable, ParsableFactory
 from typing import Any, Callable, Dict, List, Optional, TYPE_CHECKING, Union
 
 if TYPE_CHECKING:
-    from .......models.base_resource_list import BaseResourceList
     from .......models.error import Error
     from .......models.inference_service import InferenceService
     from .......models.inference_service_create import InferenceServiceCreate
+    from .......models.inference_service_list import InferenceServiceList
     from .......models.order_by_field import OrderByField
     from .......models.sort_order import SortOrder
 
@@ -31,11 +31,11 @@ class Inference_servicesRequestBuilder(BaseRequestBuilder):
         """
         super().__init__(request_adapter, "{+baseurl}/api/model_registry/v1alpha1/serving_environments/{servingenvironmentId}/inference_services{?externalID*,name*,nextPageToken*,orderBy*,pageSize*,sortOrder*}", path_parameters)
     
-    async def get(self,request_configuration: Optional[RequestConfiguration] = None) -> Optional[BaseResourceList]:
+    async def get(self,request_configuration: Optional[RequestConfiguration] = None) -> Optional[InferenceServiceList]:
         """
         Gets a list of all `InferenceService` entities for the `ServingEnvironment`.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
-        Returns: Optional[BaseResourceList]
+        Returns: Optional[InferenceServiceList]
         """
         request_info = self.to_get_request_information(
             request_configuration
@@ -49,9 +49,9 @@ class Inference_servicesRequestBuilder(BaseRequestBuilder):
         }
         if not self.request_adapter:
             raise Exception("Http core is null") 
-        from .......models.base_resource_list import BaseResourceList
+        from .......models.inference_service_list import InferenceServiceList
 
-        return await self.request_adapter.send_async(request_info, BaseResourceList, error_mapping)
+        return await self.request_adapter.send_async(request_info, InferenceServiceList, error_mapping)
     
     async def post(self,body: Optional[InferenceServiceCreate] = None, request_configuration: Optional[RequestConfiguration] = None) -> Optional[InferenceService]:
         """

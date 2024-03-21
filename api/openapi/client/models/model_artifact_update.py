@@ -4,12 +4,12 @@ from kiota_abstractions.serialization import Parsable, ParseNode, SerializationW
 from typing import Any, Callable, Dict, List, Optional, TYPE_CHECKING, Union
 
 if TYPE_CHECKING:
-    from .base_artifact_update import BaseArtifactUpdate
+    from .with_base_artifact_update import WithBaseArtifactUpdate
 
-from .base_artifact_update import BaseArtifactUpdate
+from .with_base_artifact_update import WithBaseArtifactUpdate
 
 @dataclass
-class ModelArtifactUpdate(BaseArtifactUpdate):
+class ModelArtifactUpdate(WithBaseArtifactUpdate):
     """
     An ML model artifact.
     """
@@ -40,9 +40,9 @@ class ModelArtifactUpdate(BaseArtifactUpdate):
         The deserialization information for the current model
         Returns: Dict[str, Callable[[ParseNode], None]]
         """
-        from .base_artifact_update import BaseArtifactUpdate
+        from .with_base_artifact_update import WithBaseArtifactUpdate
 
-        from .base_artifact_update import BaseArtifactUpdate
+        from .with_base_artifact_update import WithBaseArtifactUpdate
 
         fields: Dict[str, Callable[[Any], None]] = {
             "modelFormatName": lambda n : setattr(self, 'model_format_name', n.get_str_value()),

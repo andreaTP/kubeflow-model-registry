@@ -4,17 +4,12 @@ from kiota_abstractions.serialization import Parsable, ParseNode, SerializationW
 from typing import Any, Callable, Dict, List, Optional, TYPE_CHECKING, Union
 
 if TYPE_CHECKING:
-    from .execution_state import ExecutionState
     from .with_base_resource_update import WithBaseResourceUpdate
 
 from .with_base_resource_update import WithBaseResourceUpdate
 
 @dataclass
 class BaseExecutionUpdate(WithBaseResourceUpdate):
-    from .execution_state import ExecutionState
-
-    # The state of the Execution. The state transitions are  NEW -> RUNNING -> COMPLETE | CACHED | FAILED | CANCELEDCACHED means the execution is skipped due to cached results.CANCELED means the execution is skipped due to precondition not met. It isdifferent from CACHED in that a CANCELED execution will not have any eventassociated with it. It is different from FAILED in that there is nounexpected error happened and it is regarded as a normal state.See also: ml-metadata Execution.State
-    last_known_state: Optional[ExecutionState] = ExecutionState("UNKNOWN")
     
     @staticmethod
     def create_from_discriminator_value(parse_node: Optional[ParseNode] = None) -> BaseExecutionUpdate:
@@ -32,14 +27,11 @@ class BaseExecutionUpdate(WithBaseResourceUpdate):
         The deserialization information for the current model
         Returns: Dict[str, Callable[[ParseNode], None]]
         """
-        from .execution_state import ExecutionState
         from .with_base_resource_update import WithBaseResourceUpdate
 
-        from .execution_state import ExecutionState
         from .with_base_resource_update import WithBaseResourceUpdate
 
         fields: Dict[str, Callable[[Any], None]] = {
-            "lastKnownState": lambda n : setattr(self, 'last_known_state', n.get_enum_value(ExecutionState)),
         }
         super_fields = super().get_field_deserializers()
         fields.update(super_fields)
@@ -54,6 +46,5 @@ class BaseExecutionUpdate(WithBaseResourceUpdate):
         if not writer:
             raise TypeError("writer cannot be null.")
         super().serialize(writer)
-        writer.write_enum_value("lastKnownState", self.last_known_state)
     
 

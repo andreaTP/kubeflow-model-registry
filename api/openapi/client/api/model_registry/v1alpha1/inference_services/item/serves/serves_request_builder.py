@@ -11,11 +11,11 @@ from kiota_abstractions.serialization import Parsable, ParsableFactory
 from typing import Any, Callable, Dict, List, Optional, TYPE_CHECKING, Union
 
 if TYPE_CHECKING:
-    from .......models.base_resource_list import BaseResourceList
     from .......models.error import Error
     from .......models.order_by_field import OrderByField
     from .......models.serve_model import ServeModel
     from .......models.serve_model_create import ServeModelCreate
+    from .......models.serve_model_list import ServeModelList
     from .......models.sort_order import SortOrder
 
 class ServesRequestBuilder(BaseRequestBuilder):
@@ -31,11 +31,11 @@ class ServesRequestBuilder(BaseRequestBuilder):
         """
         super().__init__(request_adapter, "{+baseurl}/api/model_registry/v1alpha1/inference_services/{inferenceserviceId}/serves{?externalID*,name*,nextPageToken*,orderBy*,pageSize*,sortOrder*}", path_parameters)
     
-    async def get(self,request_configuration: Optional[RequestConfiguration] = None) -> Optional[BaseResourceList]:
+    async def get(self,request_configuration: Optional[RequestConfiguration] = None) -> Optional[ServeModelList]:
         """
         Gets a list of all `ServeModel` entities for the `InferenceService`.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
-        Returns: Optional[BaseResourceList]
+        Returns: Optional[ServeModelList]
         """
         request_info = self.to_get_request_information(
             request_configuration
@@ -49,9 +49,9 @@ class ServesRequestBuilder(BaseRequestBuilder):
         }
         if not self.request_adapter:
             raise Exception("Http core is null") 
-        from .......models.base_resource_list import BaseResourceList
+        from .......models.serve_model_list import ServeModelList
 
-        return await self.request_adapter.send_async(request_info, BaseResourceList, error_mapping)
+        return await self.request_adapter.send_async(request_info, ServeModelList, error_mapping)
     
     async def post(self,body: Optional[ServeModelCreate] = None, request_configuration: Optional[RequestConfiguration] = None) -> Optional[ServeModel]:
         """

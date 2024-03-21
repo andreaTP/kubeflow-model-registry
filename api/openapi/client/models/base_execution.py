@@ -4,12 +4,12 @@ from kiota_abstractions.serialization import Parsable, ParseNode, SerializationW
 from typing import Any, Callable, Dict, List, Optional, TYPE_CHECKING, Union
 
 if TYPE_CHECKING:
-    from .base_execution_create import BaseExecutionCreate
+    from .with_base_resource_update import WithBaseResourceUpdate
 
-from .base_execution_create import BaseExecutionCreate
+from .with_base_resource_update import WithBaseResourceUpdate
 
 @dataclass
-class BaseExecution(BaseExecutionCreate):
+class BaseExecution(WithBaseResourceUpdate):
     
     @staticmethod
     def create_from_discriminator_value(parse_node: Optional[ParseNode] = None) -> BaseExecution:
@@ -27,9 +27,9 @@ class BaseExecution(BaseExecutionCreate):
         The deserialization information for the current model
         Returns: Dict[str, Callable[[ParseNode], None]]
         """
-        from .base_execution_create import BaseExecutionCreate
+        from .with_base_resource_update import WithBaseResourceUpdate
 
-        from .base_execution_create import BaseExecutionCreate
+        from .with_base_resource_update import WithBaseResourceUpdate
 
         fields: Dict[str, Callable[[Any], None]] = {
         }

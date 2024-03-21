@@ -5,6 +5,7 @@ from typing import Any, Callable, Dict, List, Optional, TYPE_CHECKING, Union
 
 if TYPE_CHECKING:
     from .model_version_custom_properties import ModelVersion_customProperties
+    from .model_version_state import ModelVersionState
 
 @dataclass
 class ModelVersion(AdditionalDataHolder, Parsable):
@@ -14,6 +15,12 @@ class ModelVersion(AdditionalDataHolder, Parsable):
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: Dict[str, Any] = field(default_factory=dict)
 
+    from .model_version_state import ModelVersionState
+
+    # - LIVE: A state indicating that the `ModelVersion` exists- ARCHIVED: A state indicating that the `ModelVersion` has been archived.
+    state: Optional[ModelVersionState] = ModelVersionState("LIVE")
+    # Name of the author.
+    author: Optional[str] = None
     # Output only. Create time of the resource in millisecond since epoch.
     create_time_since_epoch: Optional[str] = None
     # User provided custom properties which are not defined by its type.
@@ -48,10 +55,13 @@ class ModelVersion(AdditionalDataHolder, Parsable):
         Returns: Dict[str, Callable[[ParseNode], None]]
         """
         from .model_version_custom_properties import ModelVersion_customProperties
+        from .model_version_state import ModelVersionState
 
         from .model_version_custom_properties import ModelVersion_customProperties
+        from .model_version_state import ModelVersionState
 
         fields: Dict[str, Callable[[Any], None]] = {
+            "author": lambda n : setattr(self, 'author', n.get_str_value()),
             "createTimeSinceEpoch": lambda n : setattr(self, 'create_time_since_epoch', n.get_str_value()),
             "customProperties": lambda n : setattr(self, 'custom_properties', n.get_object_value(ModelVersion_customProperties)),
             "description": lambda n : setattr(self, 'description', n.get_str_value()),
@@ -60,6 +70,7 @@ class ModelVersion(AdditionalDataHolder, Parsable):
             "lastUpdateTimeSinceEpoch": lambda n : setattr(self, 'last_update_time_since_epoch', n.get_str_value()),
             "name": lambda n : setattr(self, 'name', n.get_str_value()),
             "registeredModelID": lambda n : setattr(self, 'registered_model_i_d', n.get_str_value()),
+            "state": lambda n : setattr(self, 'state', n.get_enum_value(ModelVersionState)),
         }
         return fields
     
@@ -71,11 +82,13 @@ class ModelVersion(AdditionalDataHolder, Parsable):
         """
         if not writer:
             raise TypeError("writer cannot be null.")
+        writer.write_str_value("author", self.author)
         writer.write_object_value("customProperties", self.custom_properties)
         writer.write_str_value("description", self.description)
         writer.write_str_value("externalID", self.external_i_d)
         writer.write_str_value("name", self.name)
         writer.write_str_value("registeredModelID", self.registered_model_i_d)
+        writer.write_enum_value("state", self.state)
         writer.write_additional_data_value(self.additional_data)
     
 
