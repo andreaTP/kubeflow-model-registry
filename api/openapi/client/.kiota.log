@@ -3,7 +3,7 @@ Information: KiotaBuilder Cleaning output directory /Users/aperuffo/workspace/mo
 Debug: KiotaBuilder kiota version 1.12.0
 Information: KiotaBuilder loaded description from local source
 Trace: KiotaBuilder 8ms: Read OpenAPI file /Users/aperuffo/workspace/model-registry/api/openapi/model-registry-full-proposal.yaml
-Debug: KiotaBuilder step 1 - reading the stream - took 00:00:00.0136782
+Debug: KiotaBuilder step 1 - reading the stream - took 00:00:00.0142667
 Trace: KiotaBuilder Parsing OpenAPI file
 Warning: KiotaBuilder OpenAPI warning: #/ - Multiple servers entries were found in the OpenAPI description. Only the first one will be used. The root URL can be set manually with the request adapter.
 Warning: KiotaBuilder OpenAPI warning: #/ - The schema MetadataValue is a polymorphic type but does not define a discriminator. This will result in a serialization errors.
@@ -11,15 +11,15 @@ Warning: KiotaBuilder OpenAPI warning: #/components/schemas/MetadataIntValue/pro
 Warning: KiotaBuilder OpenAPI warning: #/components/schemas/WithBaseResource/properties/id - The format int64 is not supported by Kiota for the type string and the string type will be used.
 Warning: KiotaBuilder OpenAPI warning: #/components/schemas/WithBaseResource/properties/createTimeSinceEpoch - The format int64 is not supported by Kiota for the type string and the string type will be used.
 Warning: KiotaBuilder OpenAPI warning: #/components/schemas/WithBaseResource/properties/lastUpdateTimeSinceEpoch - The format int64 is not supported by Kiota for the type string and the string type will be used.
-Trace: KiotaBuilder 273ms: Parsed OpenAPI with errors. 21 paths found.
+Trace: KiotaBuilder 272ms: Parsed OpenAPI with errors. 21 paths found.
 Error: KiotaBuilder OpenAPI error: #/components/schemas/Artifact/discriminator - Schema Artifact must contain property specified in the discriminator artifactType in the required field list.
-Debug: KiotaBuilder step 2 - parsing the document - took 00:00:00.2778960
-Debug: KiotaBuilder step 3 - updating generation configuration from kiota extension - took 00:00:00.0002616
-Debug: KiotaBuilder step 4 - filtering API paths with patterns - took 00:00:00.0072417
-Debug: KiotaBuilder step 5 - checking whether the output should be updated - took 00:00:00.0305012
-Trace: KiotaBuilder 5ms: Created UriSpace tree
-Debug: KiotaBuilder step 6 - create uri space - took 00:00:00.0053409
-Debug: KiotaBuilder InitializeInheritanceIndex 00:00:00.0063643
+Debug: KiotaBuilder step 2 - parsing the document - took 00:00:00.2778269
+Debug: KiotaBuilder step 3 - updating generation configuration from kiota extension - took 00:00:00.0003384
+Debug: KiotaBuilder step 4 - filtering API paths with patterns - took 00:00:00.0092187
+Debug: KiotaBuilder step 5 - checking whether the output should be updated - took 00:00:00.0480656
+Trace: KiotaBuilder 6ms: Created UriSpace tree
+Debug: KiotaBuilder step 6 - create uri space - took 00:00:00.0066801
+Debug: KiotaBuilder InitializeInheritanceIndex 00:00:00.0063082
 Trace: KiotaBuilder Creating class PostsClient
 Trace: KiotaBuilder Creating property api of apiRequestBuilder
 Trace: KiotaBuilder Creating class apiRequestBuilder
@@ -37,21 +37,21 @@ Trace: KiotaBuilder Creating property inference_services of inference_servicesRe
 Trace: KiotaBuilder Creating property serving_environment of serving_environmentRequestBuilder
 Trace: KiotaBuilder Creating property serving_environments of serving_environmentsRequestBuilder
 Trace: KiotaBuilder Creating property model_version of model_versionRequestBuilder
-Trace: KiotaBuilder Creating class model_artifactRequestBuilder
 Trace: KiotaBuilder Creating class model_versionsRequestBuilder
+Trace: KiotaBuilder Creating class model_artifactRequestBuilder
 Trace: KiotaBuilder Creating class model_artifactsRequestBuilder
 Trace: KiotaBuilder Creating class registered_modelRequestBuilder
 Trace: KiotaBuilder Creating class registered_modelsRequestBuilder
 Trace: KiotaBuilder Creating class inference_servicesRequestBuilder
 Trace: KiotaBuilder Creating class inference_serviceRequestBuilder
-Trace: KiotaBuilder Creating class model_versionRequestBuilder
 Trace: KiotaBuilder Creating class serving_environmentRequestBuilder
+Trace: KiotaBuilder Creating class model_versionRequestBuilder
 Trace: KiotaBuilder Creating class serving_environmentsRequestBuilder
-Trace: KiotaBuilder Creating indexer WithRegisteredmodel-indexer
-Trace: KiotaBuilder Creating indexer WithModelartifact-indexer
-Trace: KiotaBuilder Creating indexer WithModelversion-indexer
 Trace: KiotaBuilder Creating indexer WithServingenvironment-indexer
+Trace: KiotaBuilder Creating indexer WithRegisteredmodel-indexer
+Trace: KiotaBuilder Creating indexer WithModelversion-indexer
 Trace: KiotaBuilder Creating indexer WithInferenceservice-indexer
+Trace: KiotaBuilder Creating indexer WithModelartifact-indexer
 Trace: KiotaBuilder Creating method Get of Kiota.Builder.CodeDOM.CodeType
 Trace: KiotaBuilder Creating method Get of Kiota.Builder.CodeDOM.CodeType
 Trace: KiotaBuilder Creating method Get of Kiota.Builder.CodeDOM.CodeType
@@ -61,17 +61,18 @@ Trace: KiotaBuilder Creating method Get of Kiota.Builder.CodeDOM.CodeType
 Trace: KiotaBuilder Creating method Get of Kiota.Builder.CodeDOM.CodeType
 Trace: KiotaBuilder Creating method Get of Kiota.Builder.CodeDOM.CodeType
 Trace: KiotaBuilder Creating method Get of Kiota.Builder.CodeDOM.CodeType
-Trace: KiotaBuilder Creating method ToGetRequestInformation of Kiota.Builder.CodeDOM.CodeType
-Trace: KiotaBuilder Creating method ToGetRequestInformation of Kiota.Builder.CodeDOM.CodeType
-Trace: KiotaBuilder Creating method ToGetRequestInformation of Kiota.Builder.CodeDOM.CodeType
-Trace: KiotaBuilder Creating method ToGetRequestInformation of Kiota.Builder.CodeDOM.CodeType
-Trace: KiotaBuilder Creating method ToGetRequestInformation of Kiota.Builder.CodeDOM.CodeType
-Trace: KiotaBuilder Creating method ToGetRequestInformation of Kiota.Builder.CodeDOM.CodeType
-Trace: KiotaBuilder Creating method ToGetRequestInformation of Kiota.Builder.CodeDOM.CodeType
-Trace: KiotaBuilder Creating method ToGetRequestInformation of Kiota.Builder.CodeDOM.CodeType
-Trace: KiotaBuilder Creating method ToGetRequestInformation of Kiota.Builder.CodeDOM.CodeType
 Trace: KiotaBuilder Creating method Get of Kiota.Builder.CodeDOM.CodeType
 Trace: KiotaBuilder Creating method ToGetRequestInformation of Kiota.Builder.CodeDOM.CodeType
+Trace: KiotaBuilder Creating method ToGetRequestInformation of Kiota.Builder.CodeDOM.CodeType
+Trace: KiotaBuilder Creating method ToGetRequestInformation of Kiota.Builder.CodeDOM.CodeType
+Trace: KiotaBuilder Creating method ToGetRequestInformation of Kiota.Builder.CodeDOM.CodeType
+Trace: KiotaBuilder Creating method ToGetRequestInformation of Kiota.Builder.CodeDOM.CodeType
+Trace: KiotaBuilder Creating method ToGetRequestInformation of Kiota.Builder.CodeDOM.CodeType
+Trace: KiotaBuilder Creating method ToGetRequestInformation of Kiota.Builder.CodeDOM.CodeType
+Trace: KiotaBuilder Creating method ToGetRequestInformation of Kiota.Builder.CodeDOM.CodeType
+Trace: KiotaBuilder Creating method ToGetRequestInformation of Kiota.Builder.CodeDOM.CodeType
+Trace: KiotaBuilder Creating method ToGetRequestInformation of Kiota.Builder.CodeDOM.CodeType
+Trace: KiotaBuilder Creating method Post of Kiota.Builder.CodeDOM.CodeType
 Trace: KiotaBuilder Creating method Post of Kiota.Builder.CodeDOM.CodeType
 Trace: KiotaBuilder Creating method Post of Kiota.Builder.CodeDOM.CodeType
 Trace: KiotaBuilder Creating method Post of Kiota.Builder.CodeDOM.CodeType
@@ -79,17 +80,16 @@ Trace: KiotaBuilder Creating method Post of Kiota.Builder.CodeDOM.CodeType
 Trace: KiotaBuilder Creating method ToPostRequestInformation of Kiota.Builder.CodeDOM.CodeType
 Trace: KiotaBuilder Creating method ToPostRequestInformation of Kiota.Builder.CodeDOM.CodeType
 Trace: KiotaBuilder Creating method ToPostRequestInformation of Kiota.Builder.CodeDOM.CodeType
-Trace: KiotaBuilder Creating method Post of Kiota.Builder.CodeDOM.CodeType
+Trace: KiotaBuilder Creating method ToPostRequestInformation of Kiota.Builder.CodeDOM.CodeType
 Trace: KiotaBuilder Creating method ToPostRequestInformation of Kiota.Builder.CodeDOM.CodeType
 Trace: KiotaBuilder Creating class WithModelartifactItemRequestBuilder
+Trace: KiotaBuilder Creating class WithModelversionItemRequestBuilder
 Trace: KiotaBuilder Creating class WithRegisteredmodelItemRequestBuilder
 Trace: KiotaBuilder Creating class WithServingenvironmentItemRequestBuilder
+Trace: KiotaBuilder Creating class WithInferenceserviceItemRequestBuilder
+Trace: KiotaBuilder Creating property artifacts of artifactsRequestBuilder
 Trace: KiotaBuilder Creating property versions of versionsRequestBuilder
 Trace: KiotaBuilder Creating property inference_services of inference_servicesRequestBuilder
-Trace: KiotaBuilder Creating method ToPostRequestInformation of Kiota.Builder.CodeDOM.CodeType
-Trace: KiotaBuilder Creating class WithModelversionItemRequestBuilder
-Trace: KiotaBuilder Creating property artifacts of artifactsRequestBuilder
-Trace: KiotaBuilder Creating class WithInferenceserviceItemRequestBuilder
 Trace: KiotaBuilder Creating property serves of servesRequestBuilder
 Trace: KiotaBuilder Creating property model of modelRequestBuilder
 Trace: KiotaBuilder Creating property version of versionRequestBuilder
@@ -105,56 +105,54 @@ Trace: KiotaBuilder Creating method ToGetRequestInformation of Kiota.Builder.Cod
 Trace: KiotaBuilder Creating method ToGetRequestInformation of Kiota.Builder.CodeDOM.CodeType
 Trace: KiotaBuilder Creating method Patch of Kiota.Builder.CodeDOM.CodeType
 Trace: KiotaBuilder Creating method Patch of Kiota.Builder.CodeDOM.CodeType
-Trace: KiotaBuilder Creating method ToPatchRequestInformation of Kiota.Builder.CodeDOM.CodeType
 Trace: KiotaBuilder Creating method Patch of Kiota.Builder.CodeDOM.CodeType
 Trace: KiotaBuilder Creating method ToPatchRequestInformation of Kiota.Builder.CodeDOM.CodeType
+Trace: KiotaBuilder Creating method ToPatchRequestInformation of Kiota.Builder.CodeDOM.CodeType
+Trace: KiotaBuilder Creating method ToPatchRequestInformation of Kiota.Builder.CodeDOM.CodeType
 Trace: KiotaBuilder Creating method Patch of Kiota.Builder.CodeDOM.CodeType
+Trace: KiotaBuilder Creating class versionsRequestBuilder
 Trace: KiotaBuilder Creating class artifactsRequestBuilder
 Trace: KiotaBuilder Creating method ToPatchRequestInformation of Kiota.Builder.CodeDOM.CodeType
-Trace: KiotaBuilder Creating method ToPatchRequestInformation of Kiota.Builder.CodeDOM.CodeType
 Trace: KiotaBuilder Creating class servesRequestBuilder
-Trace: KiotaBuilder Creating class inference_servicesRequestBuilder
 Trace: KiotaBuilder Creating class versionRequestBuilder
 Trace: KiotaBuilder Creating class modelRequestBuilder
 Trace: KiotaBuilder Creating method Get of Kiota.Builder.CodeDOM.CodeType
 Trace: KiotaBuilder Creating method Get of Kiota.Builder.CodeDOM.CodeType
-Trace: KiotaBuilder Creating method Get of Kiota.Builder.CodeDOM.CodeType
 Trace: KiotaBuilder Creating method ToGetRequestInformation of Kiota.Builder.CodeDOM.CodeType
-Trace: KiotaBuilder Creating method Get of Kiota.Builder.CodeDOM.CodeType
 Trace: KiotaBuilder Creating method ToGetRequestInformation of Kiota.Builder.CodeDOM.CodeType
 Trace: KiotaBuilder Creating method Get of Kiota.Builder.CodeDOM.CodeType
+Trace: KiotaBuilder Creating method Get of Kiota.Builder.CodeDOM.CodeType
+Trace: KiotaBuilder Creating method Get of Kiota.Builder.CodeDOM.CodeType
 Trace: KiotaBuilder Creating method ToGetRequestInformation of Kiota.Builder.CodeDOM.CodeType
 Trace: KiotaBuilder Creating method ToGetRequestInformation of Kiota.Builder.CodeDOM.CodeType
 Trace: KiotaBuilder Creating method ToGetRequestInformation of Kiota.Builder.CodeDOM.CodeType
+Trace: KiotaBuilder Creating method Post of Kiota.Builder.CodeDOM.CodeUnionType
+Trace: KiotaBuilder Creating method Post of Kiota.Builder.CodeDOM.CodeType
 Trace: KiotaBuilder Creating method Post of Kiota.Builder.CodeDOM.CodeType
 Trace: KiotaBuilder Creating method ToPostRequestInformation of Kiota.Builder.CodeDOM.CodeType
 Trace: KiotaBuilder Creating method Patch of Kiota.Builder.CodeDOM.CodeType
-Trace: KiotaBuilder Creating method Post of Kiota.Builder.CodeDOM.CodeUnionType
-Trace: KiotaBuilder Creating method Post of Kiota.Builder.CodeDOM.CodeType
+Trace: KiotaBuilder Creating method ToPostRequestInformation of Kiota.Builder.CodeDOM.CodeType
+Trace: KiotaBuilder Creating method ToPostRequestInformation of Kiota.Builder.CodeDOM.CodeType
 Trace: KiotaBuilder Creating method ToPatchRequestInformation of Kiota.Builder.CodeDOM.CodeType
-Trace: KiotaBuilder Creating method ToPostRequestInformation of Kiota.Builder.CodeDOM.CodeType
-Trace: KiotaBuilder Creating method ToPostRequestInformation of Kiota.Builder.CodeDOM.CodeType
-Trace: KiotaBuilder Creating class versionsRequestBuilder
+Trace: KiotaBuilder Creating class inference_servicesRequestBuilder
 Trace: KiotaBuilder Creating method Get of Kiota.Builder.CodeDOM.CodeType
 Trace: KiotaBuilder Creating method ToGetRequestInformation of Kiota.Builder.CodeDOM.CodeType
 Trace: KiotaBuilder Creating method Post of Kiota.Builder.CodeDOM.CodeType
 Trace: KiotaBuilder Creating method ToPostRequestInformation of Kiota.Builder.CodeDOM.CodeType
 Debug: KiotaBuilder CreateRequestBuilderClass 00:00:00
-Debug: KiotaBuilder MapTypeDefinitions 00:00:00.0133668
+Debug: KiotaBuilder MapTypeDefinitions 00:00:00.0123826
 Information: KiotaBuilder Removing unused model RegisteredModelList as it is not referenced by the client API surface
-Information: KiotaBuilder Removing unused model ModelVersionList as it is not referenced by the client API surface
 Information: KiotaBuilder Removing unused model ServingEnvironmentList as it is not referenced by the client API surface
-Information: KiotaBuilder Removing unused model ModelArtifactList as it is not referenced by the client API surface
 Information: KiotaBuilder Removing unused model BaseArtifact as it is not referenced by the client API surface
 Debug: KiotaBuilder TrimInheritedModels 00:00:00
 Debug: KiotaBuilder CleanUpInternalState 00:00:00
 Trace: KiotaBuilder 0ms: Created source model with 3 classes
-Debug: KiotaBuilder step 7 - create source model - took 00:00:00.1563472
-Debug: KiotaBuilder 101ms: Language refinement applied
-Debug: KiotaBuilder step 8 - refine by language - took 00:00:00.1029441
-Trace: KiotaBuilder 191ms: Files written to /Users/aperuffo/workspace/model-registry/api/openapi/client
-Debug: KiotaBuilder step 9 - writing files - took 00:00:00.1945959
+Debug: KiotaBuilder step 7 - create source model - took 00:00:00.1621110
+Debug: KiotaBuilder 133ms: Language refinement applied
+Debug: KiotaBuilder step 8 - refine by language - took 00:00:00.1343782
+Trace: KiotaBuilder 193ms: Files written to /Users/aperuffo/workspace/model-registry/api/openapi/client
+Debug: KiotaBuilder step 9 - writing files - took 00:00:00.1991756
 Information: KiotaBuilder loaded description from local source
 Trace: KiotaBuilder 2ms: Read OpenAPI file /Users/aperuffo/workspace/model-registry/api/openapi/model-registry-full-proposal.yaml
-Debug: KiotaBuilder step 10 - writing lock file - took 00:00:00.0404460
+Debug: KiotaBuilder step 10 - writing lock file - took 00:00:00.0375706
 Debug: KiotaBuilder Api manifest path: /Users/aperuffo/workspace/model-registry/apimanifest.json

@@ -5,6 +5,7 @@ from typing import Any, Callable, Dict, List, Optional, TYPE_CHECKING, Union
 
 if TYPE_CHECKING:
     from .registered_model_custom_properties import RegisteredModel_customProperties
+    from .registered_model_state import RegisteredModelState
 
 @dataclass
 class RegisteredModel(AdditionalDataHolder, Parsable):
@@ -14,6 +15,10 @@ class RegisteredModel(AdditionalDataHolder, Parsable):
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: Dict[str, Any] = field(default_factory=dict)
 
+    from .registered_model_state import RegisteredModelState
+
+    # - LIVE: A state indicating that the `RegisteredModel` exists- ARCHIVED: A state indicating that the `RegisteredModel` has been archived.
+    state: Optional[RegisteredModelState] = RegisteredModelState("LIVE")
     # Output only. Create time of the resource in millisecond since epoch.
     create_time_since_epoch: Optional[str] = None
     # User provided custom properties which are not defined by its type.
@@ -46,8 +51,10 @@ class RegisteredModel(AdditionalDataHolder, Parsable):
         Returns: Dict[str, Callable[[ParseNode], None]]
         """
         from .registered_model_custom_properties import RegisteredModel_customProperties
+        from .registered_model_state import RegisteredModelState
 
         from .registered_model_custom_properties import RegisteredModel_customProperties
+        from .registered_model_state import RegisteredModelState
 
         fields: Dict[str, Callable[[Any], None]] = {
             "createTimeSinceEpoch": lambda n : setattr(self, 'create_time_since_epoch', n.get_str_value()),
@@ -57,6 +64,7 @@ class RegisteredModel(AdditionalDataHolder, Parsable):
             "id": lambda n : setattr(self, 'id', n.get_str_value()),
             "lastUpdateTimeSinceEpoch": lambda n : setattr(self, 'last_update_time_since_epoch', n.get_str_value()),
             "name": lambda n : setattr(self, 'name', n.get_str_value()),
+            "state": lambda n : setattr(self, 'state', n.get_enum_value(RegisteredModelState)),
         }
         return fields
     
@@ -72,6 +80,7 @@ class RegisteredModel(AdditionalDataHolder, Parsable):
         writer.write_str_value("description", self.description)
         writer.write_str_value("externalID", self.external_i_d)
         writer.write_str_value("name", self.name)
+        writer.write_enum_value("state", self.state)
         writer.write_additional_data_value(self.additional_data)
     
 

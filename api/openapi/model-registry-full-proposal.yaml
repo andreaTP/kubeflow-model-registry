@@ -975,7 +975,7 @@ components:
         - $ref: "#/components/schemas/WithBaseResource"
         - $ref: "#/components/schemas/WithBaseResourceCreate"
         - $ref: "#/components/schemas/WithBaseResourceUpdate"
-        - $ref: "#/components/schemas/ModelArtifactCreate"
+        - $ref: "#/components/schemas/WithModelArtifactUpdate"
         - type: object
           required:
             - artifactType
@@ -1004,52 +1004,55 @@ components:
         - $ref: "#/components/schemas/WithBaseResource"
         - $ref: "#/components/schemas/WithBaseResourceCreate"
         - $ref: "#/components/schemas/WithBaseResourceUpdate"
-        - $ref: "#/components/schemas/RegisteredModelCreate"
+        - $ref: "#/components/schemas/WithRegisteredModelUpdate"
     ModelVersionList:
       description: List of ModelVersion entities.
       type: object
+      properties:
+        items:
+          description: Array of `ModelVersion` entities.
+          type: array
+          items:
+            $ref: "#/components/schemas/ModelVersion"
       allOf:
-        - type: object
-          properties:
-            items:
-              description: Array of `ModelVersion` entities.
-              type: array
-              items:
-                $ref: "#/components/schemas/ModelVersion"
         - $ref: "#/components/schemas/BaseResourceList"
     ModelArtifactList:
       description: List of ModelArtifact entities.
       type: object
+      properties:
+        items:
+          description: Array of `ModelArtifact` entities.
+          type: array
+          items:
+            $ref: "#/components/schemas/ModelArtifact"
       allOf:
-        - type: object
-          properties:
-            items:
-              description: Array of `ModelArtifact` entities.
-              type: array
-              items:
-                $ref: "#/components/schemas/ModelArtifact"
         - $ref: "#/components/schemas/BaseResourceList"
     RegisteredModelCreate:
       description: A registered model in model registry. A registered model has ModelVersion children.
       allOf:
         - $ref: "#/components/schemas/WithBaseResourceCreate"
         - $ref: "#/components/schemas/WithBaseResourceUpdate"
-        - $ref: "#/components/schemas/RegisteredModelUpdate"
+        - $ref: "#/components/schemas/WithRegisteredModelUpdate"
+    WithRegisteredModelUpdate:
+      description: A registered model in model registry. A registered model has ModelVersion children.
+      type: object
+      properties:
+        state:
+          $ref: "#/components/schemas/RegisteredModelState"
     RegisteredModelUpdate:
       description: A registered model in model registry. A registered model has ModelVersion children.
       allOf:
         - $ref: "#/components/schemas/WithBaseResourceUpdate"
-        - type: object
-          properties:
-            state:
-              $ref: "#/components/schemas/RegisteredModelState"
+        - $ref: "#/components/schemas/WithRegisteredModelUpdate"
     ModelVersion:
       description: Represents a ModelVersion belonging to a RegisteredModel.
+      required:
+        - registeredModelID
       allOf:
-        - $ref: "#/components/schemas/ModelVersionCreate"
         - $ref: "#/components/schemas/WithBaseResource"
         - $ref: "#/components/schemas/WithBaseResourceCreate"
         - $ref: "#/components/schemas/WithBaseResourceUpdate"
+        - $ref: "#/components/schemas/WithModelVersionUpdate"
     ModelVersionCreate:
       description: Represents a ModelVersion belonging to a RegisteredModel.
       required:
@@ -1226,37 +1229,39 @@ components:
     ArtifactList:
       description: A list of Artifact entities.
       type: object
+      properties:
+        items:
+          description: Array of `Artifact` entities.
+          type: array
+          items:
+            $ref: "#/components/schemas/Artifact"
       allOf:
-        - type: object
-          properties:
-            items:
-              description: Array of `Artifact` entities.
-              type: array
-              items:
-                $ref: "#/components/schemas/Artifact"
         - $ref: "#/components/schemas/BaseResourceList"
+    WithModelArtifactUpdate:
+      description: An ML model artifact.
+      type: object
+      properties:
+        modelFormatName:
+          description: Name of the model format.
+          type: string
+        storageKey:
+          description: Storage secret name.
+          type: string
+        storagePath:
+          description: Path for model in storage provided by `storageKey`.
+          type: string
+        modelFormatVersion:
+          description: Version of the model format.
+          type: string
+        serviceAccountName:
+          description: Name of the service account with storage secret.
+          type: string
     ModelArtifactUpdate:
       description: An ML model artifact.
       allOf:
         - $ref: "#/components/schemas/WithBaseArtifactUpdate"
         - $ref: "#/components/schemas/WithBaseResourceUpdate"
-        - type: object
-          properties:
-            modelFormatName:
-              description: Name of the model format.
-              type: string
-            storageKey:
-              description: Storage secret name.
-              type: string
-            storagePath:
-              description: Path for model in storage provided by `storageKey`.
-              type: string
-            modelFormatVersion:
-              description: Version of the model format.
-              type: string
-            serviceAccountName:
-              description: Name of the service account with storage secret.
-              type: string
+        - $ref: "#/components/schemas/WithModelArtifactUpdate"
     ModelArtifactCreate:
       description: An ML model artifact.
       type: object
@@ -1264,7 +1269,7 @@ components:
         - $ref: "#/components/schemas/WithBaseArtifactUpdate"
         - $ref: "#/components/schemas/WithBaseResourceCreate"
         - $ref: "#/components/schemas/WithBaseResourceUpdate"
-        - $ref: "#/components/schemas/ModelArtifactUpdate"
+        - $ref: "#/components/schemas/WithModelArtifactUpdate"
     Error:
       description: Error code and message.
       required:

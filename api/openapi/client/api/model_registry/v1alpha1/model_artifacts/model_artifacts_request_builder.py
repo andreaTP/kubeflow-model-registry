@@ -11,10 +11,10 @@ from kiota_abstractions.serialization import Parsable, ParsableFactory
 from typing import Any, Callable, Dict, List, Optional, TYPE_CHECKING, Union
 
 if TYPE_CHECKING:
-    from .....models.base_resource_list import BaseResourceList
     from .....models.error import Error
     from .....models.model_artifact import ModelArtifact
     from .....models.model_artifact_create import ModelArtifactCreate
+    from .....models.model_artifact_list import ModelArtifactList
     from .....models.order_by_field import OrderByField
     from .....models.sort_order import SortOrder
     from .item.with_modelartifact_item_request_builder import WithModelartifactItemRequestBuilder
@@ -46,11 +46,11 @@ class Model_artifactsRequestBuilder(BaseRequestBuilder):
         url_tpl_params["modelartifactId"] = modelartifact_id
         return WithModelartifactItemRequestBuilder(self.request_adapter, url_tpl_params)
     
-    async def get(self,request_configuration: Optional[RequestConfiguration] = None) -> Optional[BaseResourceList]:
+    async def get(self,request_configuration: Optional[RequestConfiguration] = None) -> Optional[ModelArtifactList]:
         """
         Gets a list of all `ModelArtifact` entities.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
-        Returns: Optional[BaseResourceList]
+        Returns: Optional[ModelArtifactList]
         """
         request_info = self.to_get_request_information(
             request_configuration
@@ -65,9 +65,9 @@ class Model_artifactsRequestBuilder(BaseRequestBuilder):
         }
         if not self.request_adapter:
             raise Exception("Http core is null") 
-        from .....models.base_resource_list import BaseResourceList
+        from .....models.model_artifact_list import ModelArtifactList
 
-        return await self.request_adapter.send_async(request_info, BaseResourceList, error_mapping)
+        return await self.request_adapter.send_async(request_info, ModelArtifactList, error_mapping)
     
     async def post(self,body: Optional[ModelArtifactCreate] = None, request_configuration: Optional[RequestConfiguration] = None) -> Optional[ModelArtifact]:
         """

@@ -11,10 +11,10 @@ from kiota_abstractions.serialization import Parsable, ParsableFactory
 from typing import Any, Callable, Dict, List, Optional, TYPE_CHECKING, Union
 
 if TYPE_CHECKING:
-    from .....models.base_resource_list import BaseResourceList
     from .....models.error import Error
     from .....models.model_version import ModelVersion
     from .....models.model_version_create import ModelVersionCreate
+    from .....models.model_version_list import ModelVersionList
     from .....models.order_by_field import OrderByField
     from .....models.sort_order import SortOrder
     from .item.with_modelversion_item_request_builder import WithModelversionItemRequestBuilder
@@ -46,11 +46,11 @@ class Model_versionsRequestBuilder(BaseRequestBuilder):
         url_tpl_params["modelversionId"] = modelversion_id
         return WithModelversionItemRequestBuilder(self.request_adapter, url_tpl_params)
     
-    async def get(self,request_configuration: Optional[RequestConfiguration] = None) -> Optional[BaseResourceList]:
+    async def get(self,request_configuration: Optional[RequestConfiguration] = None) -> Optional[ModelVersionList]:
         """
         Gets a list of all `ModelVersion` entities.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
-        Returns: Optional[BaseResourceList]
+        Returns: Optional[ModelVersionList]
         """
         request_info = self.to_get_request_information(
             request_configuration
@@ -63,9 +63,9 @@ class Model_versionsRequestBuilder(BaseRequestBuilder):
         }
         if not self.request_adapter:
             raise Exception("Http core is null") 
-        from .....models.base_resource_list import BaseResourceList
+        from .....models.model_version_list import ModelVersionList
 
-        return await self.request_adapter.send_async(request_info, BaseResourceList, error_mapping)
+        return await self.request_adapter.send_async(request_info, ModelVersionList, error_mapping)
     
     async def post(self,body: Optional[ModelVersionCreate] = None, request_configuration: Optional[RequestConfiguration] = None) -> Optional[ModelVersion]:
         """
