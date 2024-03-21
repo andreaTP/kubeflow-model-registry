@@ -1074,11 +1074,6 @@ components:
         author:
           description: Name of the author.
           type: string
-    ModelVersionUpdate:
-      description: Represents a ModelVersion belonging to a RegisteredModel.
-      allOf:
-        - $ref: "#/components/schemas/WithBaseResourceUpdate"
-        - $ref: "#/components/schemas/WithModelVersionUpdate"
     WithBaseArtifactUpdate:  
       type: object
       properties:
@@ -1089,27 +1084,11 @@ components:
           type: string
         state:
           $ref: "#/components/schemas/ArtifactState"
-    BaseExecution:
-      allOf:
-        - $ref: "#/components/schemas/WithBaseExecutionUpdate"
-        - $ref: "#/components/schemas/WithBaseResource"
-        - $ref: "#/components/schemas/WithBaseResourceCreate"
-        - $ref: "#/components/schemas/WithBaseResourceUpdate"
-    BaseExecutionCreate:
-      allOf:
-        - $ref: "#/components/schemas/WithBaseExecutionUpdate"
-        - $ref: "#/components/schemas/WithBaseResourceCreate"
-        - $ref: "#/components/schemas/WithBaseResourceUpdate"
     WithBaseExecutionUpdate:
       type: object
       properties:
         lastKnownState:
           $ref: "#/components/schemas/ExecutionState"
-    BaseExecutionUpdate:
-      type: object
-      allOf:
-        - $ref: "#/components/schemas/WithBaseResourceUpdate"
-        - $ref: "#/components/schemas/WithBaseExecutionUpdate"
     MetadataValue:
       oneOf:
         - $ref: "#/components/schemas/MetadataIntValue"
@@ -1386,11 +1365,6 @@ components:
         - $ref: "#/components/schemas/WithBaseResourceCreate"
         - $ref: "#/components/schemas/WithBaseResourceUpdate"
         - $ref: "#/components/schemas/WithServeModelCreate"
-    ServeModelUpdate:
-      description: An ML model serving action.
-      allOf:
-        - $ref: "#/components/schemas/WithBaseResourceUpdate"
-        - $ref: "#/components/schemas/WithBaseExecutionUpdate"
     WithServeModelCreate:
       description: An ML model serving action.
       required:
