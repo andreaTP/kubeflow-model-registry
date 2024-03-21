@@ -1,9 +1,9 @@
 diff --git a/internal/server/openapi/type_asserts.go b/internal/server/openapi/type_asserts.go
-index 4318f15..2aba64a 100644
+index 908ae2f..97d4372 100644
 --- a/internal/server/openapi/type_asserts.go
 +++ b/internal/server/openapi/type_asserts.go
-@@ -18,15 +18,15 @@ import (
-
+@@ -19,14 +19,15 @@ import (
+ 
  // AssertArtifactRequired checks if the required fields are not zero-ed
  func AssertArtifactRequired(obj model.Artifact) error {
 -	elements := map[string]interface{}{
@@ -14,7 +14,6 @@ index 4318f15..2aba64a 100644
 -			return &RequiredError{Field: name}
 -		}
 -	}
--
 +	// FIXME(manual): Artifact.ArtifactType is not present on client models
 +	// elements := map[string]interface{}{
 +	// 	"artifactType": obj.ArtifactType,
@@ -24,5 +23,6 @@ index 4318f15..2aba64a 100644
 +	// 		return &RequiredError{Field: name}
 +	// 	}
 +	// }
+ 
  	return nil
  }
