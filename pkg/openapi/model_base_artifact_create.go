@@ -19,6 +19,8 @@ var _ MappedNullable = &BaseArtifactCreate{}
 
 // BaseArtifactCreate struct for BaseArtifactCreate
 type BaseArtifactCreate struct {
+	// The client provided name of the artifact. This field is optional. If set, it must be unique among all the artifacts of the same artifact type within a database instance and cannot be changed once set.
+	Name *string `json:"name,omitempty"`
 	// User provided custom properties which are not defined by its type.
 	CustomProperties *map[string]MetadataValue `json:"customProperties,omitempty"`
 	// An optional description about the resource.
@@ -28,8 +30,6 @@ type BaseArtifactCreate struct {
 	// The uniform resource identifier of the physical artifact. May be empty if there is no physical artifact.
 	Uri   *string        `json:"uri,omitempty"`
 	State *ArtifactState `json:"state,omitempty"`
-	// The client provided name of the artifact. This field is optional. If set, it must be unique among all the artifacts of the same artifact type within a database instance and cannot be changed once set.
-	Name *string `json:"name,omitempty"`
 }
 
 // NewBaseArtifactCreate instantiates a new BaseArtifactCreate object
@@ -51,6 +51,38 @@ func NewBaseArtifactCreateWithDefaults() *BaseArtifactCreate {
 	var state ArtifactState = ARTIFACTSTATE_UNKNOWN
 	this.State = &state
 	return &this
+}
+
+// GetName returns the Name field value if set, zero value otherwise.
+func (o *BaseArtifactCreate) GetName() string {
+	if o == nil || IsNil(o.Name) {
+		var ret string
+		return ret
+	}
+	return *o.Name
+}
+
+// GetNameOk returns a tuple with the Name field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BaseArtifactCreate) GetNameOk() (*string, bool) {
+	if o == nil || IsNil(o.Name) {
+		return nil, false
+	}
+	return o.Name, true
+}
+
+// HasName returns a boolean if a field has been set.
+func (o *BaseArtifactCreate) HasName() bool {
+	if o != nil && !IsNil(o.Name) {
+		return true
+	}
+
+	return false
+}
+
+// SetName gets a reference to the given string and assigns it to the Name field.
+func (o *BaseArtifactCreate) SetName(v string) {
+	o.Name = &v
 }
 
 // GetCustomProperties returns the CustomProperties field value if set, zero value otherwise.
@@ -213,38 +245,6 @@ func (o *BaseArtifactCreate) SetState(v ArtifactState) {
 	o.State = &v
 }
 
-// GetName returns the Name field value if set, zero value otherwise.
-func (o *BaseArtifactCreate) GetName() string {
-	if o == nil || IsNil(o.Name) {
-		var ret string
-		return ret
-	}
-	return *o.Name
-}
-
-// GetNameOk returns a tuple with the Name field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *BaseArtifactCreate) GetNameOk() (*string, bool) {
-	if o == nil || IsNil(o.Name) {
-		return nil, false
-	}
-	return o.Name, true
-}
-
-// HasName returns a boolean if a field has been set.
-func (o *BaseArtifactCreate) HasName() bool {
-	if o != nil && !IsNil(o.Name) {
-		return true
-	}
-
-	return false
-}
-
-// SetName gets a reference to the given string and assigns it to the Name field.
-func (o *BaseArtifactCreate) SetName(v string) {
-	o.Name = &v
-}
-
 func (o BaseArtifactCreate) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -255,6 +255,9 @@ func (o BaseArtifactCreate) MarshalJSON() ([]byte, error) {
 
 func (o BaseArtifactCreate) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Name) {
+		toSerialize["name"] = o.Name
+	}
 	if !IsNil(o.CustomProperties) {
 		toSerialize["customProperties"] = o.CustomProperties
 	}
@@ -269,9 +272,6 @@ func (o BaseArtifactCreate) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.State) {
 		toSerialize["state"] = o.State
-	}
-	if !IsNil(o.Name) {
-		toSerialize["name"] = o.Name
 	}
 	return toSerialize, nil
 }

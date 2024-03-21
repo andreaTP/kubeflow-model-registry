@@ -59,7 +59,7 @@ internal/ml_metadata/proto/%.pb.go: api/grpc/ml_metadata/proto/%.proto
 gen/grpc: internal/ml_metadata/proto/metadata_store.pb.go internal/ml_metadata/proto/metadata_store_service.pb.go
 
 internal/converter/generated/converter.go: internal/converter/*.go
-	goverter gen github.com/opendatahub-io/model-registry/internal/converter/
+	bin/goverter gen github.com/opendatahub-io/model-registry/internal/converter/
 
 .PHONY: gen/converter
 gen/converter: gen/grpc internal/converter/generated/converter.go
@@ -67,13 +67,13 @@ gen/converter: gen/grpc internal/converter/generated/converter.go
 # validate the openapi schema
 .PHONY: openapi/validate
 openapi/validate: bin/openapi-generator-cli
-	openapi-generator-cli validate -i api/openapi/model-registry.yaml
+	bin/openapi-generator-cli validate -i api/openapi/model-registry.yaml
 
 # generate the openapi server implementation
 # note: run manually only when model-registry.yaml api changes, for model changes gen/openapi is run automatically
 .PHONY: gen/openapi-server
 gen/openapi-server: bin/openapi-generator-cli openapi/validate
-	openapi-generator-cli generate \
+	bin/openapi-generator-cli generate \
 		-i api/openapi/model-registry.yaml -g go-server -o internal/server/openapi --package-name openapi --global-property models \
 		--ignore-file-override ./.openapi-generator-ignore --additional-properties=outputAsLibrary=true,enumClassPrefix=true,router=chi,sourceFolder=,onlyInterfaces=true,isGoSubmodule=true,enumClassPrefix=true,useOneOfDiscriminatorLookup=true \
 		--template-dir ./templates/go-server
@@ -86,7 +86,7 @@ gen/openapi: bin/openapi-generator-cli openapi/validate pkg/openapi/client.go
 
 pkg/openapi/client.go: bin/openapi-generator-cli api/openapi/model-registry.yaml
 	rm -rf pkg/openapi
-	openapi-generator-cli generate \
+	bin/openapi-generator-cli generate \
 		-i api/openapi/model-registry.yaml -g go -o pkg/openapi --package-name openapi \
 		--ignore-file-override ./.openapi-generator-ignore --additional-properties=isGoSubmodule=true,enumClassPrefix=true,useOneOfDiscriminatorLookup=true
 	gofmt -w pkg/openapi

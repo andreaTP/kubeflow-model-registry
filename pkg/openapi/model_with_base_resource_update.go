@@ -14,43 +14,38 @@ import (
 	"encoding/json"
 )
 
-// checks if the ServeModelUpdate type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &ServeModelUpdate{}
+// checks if the WithBaseResourceUpdate type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &WithBaseResourceUpdate{}
 
-// ServeModelUpdate An ML model serving action.
-type ServeModelUpdate struct {
+// WithBaseResourceUpdate struct for WithBaseResourceUpdate
+type WithBaseResourceUpdate struct {
 	// User provided custom properties which are not defined by its type.
 	CustomProperties *map[string]MetadataValue `json:"customProperties,omitempty"`
 	// An optional description about the resource.
 	Description *string `json:"description,omitempty"`
 	// The external id that come from the clients’ system. This field is optional. If set, it must be unique among all resources within a database instance.
-	ExternalID     *string         `json:"externalID,omitempty"`
-	LastKnownState *ExecutionState `json:"lastKnownState,omitempty"`
+	ExternalID *string `json:"externalID,omitempty"`
 }
 
-// NewServeModelUpdate instantiates a new ServeModelUpdate object
+// NewWithBaseResourceUpdate instantiates a new WithBaseResourceUpdate object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewServeModelUpdate() *ServeModelUpdate {
-	this := ServeModelUpdate{}
-	var lastKnownState ExecutionState = EXECUTIONSTATE_UNKNOWN
-	this.LastKnownState = &lastKnownState
+func NewWithBaseResourceUpdate() *WithBaseResourceUpdate {
+	this := WithBaseResourceUpdate{}
 	return &this
 }
 
-// NewServeModelUpdateWithDefaults instantiates a new ServeModelUpdate object
+// NewWithBaseResourceUpdateWithDefaults instantiates a new WithBaseResourceUpdate object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewServeModelUpdateWithDefaults() *ServeModelUpdate {
-	this := ServeModelUpdate{}
-	var lastKnownState ExecutionState = EXECUTIONSTATE_UNKNOWN
-	this.LastKnownState = &lastKnownState
+func NewWithBaseResourceUpdateWithDefaults() *WithBaseResourceUpdate {
+	this := WithBaseResourceUpdate{}
 	return &this
 }
 
 // GetCustomProperties returns the CustomProperties field value if set, zero value otherwise.
-func (o *ServeModelUpdate) GetCustomProperties() map[string]MetadataValue {
+func (o *WithBaseResourceUpdate) GetCustomProperties() map[string]MetadataValue {
 	if o == nil || IsNil(o.CustomProperties) {
 		var ret map[string]MetadataValue
 		return ret
@@ -60,7 +55,7 @@ func (o *ServeModelUpdate) GetCustomProperties() map[string]MetadataValue {
 
 // GetCustomPropertiesOk returns a tuple with the CustomProperties field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ServeModelUpdate) GetCustomPropertiesOk() (*map[string]MetadataValue, bool) {
+func (o *WithBaseResourceUpdate) GetCustomPropertiesOk() (*map[string]MetadataValue, bool) {
 	if o == nil || IsNil(o.CustomProperties) {
 		return nil, false
 	}
@@ -68,7 +63,7 @@ func (o *ServeModelUpdate) GetCustomPropertiesOk() (*map[string]MetadataValue, b
 }
 
 // HasCustomProperties returns a boolean if a field has been set.
-func (o *ServeModelUpdate) HasCustomProperties() bool {
+func (o *WithBaseResourceUpdate) HasCustomProperties() bool {
 	if o != nil && !IsNil(o.CustomProperties) {
 		return true
 	}
@@ -77,12 +72,12 @@ func (o *ServeModelUpdate) HasCustomProperties() bool {
 }
 
 // SetCustomProperties gets a reference to the given map[string]MetadataValue and assigns it to the CustomProperties field.
-func (o *ServeModelUpdate) SetCustomProperties(v map[string]MetadataValue) {
+func (o *WithBaseResourceUpdate) SetCustomProperties(v map[string]MetadataValue) {
 	o.CustomProperties = &v
 }
 
 // GetDescription returns the Description field value if set, zero value otherwise.
-func (o *ServeModelUpdate) GetDescription() string {
+func (o *WithBaseResourceUpdate) GetDescription() string {
 	if o == nil || IsNil(o.Description) {
 		var ret string
 		return ret
@@ -92,7 +87,7 @@ func (o *ServeModelUpdate) GetDescription() string {
 
 // GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ServeModelUpdate) GetDescriptionOk() (*string, bool) {
+func (o *WithBaseResourceUpdate) GetDescriptionOk() (*string, bool) {
 	if o == nil || IsNil(o.Description) {
 		return nil, false
 	}
@@ -100,7 +95,7 @@ func (o *ServeModelUpdate) GetDescriptionOk() (*string, bool) {
 }
 
 // HasDescription returns a boolean if a field has been set.
-func (o *ServeModelUpdate) HasDescription() bool {
+func (o *WithBaseResourceUpdate) HasDescription() bool {
 	if o != nil && !IsNil(o.Description) {
 		return true
 	}
@@ -109,12 +104,12 @@ func (o *ServeModelUpdate) HasDescription() bool {
 }
 
 // SetDescription gets a reference to the given string and assigns it to the Description field.
-func (o *ServeModelUpdate) SetDescription(v string) {
+func (o *WithBaseResourceUpdate) SetDescription(v string) {
 	o.Description = &v
 }
 
 // GetExternalID returns the ExternalID field value if set, zero value otherwise.
-func (o *ServeModelUpdate) GetExternalID() string {
+func (o *WithBaseResourceUpdate) GetExternalID() string {
 	if o == nil || IsNil(o.ExternalID) {
 		var ret string
 		return ret
@@ -124,7 +119,7 @@ func (o *ServeModelUpdate) GetExternalID() string {
 
 // GetExternalIDOk returns a tuple with the ExternalID field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ServeModelUpdate) GetExternalIDOk() (*string, bool) {
+func (o *WithBaseResourceUpdate) GetExternalIDOk() (*string, bool) {
 	if o == nil || IsNil(o.ExternalID) {
 		return nil, false
 	}
@@ -132,7 +127,7 @@ func (o *ServeModelUpdate) GetExternalIDOk() (*string, bool) {
 }
 
 // HasExternalID returns a boolean if a field has been set.
-func (o *ServeModelUpdate) HasExternalID() bool {
+func (o *WithBaseResourceUpdate) HasExternalID() bool {
 	if o != nil && !IsNil(o.ExternalID) {
 		return true
 	}
@@ -141,43 +136,11 @@ func (o *ServeModelUpdate) HasExternalID() bool {
 }
 
 // SetExternalID gets a reference to the given string and assigns it to the ExternalID field.
-func (o *ServeModelUpdate) SetExternalID(v string) {
+func (o *WithBaseResourceUpdate) SetExternalID(v string) {
 	o.ExternalID = &v
 }
 
-// GetLastKnownState returns the LastKnownState field value if set, zero value otherwise.
-func (o *ServeModelUpdate) GetLastKnownState() ExecutionState {
-	if o == nil || IsNil(o.LastKnownState) {
-		var ret ExecutionState
-		return ret
-	}
-	return *o.LastKnownState
-}
-
-// GetLastKnownStateOk returns a tuple with the LastKnownState field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ServeModelUpdate) GetLastKnownStateOk() (*ExecutionState, bool) {
-	if o == nil || IsNil(o.LastKnownState) {
-		return nil, false
-	}
-	return o.LastKnownState, true
-}
-
-// HasLastKnownState returns a boolean if a field has been set.
-func (o *ServeModelUpdate) HasLastKnownState() bool {
-	if o != nil && !IsNil(o.LastKnownState) {
-		return true
-	}
-
-	return false
-}
-
-// SetLastKnownState gets a reference to the given ExecutionState and assigns it to the LastKnownState field.
-func (o *ServeModelUpdate) SetLastKnownState(v ExecutionState) {
-	o.LastKnownState = &v
-}
-
-func (o ServeModelUpdate) MarshalJSON() ([]byte, error) {
+func (o WithBaseResourceUpdate) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -185,7 +148,7 @@ func (o ServeModelUpdate) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o ServeModelUpdate) ToMap() (map[string]interface{}, error) {
+func (o WithBaseResourceUpdate) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.CustomProperties) {
 		toSerialize["customProperties"] = o.CustomProperties
@@ -196,44 +159,41 @@ func (o ServeModelUpdate) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ExternalID) {
 		toSerialize["externalID"] = o.ExternalID
 	}
-	if !IsNil(o.LastKnownState) {
-		toSerialize["lastKnownState"] = o.LastKnownState
-	}
 	return toSerialize, nil
 }
 
-type NullableServeModelUpdate struct {
-	value *ServeModelUpdate
+type NullableWithBaseResourceUpdate struct {
+	value *WithBaseResourceUpdate
 	isSet bool
 }
 
-func (v NullableServeModelUpdate) Get() *ServeModelUpdate {
+func (v NullableWithBaseResourceUpdate) Get() *WithBaseResourceUpdate {
 	return v.value
 }
 
-func (v *NullableServeModelUpdate) Set(val *ServeModelUpdate) {
+func (v *NullableWithBaseResourceUpdate) Set(val *WithBaseResourceUpdate) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableServeModelUpdate) IsSet() bool {
+func (v NullableWithBaseResourceUpdate) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableServeModelUpdate) Unset() {
+func (v *NullableWithBaseResourceUpdate) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableServeModelUpdate(val *ServeModelUpdate) *NullableServeModelUpdate {
-	return &NullableServeModelUpdate{value: val, isSet: true}
+func NewNullableWithBaseResourceUpdate(val *WithBaseResourceUpdate) *NullableWithBaseResourceUpdate {
+	return &NullableWithBaseResourceUpdate{value: val, isSet: true}
 }
 
-func (v NullableServeModelUpdate) MarshalJSON() ([]byte, error) {
+func (v NullableWithBaseResourceUpdate) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableServeModelUpdate) UnmarshalJSON(src []byte) error {
+func (v *NullableWithBaseResourceUpdate) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

@@ -20,14 +20,14 @@ var _ MappedNullable = &BaseExecutionCreate{}
 // BaseExecutionCreate struct for BaseExecutionCreate
 type BaseExecutionCreate struct {
 	LastKnownState *ExecutionState `json:"lastKnownState,omitempty"`
+	// The client provided name of the artifact. This field is optional. If set, it must be unique among all the artifacts of the same artifact type within a database instance and cannot be changed once set.
+	Name *string `json:"name,omitempty"`
 	// User provided custom properties which are not defined by its type.
 	CustomProperties *map[string]MetadataValue `json:"customProperties,omitempty"`
 	// An optional description about the resource.
 	Description *string `json:"description,omitempty"`
 	// The external id that come from the clients’ system. This field is optional. If set, it must be unique among all resources within a database instance.
 	ExternalID *string `json:"externalID,omitempty"`
-	// The client provided name of the artifact. This field is optional. If set, it must be unique among all the artifacts of the same artifact type within a database instance and cannot be changed once set.
-	Name *string `json:"name,omitempty"`
 }
 
 // NewBaseExecutionCreate instantiates a new BaseExecutionCreate object
@@ -81,6 +81,38 @@ func (o *BaseExecutionCreate) HasLastKnownState() bool {
 // SetLastKnownState gets a reference to the given ExecutionState and assigns it to the LastKnownState field.
 func (o *BaseExecutionCreate) SetLastKnownState(v ExecutionState) {
 	o.LastKnownState = &v
+}
+
+// GetName returns the Name field value if set, zero value otherwise.
+func (o *BaseExecutionCreate) GetName() string {
+	if o == nil || IsNil(o.Name) {
+		var ret string
+		return ret
+	}
+	return *o.Name
+}
+
+// GetNameOk returns a tuple with the Name field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BaseExecutionCreate) GetNameOk() (*string, bool) {
+	if o == nil || IsNil(o.Name) {
+		return nil, false
+	}
+	return o.Name, true
+}
+
+// HasName returns a boolean if a field has been set.
+func (o *BaseExecutionCreate) HasName() bool {
+	if o != nil && !IsNil(o.Name) {
+		return true
+	}
+
+	return false
+}
+
+// SetName gets a reference to the given string and assigns it to the Name field.
+func (o *BaseExecutionCreate) SetName(v string) {
+	o.Name = &v
 }
 
 // GetCustomProperties returns the CustomProperties field value if set, zero value otherwise.
@@ -179,38 +211,6 @@ func (o *BaseExecutionCreate) SetExternalID(v string) {
 	o.ExternalID = &v
 }
 
-// GetName returns the Name field value if set, zero value otherwise.
-func (o *BaseExecutionCreate) GetName() string {
-	if o == nil || IsNil(o.Name) {
-		var ret string
-		return ret
-	}
-	return *o.Name
-}
-
-// GetNameOk returns a tuple with the Name field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *BaseExecutionCreate) GetNameOk() (*string, bool) {
-	if o == nil || IsNil(o.Name) {
-		return nil, false
-	}
-	return o.Name, true
-}
-
-// HasName returns a boolean if a field has been set.
-func (o *BaseExecutionCreate) HasName() bool {
-	if o != nil && !IsNil(o.Name) {
-		return true
-	}
-
-	return false
-}
-
-// SetName gets a reference to the given string and assigns it to the Name field.
-func (o *BaseExecutionCreate) SetName(v string) {
-	o.Name = &v
-}
-
 func (o BaseExecutionCreate) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -224,6 +224,9 @@ func (o BaseExecutionCreate) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.LastKnownState) {
 		toSerialize["lastKnownState"] = o.LastKnownState
 	}
+	if !IsNil(o.Name) {
+		toSerialize["name"] = o.Name
+	}
 	if !IsNil(o.CustomProperties) {
 		toSerialize["customProperties"] = o.CustomProperties
 	}
@@ -232,9 +235,6 @@ func (o BaseExecutionCreate) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.ExternalID) {
 		toSerialize["externalID"] = o.ExternalID
-	}
-	if !IsNil(o.Name) {
-		toSerialize["name"] = o.Name
 	}
 	return toSerialize, nil
 }
