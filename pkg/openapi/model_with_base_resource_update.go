@@ -14,11 +14,11 @@ import (
 	"encoding/json"
 )
 
-// checks if the BaseResourceUpdate type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &BaseResourceUpdate{}
+// checks if the WithBaseResourceUpdate type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &WithBaseResourceUpdate{}
 
-// BaseResourceUpdate struct for BaseResourceUpdate
-type BaseResourceUpdate struct {
+// WithBaseResourceUpdate struct for WithBaseResourceUpdate
+type WithBaseResourceUpdate struct {
 	// User provided custom properties which are not defined by its type.
 	CustomProperties *map[string]MetadataValue `json:"customProperties,omitempty"`
 	// An optional description about the resource.
@@ -27,25 +27,25 @@ type BaseResourceUpdate struct {
 	ExternalID *string `json:"externalID,omitempty"`
 }
 
-// NewBaseResourceUpdate instantiates a new BaseResourceUpdate object
+// NewWithBaseResourceUpdate instantiates a new WithBaseResourceUpdate object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewBaseResourceUpdate() *BaseResourceUpdate {
-	this := BaseResourceUpdate{}
+func NewWithBaseResourceUpdate() *WithBaseResourceUpdate {
+	this := WithBaseResourceUpdate{}
 	return &this
 }
 
-// NewBaseResourceUpdateWithDefaults instantiates a new BaseResourceUpdate object
+// NewWithBaseResourceUpdateWithDefaults instantiates a new WithBaseResourceUpdate object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewBaseResourceUpdateWithDefaults() *BaseResourceUpdate {
-	this := BaseResourceUpdate{}
+func NewWithBaseResourceUpdateWithDefaults() *WithBaseResourceUpdate {
+	this := WithBaseResourceUpdate{}
 	return &this
 }
 
 // GetCustomProperties returns the CustomProperties field value if set, zero value otherwise.
-func (o *BaseResourceUpdate) GetCustomProperties() map[string]MetadataValue {
+func (o *WithBaseResourceUpdate) GetCustomProperties() map[string]MetadataValue {
 	if o == nil || IsNil(o.CustomProperties) {
 		var ret map[string]MetadataValue
 		return ret
@@ -55,7 +55,7 @@ func (o *BaseResourceUpdate) GetCustomProperties() map[string]MetadataValue {
 
 // GetCustomPropertiesOk returns a tuple with the CustomProperties field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *BaseResourceUpdate) GetCustomPropertiesOk() (*map[string]MetadataValue, bool) {
+func (o *WithBaseResourceUpdate) GetCustomPropertiesOk() (*map[string]MetadataValue, bool) {
 	if o == nil || IsNil(o.CustomProperties) {
 		return nil, false
 	}
@@ -63,7 +63,7 @@ func (o *BaseResourceUpdate) GetCustomPropertiesOk() (*map[string]MetadataValue,
 }
 
 // HasCustomProperties returns a boolean if a field has been set.
-func (o *BaseResourceUpdate) HasCustomProperties() bool {
+func (o *WithBaseResourceUpdate) HasCustomProperties() bool {
 	if o != nil && !IsNil(o.CustomProperties) {
 		return true
 	}
@@ -72,12 +72,12 @@ func (o *BaseResourceUpdate) HasCustomProperties() bool {
 }
 
 // SetCustomProperties gets a reference to the given map[string]MetadataValue and assigns it to the CustomProperties field.
-func (o *BaseResourceUpdate) SetCustomProperties(v map[string]MetadataValue) {
+func (o *WithBaseResourceUpdate) SetCustomProperties(v map[string]MetadataValue) {
 	o.CustomProperties = &v
 }
 
 // GetDescription returns the Description field value if set, zero value otherwise.
-func (o *BaseResourceUpdate) GetDescription() string {
+func (o *WithBaseResourceUpdate) GetDescription() string {
 	if o == nil || IsNil(o.Description) {
 		var ret string
 		return ret
@@ -87,7 +87,7 @@ func (o *BaseResourceUpdate) GetDescription() string {
 
 // GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *BaseResourceUpdate) GetDescriptionOk() (*string, bool) {
+func (o *WithBaseResourceUpdate) GetDescriptionOk() (*string, bool) {
 	if o == nil || IsNil(o.Description) {
 		return nil, false
 	}
@@ -95,7 +95,7 @@ func (o *BaseResourceUpdate) GetDescriptionOk() (*string, bool) {
 }
 
 // HasDescription returns a boolean if a field has been set.
-func (o *BaseResourceUpdate) HasDescription() bool {
+func (o *WithBaseResourceUpdate) HasDescription() bool {
 	if o != nil && !IsNil(o.Description) {
 		return true
 	}
@@ -104,12 +104,12 @@ func (o *BaseResourceUpdate) HasDescription() bool {
 }
 
 // SetDescription gets a reference to the given string and assigns it to the Description field.
-func (o *BaseResourceUpdate) SetDescription(v string) {
+func (o *WithBaseResourceUpdate) SetDescription(v string) {
 	o.Description = &v
 }
 
 // GetExternalID returns the ExternalID field value if set, zero value otherwise.
-func (o *BaseResourceUpdate) GetExternalID() string {
+func (o *WithBaseResourceUpdate) GetExternalID() string {
 	if o == nil || IsNil(o.ExternalID) {
 		var ret string
 		return ret
@@ -119,7 +119,7 @@ func (o *BaseResourceUpdate) GetExternalID() string {
 
 // GetExternalIDOk returns a tuple with the ExternalID field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *BaseResourceUpdate) GetExternalIDOk() (*string, bool) {
+func (o *WithBaseResourceUpdate) GetExternalIDOk() (*string, bool) {
 	if o == nil || IsNil(o.ExternalID) {
 		return nil, false
 	}
@@ -127,7 +127,7 @@ func (o *BaseResourceUpdate) GetExternalIDOk() (*string, bool) {
 }
 
 // HasExternalID returns a boolean if a field has been set.
-func (o *BaseResourceUpdate) HasExternalID() bool {
+func (o *WithBaseResourceUpdate) HasExternalID() bool {
 	if o != nil && !IsNil(o.ExternalID) {
 		return true
 	}
@@ -136,11 +136,11 @@ func (o *BaseResourceUpdate) HasExternalID() bool {
 }
 
 // SetExternalID gets a reference to the given string and assigns it to the ExternalID field.
-func (o *BaseResourceUpdate) SetExternalID(v string) {
+func (o *WithBaseResourceUpdate) SetExternalID(v string) {
 	o.ExternalID = &v
 }
 
-func (o BaseResourceUpdate) MarshalJSON() ([]byte, error) {
+func (o WithBaseResourceUpdate) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -148,7 +148,7 @@ func (o BaseResourceUpdate) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o BaseResourceUpdate) ToMap() (map[string]interface{}, error) {
+func (o WithBaseResourceUpdate) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.CustomProperties) {
 		toSerialize["customProperties"] = o.CustomProperties
@@ -162,38 +162,38 @@ func (o BaseResourceUpdate) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-type NullableBaseResourceUpdate struct {
-	value *BaseResourceUpdate
+type NullableWithBaseResourceUpdate struct {
+	value *WithBaseResourceUpdate
 	isSet bool
 }
 
-func (v NullableBaseResourceUpdate) Get() *BaseResourceUpdate {
+func (v NullableWithBaseResourceUpdate) Get() *WithBaseResourceUpdate {
 	return v.value
 }
 
-func (v *NullableBaseResourceUpdate) Set(val *BaseResourceUpdate) {
+func (v *NullableWithBaseResourceUpdate) Set(val *WithBaseResourceUpdate) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableBaseResourceUpdate) IsSet() bool {
+func (v NullableWithBaseResourceUpdate) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableBaseResourceUpdate) Unset() {
+func (v *NullableWithBaseResourceUpdate) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableBaseResourceUpdate(val *BaseResourceUpdate) *NullableBaseResourceUpdate {
-	return &NullableBaseResourceUpdate{value: val, isSet: true}
+func NewNullableWithBaseResourceUpdate(val *WithBaseResourceUpdate) *NullableWithBaseResourceUpdate {
+	return &NullableWithBaseResourceUpdate{value: val, isSet: true}
 }
 
-func (v NullableBaseResourceUpdate) MarshalJSON() ([]byte, error) {
+func (v NullableWithBaseResourceUpdate) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableBaseResourceUpdate) UnmarshalJSON(src []byte) error {
+func (v *NullableWithBaseResourceUpdate) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

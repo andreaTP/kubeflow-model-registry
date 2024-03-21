@@ -1,0 +1,159 @@
+Trace: KiotaBuilder configuration: {"Generation":{"ShouldGetApiManifest":false,"SkipGeneration":false,"Operation":null,"OpenAPIFilePath":"/Users/aperuffo/workspace/model-registry/api/openapi/model-registry-full-proposal.yaml","ApiManifestPath":"/Users/aperuffo/workspace/model-registry/apimanifest.json","OutputPath":"/Users/aperuffo/workspace/model-registry/api/openapi/client","ClientClassName":"PostsClient","ClientNamespaceName":"client","NamespaceNameSeparator":".","ModelsNamespaceName":"client.models","Language":4,"ApiRootUrl":null,"UsesBackingStore":false,"ExcludeBackwardCompatible":false,"IncludeBackwardCompatible":true,"IncludeAdditionalData":true,"Serializers":["Microsoft.Kiota.Serialization.Json.JsonSerializationWriterFactory","Microsoft.Kiota.Serialization.Text.TextSerializationWriterFactory","Microsoft.Kiota.Serialization.Form.FormSerializationWriterFactory","Microsoft.Kiota.Serialization.Multipart.MultipartSerializationWriterFactory"],"Deserializers":["Microsoft.Kiota.Serialization.Json.JsonParseNodeFactory","Microsoft.Kiota.Serialization.Text.TextParseNodeFactory","Microsoft.Kiota.Serialization.Form.FormParseNodeFactory"],"ShouldWriteNamespaceIndices":false,"ShouldWriteBarrelsIfClassExists":false,"CleanOutput":true,"StructuredMimeTypes":["application/json","text/plain;q=0.9","application/x-www-form-urlencoded;q=0.2","multipart/form-data;q=0.1"],"IncludePatterns":[],"ExcludePatterns":[],"PatternsOverride":[],"ClearCache":false,"DisabledValidationRules":[],"MaxDegreeOfParallelism":-1},"Search":{"APIsGuruListUrl":"https://raw.githubusercontent.com/APIs-guru/openapi-directory/gh-pages/v2/list.json","GitHub":{"AppId":"Iv1.9ed2bcb878c90617","ApiBaseUrl":"https://api.github.com","BlockListUrl":"https://raw.githubusercontent.com/microsoft/kiota/main/resources/index-block-list.yml","AppManagement":"https://aka.ms/kiota/install/github"},"ClearCache":false},"Download":{"OutputPath":"./output/result.json","CleanOutput":false,"ClearCache":false},"Languages":{"CLI":{"MaturityLevel":1,"Dependencies":[{"Name":"Microsoft.Kiota.Abstractions","Version":"1.7.11"},{"Name":"Microsoft.Kiota.Http.HttpClientLibrary","Version":"1.3.7"},{"Name":"Microsoft.Kiota.Serialization.Form","Version":"1.1.5"},{"Name":"Microsoft.Kiota.Serialization.Json","Version":"1.1.8"},{"Name":"Microsoft.Kiota.Authentication.Azure","Version":"1.1.4"},{"Name":"Microsoft.Kiota.Serialization.Text","Version":"1.1.4"},{"Name":"Microsoft.Kiota.Cli.Commons","Version":"1.1.0"}],"DependencyInstallCommand":"dotnet add package {0} --version {1}","ClientClassName":"","ClientNamespaceName":"","StructuredMimeTypes":[]},"CSharp":{"MaturityLevel":2,"Dependencies":[{"Name":"Microsoft.Kiota.Abstractions","Version":"1.7.11"},{"Name":"Microsoft.Kiota.Http.HttpClientLibrary","Version":"1.3.7"},{"Name":"Microsoft.Kiota.Serialization.Form","Version":"1.1.5"},{"Name":"Microsoft.Kiota.Serialization.Json","Version":"1.1.8"},{"Name":"Microsoft.Kiota.Authentication.Azure","Version":"1.1.4"},{"Name":"Microsoft.Kiota.Serialization.Text","Version":"1.1.4"},{"Name":"Microsoft.Kiota.Serialization.Multipart","Version":"1.1.3"}],"DependencyInstallCommand":"dotnet add package {0} --version {1}","ClientClassName":"","ClientNamespaceName":"","StructuredMimeTypes":[]},"Go":{"MaturityLevel":2,"Dependencies":[{"Name":"github.com/microsoft/kiota-abstractions-go","Version":"v1.5.6"},{"Name":"github.com/microsoft/kiota-http-go","Version":"v1.3.2"},{"Name":"github.com/microsoft/kiota-serialization-form-go","Version":"v1.0.0"},{"Name":"github.com/microsoft/kiota-serialization-json-go","Version":"v1.0.6"},{"Name":"github.com/microsoft/kiota-authentication-azure-go","Version":"v1.0.2"},{"Name":"github.com/microsoft/kiota-serialization-text-go","Version":"v1.0.0"},{"Name":"github.com/microsoft/kiota-serialization-multipart-go","Version":"v1.0.0"}],"DependencyInstallCommand":"go get {0}@{1}","ClientClassName":"","ClientNamespaceName":"","StructuredMimeTypes":[]},"Java":{"MaturityLevel":2,"Dependencies":[{"Name":"com.microsoft.kiota:microsoft-kiota-abstractions","Version":"1.0.6"},{"Name":"com.microsoft.kiota:microsoft-kiota-http-okHttp","Version":"1.0.6"},{"Name":"com.microsoft.kiota:microsoft-kiota-serialization-form","Version":"1.0.6"},{"Name":"com.microsoft.kiota:microsoft-kiota-serialization-json","Version":"1.0.6"},{"Name":"com.microsoft.kiota:microsoft-kiota-authentication-azure","Version":"1.0.6"},{"Name":"com.microsoft.kiota:microsoft-kiota-serialization-text","Version":"1.0.6"},{"Name":"com.microsoft.kiota:microsoft-kiota-serialization-multipart","Version":"1.0.6"},{"Name":"jakarta.annotation:jakarta.annotation-api","Version":"3.0.0-M1"}],"DependencyInstallCommand":"{0}:{1}","ClientClassName":"","ClientNamespaceName":"","StructuredMimeTypes":[]},"PHP":{"MaturityLevel":2,"Dependencies":[{"Name":"microsoft/kiota-abstractions","Version":"1.1.0"},{"Name":"microsoft/kiota-http-guzzle","Version":"1.2.0"},{"Name":"microsoft/kiota-serialization-json","Version":"1.0.1"},{"Name":"microsoft/kiota-authentication-phpleague","Version":"1.1.0"},{"Name":"microsoft/kiota-serialization-text","Version":"1.0.1"}],"DependencyInstallCommand":"composer require {0}:{1}","ClientClassName":"","ClientNamespaceName":"","StructuredMimeTypes":[]},"Python":{"MaturityLevel":2,"Dependencies":[{"Name":"microsoft-kiota-abstractions","Version":"1.3.1"},{"Name":"microsoft-kiota-http","Version":"1.3.1"},{"Name":"microsoft-kiota-serialization-json","Version":"1.1.0"},{"Name":"microsoft-kiota-authentication-azure","Version":"1.0.0"},{"Name":"microsoft-kiota-serialization-text","Version":"1.0.0"},{"Name":"microsoft-kiota-serialization-form","Version":"0.1.0"},{"Name":"microsoft-kiota-serialization-multipart","Version":"0.1.0"}],"DependencyInstallCommand":"pip install {0}=={1}","ClientClassName":"","ClientNamespaceName":"","StructuredMimeTypes":[]},"Ruby":{"MaturityLevel":0,"Dependencies":[{"Name":"microsoft_kiota_abstractions","Version":"0.14.4"},{"Name":"microsoft_kiota_faraday","Version":"0.15.0"},{"Name":"microsoft_kiota_serialization_json","Version":"0.9.1"},{"Name":"microsoft_kiota_authentication_oauth","Version":"0.8.0"}],"DependencyInstallCommand":"gem install \u0022{0}\u0022 -v \u0022{1}\u0022","ClientClassName":"","ClientNamespaceName":"","StructuredMimeTypes":[]},"Swift":{"MaturityLevel":0,"Dependencies":[],"DependencyInstallCommand":"","ClientClassName":"","ClientNamespaceName":"","StructuredMimeTypes":[]},"TypeScript":{"MaturityLevel":0,"Dependencies":[{"Name":"@microsoft/kiota-abstractions","Version":"1.0.0-preview.44"},{"Name":"@microsoft/kiota-http-fetchlibrary","Version":"1.0.0-preview.43"},{"Name":"@microsoft/kiota-serialization-form","Version":"1.0.0-preview.33"},{"Name":"@microsoft/kiota-serialization-json","Version":"1.0.0-preview.44"},{"Name":"@microsoft/kiota-authentication-azure","Version":"1.0.0-preview.39"},{"Name":"@microsoft/kiota-serialization-text","Version":"1.0.0-preview.41"},{"Name":"@microsoft/kiota-serialization-multipart","Version":"1.0.0-preview.23"}],"DependencyInstallCommand":"npm install {0}@{1} -S","ClientClassName":"","ClientNamespaceName":"","StructuredMimeTypes":[]}},"Update":{"OrgName":"microsoft","RepoName":"kiota","Disabled":false}}
+Information: KiotaBuilder Cleaning output directory /Users/aperuffo/workspace/model-registry/api/openapi/client
+Debug: KiotaBuilder kiota version 1.12.0
+Information: KiotaBuilder loaded description from local source
+Trace: KiotaBuilder 8ms: Read OpenAPI file /Users/aperuffo/workspace/model-registry/api/openapi/model-registry-full-proposal.yaml
+Debug: KiotaBuilder step 1 - reading the stream - took 00:00:00.0138658
+Trace: KiotaBuilder Parsing OpenAPI file
+Warning: KiotaBuilder OpenAPI warning: #/ - Multiple servers entries were found in the OpenAPI description. Only the first one will be used. The root URL can be set manually with the request adapter.
+Warning: KiotaBuilder OpenAPI warning: #/ - The schema MetadataValue is a polymorphic type but does not define a discriminator. This will result in a serialization errors.
+Warning: KiotaBuilder OpenAPI warning: #/components/schemas/MetadataIntValue/properties/int_value - The format int64 is not supported by Kiota for the type string and the string type will be used.
+Warning: KiotaBuilder OpenAPI warning: #/components/schemas/WithBaseResource/properties/id - The format int64 is not supported by Kiota for the type string and the string type will be used.
+Warning: KiotaBuilder OpenAPI warning: #/components/schemas/WithBaseResource/properties/createTimeSinceEpoch - The format int64 is not supported by Kiota for the type string and the string type will be used.
+Warning: KiotaBuilder OpenAPI warning: #/components/schemas/WithBaseResource/properties/lastUpdateTimeSinceEpoch - The format int64 is not supported by Kiota for the type string and the string type will be used.
+Trace: KiotaBuilder 235ms: Parsed OpenAPI with errors. 21 paths found.
+Error: KiotaBuilder OpenAPI error: #/components/schemas/Artifact/discriminator - Schema Artifact must contain property specified in the discriminator artifactType in the required field list.
+Debug: KiotaBuilder step 2 - parsing the document - took 00:00:00.2394885
+Debug: KiotaBuilder step 3 - updating generation configuration from kiota extension - took 00:00:00.0002831
+Debug: KiotaBuilder step 4 - filtering API paths with patterns - took 00:00:00.0055305
+Debug: KiotaBuilder step 5 - checking whether the output should be updated - took 00:00:00.0295048
+Trace: KiotaBuilder 6ms: Created UriSpace tree
+Debug: KiotaBuilder step 6 - create uri space - took 00:00:00.0065084
+Debug: KiotaBuilder InitializeInheritanceIndex 00:00:00.0071306
+Trace: KiotaBuilder Creating class PostsClient
+Trace: KiotaBuilder Creating property api of apiRequestBuilder
+Trace: KiotaBuilder Creating class apiRequestBuilder
+Trace: KiotaBuilder Creating property model_registry of model_registryRequestBuilder
+Trace: KiotaBuilder Creating class model_registryRequestBuilder
+Trace: KiotaBuilder Creating property v1alpha1 of v1alpha1RequestBuilder
+Trace: KiotaBuilder Creating class v1alpha1RequestBuilder
+Trace: KiotaBuilder Creating property model_artifact of model_artifactRequestBuilder
+Trace: KiotaBuilder Creating property model_artifacts of model_artifactsRequestBuilder
+Trace: KiotaBuilder Creating property model_versions of model_versionsRequestBuilder
+Trace: KiotaBuilder Creating property registered_model of registered_modelRequestBuilder
+Trace: KiotaBuilder Creating property registered_models of registered_modelsRequestBuilder
+Trace: KiotaBuilder Creating property inference_service of inference_serviceRequestBuilder
+Trace: KiotaBuilder Creating property inference_services of inference_servicesRequestBuilder
+Trace: KiotaBuilder Creating property serving_environment of serving_environmentRequestBuilder
+Trace: KiotaBuilder Creating property serving_environments of serving_environmentsRequestBuilder
+Trace: KiotaBuilder Creating property model_version of model_versionRequestBuilder
+Trace: KiotaBuilder Creating class model_artifactRequestBuilder
+Trace: KiotaBuilder Creating class model_artifactsRequestBuilder
+Trace: KiotaBuilder Creating class registered_modelRequestBuilder
+Trace: KiotaBuilder Creating class model_versionsRequestBuilder
+Trace: KiotaBuilder Creating class registered_modelsRequestBuilder
+Trace: KiotaBuilder Creating class inference_servicesRequestBuilder
+Trace: KiotaBuilder Creating class inference_serviceRequestBuilder
+Trace: KiotaBuilder Creating class serving_environmentsRequestBuilder
+Trace: KiotaBuilder Creating class serving_environmentRequestBuilder
+Trace: KiotaBuilder Creating class model_versionRequestBuilder
+Trace: KiotaBuilder Creating indexer WithModelartifact-indexer
+Trace: KiotaBuilder Creating indexer WithInferenceservice-indexer
+Trace: KiotaBuilder Creating indexer WithModelversion-indexer
+Trace: KiotaBuilder Creating indexer WithRegisteredmodel-indexer
+Trace: KiotaBuilder Creating indexer WithServingenvironment-indexer
+Trace: KiotaBuilder Creating method Get of Kiota.Builder.CodeDOM.CodeType
+Trace: KiotaBuilder Creating method Get of Kiota.Builder.CodeDOM.CodeType
+Trace: KiotaBuilder Creating method Get of Kiota.Builder.CodeDOM.CodeType
+Trace: KiotaBuilder Creating method Get of Kiota.Builder.CodeDOM.CodeType
+Trace: KiotaBuilder Creating method Get of Kiota.Builder.CodeDOM.CodeType
+Trace: KiotaBuilder Creating method Get of Kiota.Builder.CodeDOM.CodeType
+Trace: KiotaBuilder Creating method Get of Kiota.Builder.CodeDOM.CodeType
+Trace: KiotaBuilder Creating method Get of Kiota.Builder.CodeDOM.CodeType
+Trace: KiotaBuilder Creating method ToGetRequestInformation of Kiota.Builder.CodeDOM.CodeType
+Trace: KiotaBuilder Creating method ToGetRequestInformation of Kiota.Builder.CodeDOM.CodeType
+Trace: KiotaBuilder Creating method ToGetRequestInformation of Kiota.Builder.CodeDOM.CodeType
+Trace: KiotaBuilder Creating method ToGetRequestInformation of Kiota.Builder.CodeDOM.CodeType
+Trace: KiotaBuilder Creating method ToGetRequestInformation of Kiota.Builder.CodeDOM.CodeType
+Trace: KiotaBuilder Creating method ToGetRequestInformation of Kiota.Builder.CodeDOM.CodeType
+Trace: KiotaBuilder Creating method ToGetRequestInformation of Kiota.Builder.CodeDOM.CodeType
+Trace: KiotaBuilder Creating method ToGetRequestInformation of Kiota.Builder.CodeDOM.CodeType
+Trace: KiotaBuilder Creating method Get of Kiota.Builder.CodeDOM.CodeType
+Trace: KiotaBuilder Creating method ToGetRequestInformation of Kiota.Builder.CodeDOM.CodeType
+Trace: KiotaBuilder Creating method Get of Kiota.Builder.CodeDOM.CodeType
+Trace: KiotaBuilder Creating method ToGetRequestInformation of Kiota.Builder.CodeDOM.CodeType
+Trace: KiotaBuilder Creating method Post of Kiota.Builder.CodeDOM.CodeType
+Trace: KiotaBuilder Creating method Post of Kiota.Builder.CodeDOM.CodeType
+Trace: KiotaBuilder Creating method ToPostRequestInformation of Kiota.Builder.CodeDOM.CodeType
+Trace: KiotaBuilder Creating method Post of Kiota.Builder.CodeDOM.CodeType
+Trace: KiotaBuilder Creating method ToPostRequestInformation of Kiota.Builder.CodeDOM.CodeType
+Trace: KiotaBuilder Creating class WithModelversionItemRequestBuilder
+Trace: KiotaBuilder Creating property artifacts of artifactsRequestBuilder
+Trace: KiotaBuilder Creating method ToPostRequestInformation of Kiota.Builder.CodeDOM.CodeType
+Trace: KiotaBuilder Creating class WithModelartifactItemRequestBuilder
+Trace: KiotaBuilder Creating method Post of Kiota.Builder.CodeDOM.CodeType
+Trace: KiotaBuilder Creating method ToPostRequestInformation of Kiota.Builder.CodeDOM.CodeType
+Trace: KiotaBuilder Creating class WithInferenceserviceItemRequestBuilder
+Trace: KiotaBuilder Creating method Post of Kiota.Builder.CodeDOM.CodeType
+Trace: KiotaBuilder Creating property serves of servesRequestBuilder
+Trace: KiotaBuilder Creating property model of modelRequestBuilder
+Trace: KiotaBuilder Creating property version of versionRequestBuilder
+Trace: KiotaBuilder Creating method ToPostRequestInformation of Kiota.Builder.CodeDOM.CodeType
+Trace: KiotaBuilder Creating class WithRegisteredmodelItemRequestBuilder
+Trace: KiotaBuilder Creating class WithServingenvironmentItemRequestBuilder
+Trace: KiotaBuilder Creating property inference_services of inference_servicesRequestBuilder
+Trace: KiotaBuilder Creating property versions of versionsRequestBuilder
+Trace: KiotaBuilder Creating method Get of Kiota.Builder.CodeDOM.CodeType
+Trace: KiotaBuilder Creating method ToGetRequestInformation of Kiota.Builder.CodeDOM.CodeType
+Trace: KiotaBuilder Creating method Get of Kiota.Builder.CodeDOM.CodeType
+Trace: KiotaBuilder Creating method Get of Kiota.Builder.CodeDOM.CodeType
+Trace: KiotaBuilder Creating method Get of Kiota.Builder.CodeDOM.CodeType
+Trace: KiotaBuilder Creating method ToGetRequestInformation of Kiota.Builder.CodeDOM.CodeType
+Trace: KiotaBuilder Creating method Get of Kiota.Builder.CodeDOM.CodeType
+Trace: KiotaBuilder Creating method ToGetRequestInformation of Kiota.Builder.CodeDOM.CodeType
+Trace: KiotaBuilder Creating method ToGetRequestInformation of Kiota.Builder.CodeDOM.CodeType
+Trace: KiotaBuilder Creating method ToGetRequestInformation of Kiota.Builder.CodeDOM.CodeType
+Trace: KiotaBuilder Creating method Patch of Kiota.Builder.CodeDOM.CodeType
+Trace: KiotaBuilder Creating method Patch of Kiota.Builder.CodeDOM.CodeType
+Trace: KiotaBuilder Creating method ToPatchRequestInformation of Kiota.Builder.CodeDOM.CodeType
+Trace: KiotaBuilder Creating method Patch of Kiota.Builder.CodeDOM.CodeType
+Trace: KiotaBuilder Creating method ToPatchRequestInformation of Kiota.Builder.CodeDOM.CodeType
+Trace: KiotaBuilder Creating class versionsRequestBuilder
+Trace: KiotaBuilder Creating method ToPatchRequestInformation of Kiota.Builder.CodeDOM.CodeType
+Trace: KiotaBuilder Creating class servesRequestBuilder
+Trace: KiotaBuilder Creating class modelRequestBuilder
+Trace: KiotaBuilder Creating method Patch of Kiota.Builder.CodeDOM.CodeType
+Trace: KiotaBuilder Creating method ToPatchRequestInformation of Kiota.Builder.CodeDOM.CodeType
+Trace: KiotaBuilder Creating method Get of Kiota.Builder.CodeDOM.CodeType
+Trace: KiotaBuilder Creating class artifactsRequestBuilder
+Trace: KiotaBuilder Creating method Get of Kiota.Builder.CodeDOM.CodeType
+Trace: KiotaBuilder Creating method Get of Kiota.Builder.CodeDOM.CodeType
+Trace: KiotaBuilder Creating method ToGetRequestInformation of Kiota.Builder.CodeDOM.CodeType
+Trace: KiotaBuilder Creating method ToGetRequestInformation of Kiota.Builder.CodeDOM.CodeType
+Trace: KiotaBuilder Creating method Patch of Kiota.Builder.CodeDOM.CodeType
+Trace: KiotaBuilder Creating class versionRequestBuilder
+Trace: KiotaBuilder Creating method ToPatchRequestInformation of Kiota.Builder.CodeDOM.CodeType
+Trace: KiotaBuilder Creating method Post of Kiota.Builder.CodeDOM.CodeType
+Trace: KiotaBuilder Creating class inference_servicesRequestBuilder
+Trace: KiotaBuilder Creating method Get of Kiota.Builder.CodeDOM.CodeType
+Trace: KiotaBuilder Creating method ToPostRequestInformation of Kiota.Builder.CodeDOM.CodeType
+Trace: KiotaBuilder Creating method ToGetRequestInformation of Kiota.Builder.CodeDOM.CodeType
+Trace: KiotaBuilder Creating method Get of Kiota.Builder.CodeDOM.CodeType
+Trace: KiotaBuilder Creating method ToGetRequestInformation of Kiota.Builder.CodeDOM.CodeType
+Trace: KiotaBuilder Creating method Get of Kiota.Builder.CodeDOM.CodeType
+Trace: KiotaBuilder Creating method ToGetRequestInformation of Kiota.Builder.CodeDOM.CodeType
+Trace: KiotaBuilder Creating method ToGetRequestInformation of Kiota.Builder.CodeDOM.CodeType
+Trace: KiotaBuilder Creating method Post of Kiota.Builder.CodeDOM.CodeUnionType
+Trace: KiotaBuilder Creating method Post of Kiota.Builder.CodeDOM.CodeType
+Trace: KiotaBuilder Creating method ToPostRequestInformation of Kiota.Builder.CodeDOM.CodeType
+Trace: KiotaBuilder Creating method Post of Kiota.Builder.CodeDOM.CodeType
+Trace: KiotaBuilder Creating method ToPostRequestInformation of Kiota.Builder.CodeDOM.CodeType
+Trace: KiotaBuilder Creating method ToPostRequestInformation of Kiota.Builder.CodeDOM.CodeType
+Debug: KiotaBuilder CreateRequestBuilderClass 00:00:00
+Debug: KiotaBuilder MapTypeDefinitions 00:00:00.0209903
+Information: KiotaBuilder Removing unused model RegisteredModelList as it is not referenced by the client API surface
+Information: KiotaBuilder Removing unused model ModelVersionList as it is not referenced by the client API surface
+Information: KiotaBuilder Removing unused model ModelArtifactList as it is not referenced by the client API surface
+Information: KiotaBuilder Removing unused model InferenceServiceList as it is not referenced by the client API surface
+Debug: KiotaBuilder TrimInheritedModels 00:00:00
+Debug: KiotaBuilder CleanUpInternalState 00:00:00
+Trace: KiotaBuilder 0ms: Created source model with 3 classes
+Debug: KiotaBuilder step 7 - create source model - took 00:00:00.1887725
+Debug: KiotaBuilder 87ms: Language refinement applied
+Debug: KiotaBuilder step 8 - refine by language - took 00:00:00.0886747
+Trace: KiotaBuilder 172ms: Files written to /Users/aperuffo/workspace/model-registry/api/openapi/client
+Debug: KiotaBuilder step 9 - writing files - took 00:00:00.1753755
+Information: KiotaBuilder loaded description from local source
+Trace: KiotaBuilder 0ms: Read OpenAPI file /Users/aperuffo/workspace/model-registry/api/openapi/model-registry-full-proposal.yaml
+Debug: KiotaBuilder step 10 - writing lock file - took 00:00:00.0378133
+Debug: KiotaBuilder Api manifest path: /Users/aperuffo/workspace/model-registry/apimanifest.json

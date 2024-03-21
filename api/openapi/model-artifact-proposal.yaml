@@ -1,0 +1,167 @@
+openapi: 3.0.3
+info:
+  title: Model Registry REST API
+  version: v1alpha1
+  description: REST API for Model Registry to create and manage ML model metadata
+  license:
+    name: Apache 2.0
+    url: "https://www.apache.org/licenses/LICENSE-2.0"
+paths:
+  /api/model_registry/v1alpha1/model_artifact:
+    summary: Path used to search for a modelartifact.
+    description: >-
+      The REST endpoint/path used to search for a `ModelArtifact` entity.  This path contains a `GET` operation to perform the find task.
+    get:
+      tags:
+        - ModelRegistryService
+      responses:
+        "200":
+          $ref: "#/components/responses/ModelArtifactResponse"
+      operationId: findModelArtifact
+      summary: Get a ModelArtifact that matches search parameters.
+      description: Gets the details of a single instance of a `ModelArtifact` that matches search parameters.
+components:
+  schemas:
+    ArtifactState:
+      description: |2-
+         - PENDING: A state indicating that the artifact may exist.
+         - LIVE: A state indicating that the artifact should exist, unless something
+        external to the system deletes it.
+         - MARKED_FOR_DELETION: A state indicating that the artifact should be deleted.
+         - DELETED: A state indicating that the artifact has been deleted.
+         - ABANDONED: A state indicating that the artifact has been abandoned, which may be
+        due to a failed or cancelled execution.
+         - REFERENCE: A state indicating that the artifact is a reference artifact. At
+        execution start time, the orchestrator produces an output artifact for
+        each output key with state PENDING. However, for an intermediate
+        artifact, this first artifact's state will be REFERENCE. Intermediate
+        artifacts emitted during a component's execution will copy the REFERENCE
+        artifact's attributes. At the end of an execution, the artifact state
+        should remain REFERENCE instead of being changed to LIVE.
+
+        See also: ml-metadata Artifact.State
+      default: UNKNOWN
+      enum:
+        - UNKNOWN
+        - PENDING
+        - LIVE
+        - MARKED_FOR_DELETION
+        - DELETED
+        - ABANDONED
+        - REFERENCE
+      type: string
+    ModelArtifact:
+      description: An ML model artifact.
+      type: object
+      allOf:
+        - $ref: "#/components/schemas/WithBaseResource"
+        - $ref: "#/components/schemas/WithBaseResourceCreate"
+        - $ref: "#/components/schemas/WithBaseResourceUpdate"
+        - $ref: "#/components/schemas/WithBaseArtifactUpdate"
+        - $ref: "#/components/schemas/WithModelArtifactUpdate"
+        - type: object
+          required:
+            - artifactType
+          properties:
+            artifactType:
+              type: string
+              default: "model-artifact"
+    WithBaseArtifactUpdate:
+      type: object
+      properties:
+        uri:
+          description: |-
+            The uniform resource identifier of the physical artifact.
+            May be empty if there is no physical artifact.
+          type: string
+        state:
+          $ref: "#/components/schemas/ArtifactState"
+    MetadataValue:
+      oneOf:
+        - $ref: "#/components/schemas/MetadataIntValue"
+        # Commented just for the seek of keeping the file small:
+        # - $ref: "#/components/schemas/MetadataDoubleValue"
+        # - $ref: "#/components/schemas/MetadataStringValue"
+        # - $ref: "#/components/schemas/MetadataStructValue"
+        # - $ref: "#/components/schemas/MetadataProtoValue"
+        # - $ref: "#/components/schemas/MetadataBoolValue"
+      description: A value in properties.
+    MetadataIntValue:
+      description: An integer (int64) property value.
+      type: object
+      properties:
+        int_value:
+          format: int64
+          type: string
+    WithBaseResource:
+      type: object
+      properties:
+        id:
+          format: int64
+          description: Output only. The unique server generated id of the resource.
+          type: string
+          readOnly: true
+        createTimeSinceEpoch:
+          format: int64
+          description: Output only. Create time of the resource in millisecond since epoch.
+          type: string
+          readOnly: true
+        lastUpdateTimeSinceEpoch:
+          format: int64
+          description: |-
+            Output only. Last update time of the resource since epoch in millisecond
+            since epoch.
+          type: string
+          readOnly: true
+    WithBaseResourceCreate:
+      type: object
+      properties:
+        name:
+          description: |-
+            The client provided name of the artifact. This field is optional. If set,
+            it must be unique among all the artifacts of the same artifact type within
+            a database instance and cannot be changed once set.
+          type: string
+    WithBaseResourceUpdate:
+      type: object
+      properties:
+        customProperties:
+          description: User provided custom properties which are not defined by its type.
+          type: object
+          additionalProperties:
+            $ref: "#/components/schemas/MetadataValue"
+        description:
+          description: |-
+            An optional description about the resource.
+          type: string
+        externalID:
+          description: |-
+            The external id that come from the clients’ system. This field is optional.
+            If set, it must be unique among all resources within a database instance.
+          type: string
+    WithModelArtifactUpdate:
+      description: An ML model artifact.
+      type: object
+      properties:
+        modelFormatName:
+          description: Name of the model format.
+          type: string
+        storageKey:
+          description: Storage secret name.
+          type: string
+        storagePath:
+          description: Path for model in storage provided by `storageKey`.
+          type: string
+        modelFormatVersion:
+          description: Version of the model format.
+          type: string
+        serviceAccountName:
+          description: Name of the service account with storage secret.
+          type: string
+  responses:
+    ModelArtifactResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ModelArtifact"
+      description: A response containing a `ModelArtifact` entity.

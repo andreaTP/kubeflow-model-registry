@@ -10,10 +10,7 @@ model_base_artifact_update.go
 model_base_execution.go
 model_base_execution_create.go
 model_base_execution_update.go
-model_base_resource.go
-model_base_resource_create.go
 model_base_resource_list.go
-model_base_resource_update.go
 model_doc_artifact.go
 model_error.go
 model_execution_state.go
@@ -53,5 +50,8 @@ model_serving_environment_create.go
 model_serving_environment_list.go
 model_serving_environment_update.go
 model_sort_order.go
+model_with_base_resource.go
+model_with_base_resource_create.go
+model_with_base_resource_update.go
 response.go
 utils.go
