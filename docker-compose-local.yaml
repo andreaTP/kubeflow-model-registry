@@ -21,8 +21,8 @@ services:
       - "8080:8080"
     depends_on:
       - mlmd-server
-  # hello:
-  #   image: crccheck/hello-world
-  #   container_name: hello
-  #   ports:
-  #     - "8000:8000"
+  hello:
+    image: crccheck/hello-world
+    container_name: hello
+    ports:
+      - "8000:8000"

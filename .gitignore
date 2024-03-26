@@ -35,3 +35,5 @@ output.xml
 report.html
 __pycache__
 bin
+/include
+readme.txt

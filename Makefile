@@ -56,7 +56,7 @@ api/grpc/ml_metadata/proto/metadata_store_service.proto:
 		sed -i 's#syntax = "proto[23]";#&\noption go_package = "github.com/kubeflow/model-registry/internal/ml_metadata/proto";#' metadata_store_service.proto
 
 internal/ml_metadata/proto/%.pb.go: api/grpc/ml_metadata/proto/%.proto
-	protoc -I./api/grpc --go_out=./internal --go_opt=paths=source_relative \
+	bin/protoc -I./api/grpc --go_out=./internal --go_opt=paths=source_relative \
 		--go-grpc_out=./internal --go-grpc_opt=paths=source_relative $<
 
 .PHONY: gen/grpc
@@ -110,7 +110,10 @@ clean/odh:
 bin/go-enum:
 	GOBIN=$(PROJECT_BIN) go install github.com/searKing/golang/tools/go-enum@v1.2.97
 
-bin/protoc-gen-go:
+bin/protoc:
+	./scripts/install_protoc.sh
+
+bin/protoc-gen-go: bin/protoc
 	GOBIN=$(PROJECT_BIN) go install google.golang.org/protobuf/cmd/protoc-gen-go@v1.31.0
 
 bin/protoc-gen-go-grpc:
