@@ -29,7 +29,6 @@ RUN wget -q https://github.com/protocolbuffers/protobuf/releases/download/v24.3/
 RUN make deps
 
 # Copy rest of the source
-COPY bin/ bin/
 COPY cmd/ cmd/
 COPY api/ api/
 COPY internal/ internal/

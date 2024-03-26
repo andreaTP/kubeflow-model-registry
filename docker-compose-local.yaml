@@ -13,8 +13,16 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    command: ["proxy", "--mlmd-hostname", "localhost", "--mlmd-port", "9090"]
+    # command: ["proxy", "--mlmd-hostname", "mlmd-server", "--mlmd-port", "9090"]
+    # command: ["proxy", "--mlmd-hostname", "mlmd-server", "--mlmd-port", "8080"]
+    command: ["proxy", "--mlmd-hostname", "host.containers.internal", "--mlmd-port", "9090"]
     container_name: model-registry
-    network_mode: host
+    ports:
+      - "8080:8080"
     depends_on:
       - mlmd-server
+  # hello:
+  #   image: crccheck/hello-world
+  #   container_name: hello
+  #   ports:
+  #     - "8000:8000"

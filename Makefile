@@ -76,7 +76,7 @@ openapi/validate: bin/openapi-generator-cli
 # generate the openapi server implementation
 .PHONY: gen/openapi-server
 gen/openapi-server: bin/openapi-generator-cli openapi/validate
-	@if git diff --cached --name-only | grep -q "api/openapi/model-registry.yaml" || \
+	@if git diff --name-only | grep -q "api/openapi/model-registry.yaml" || \
 		git diff --name-only | grep -q "api/openapi/model-registry.yaml" || \
 		[ -n "${FORCE_SERVER_GENERATION}" ]; then \
 		ROOT_FOLDER="." ./scripts/gen_openapi_server.sh; \
